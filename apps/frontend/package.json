@@ -1,22 +1,44 @@
 {
-  "name": "web",
+  "name": "x-dapp-frontend",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite --clearScreen false",
+    "dev": "vite --port 8082 --host",
     "build": "tsc && vite build",
-    "preview": "vite preview",
-    "lint": "eslint \"src/**/*.ts\""
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
   },
   "dependencies": {
-    "@repo/ui": "*"
+    "@chakra-ui/react": "^2.8.2",
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@repo/utils": "*",
+    "@vechain/dapp-kit-react": "^1.0.12",
+    "framer-motion": "^11.2.6",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-dropzone": "^14.2.3",
+    "react-google-recaptcha-v3": "^1.10.1",
+    "react-lottie": "^1.2.4"
   },
   "devDependencies": {
-    "@repo/eslint-config": "*",
+    "@fingerprintjs/fingerprintjs": "^4.3.0",
     "@repo/typescript-config": "*",
+    "@types/device-uuid": "^1.0.3",
+    "@types/react": "^18.2.66",
+    "@types/react-dom": "^18.2.22",
+    "@types/react-lottie": "^1.2.10",
+    "@typescript-eslint/eslint-plugin": "^7.2.0",
+    "@typescript-eslint/parser": "^7.2.0",
+    "@vitejs/plugin-react": "^4.2.1",
+    "device-uuid": "^1.0.4",
     "eslint": "^8.57.0",
-    "typescript": "^5.3.3",
-    "vite": "^5.1.4"
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.6",
+    "react-icons": "^5.2.1",
+    "typescript": "^5.2.2",
+    "vite": "^5.2.0",
+    "vite-plugin-node-polyfills": "^0.22.0"
   }
 }
