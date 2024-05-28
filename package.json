@@ -5,7 +5,9 @@
     "dev": "turbo dev",
     "lint": "turbo lint",
     "test": "turbo test",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "contracts:deploy:solo": "turbo run deploy:solo",
+    "contracts:deploy:testnet": "turbo run deploy:testnet"
   },
   "devDependencies": {
     "eslint": "^8.57.0",
