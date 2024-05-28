@@ -9,3 +9,4 @@ dist-ssr
 .cache
 server/dist
 public/dist
+.idea
