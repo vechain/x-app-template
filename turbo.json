@@ -19,6 +19,16 @@
         "^lint"
       ],
       "cache": false
+    },
+    "deploy:solo": {
+      "dependsOn": [
+        "^build"
+      ]
+    },
+    "deploy:testnet": {
+      "dependsOn": [
+        "^build"
+      ]
     }
   }
 }
