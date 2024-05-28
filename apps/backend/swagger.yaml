@@ -1,0 +1,53 @@
+tags:
+  - name: submission
+    description: submission API
+
+paths:
+  /submitReceipt:
+    # [POST] submission
+    post:
+      tags:
+        - submission
+      summary: Validate Receipt
+      parameters:
+        - name: body
+          in: body
+          description: user Data
+          required: true
+          schema:
+            $ref: '#/definitions/submitReceipt'
+      responses:
+        200:
+          description: 'Submission response'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+ 
+
+# definitions
+definitions:
+  submitReceipt:
+    type: object
+    required:
+      - image
+    properties:
+      image:
+        type: string
+        description: image base64
+      address:
+        type: string
+        description: User's address
+      captcha:
+        type: string
+        description: Captcha code
+      deviceID:
+        type: string
+        description: User's device ID
+
+schemes:
+  - https
+  - http
