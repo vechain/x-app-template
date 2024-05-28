@@ -3,7 +3,7 @@ import { HttpException } from '@/exceptions/HttpException';
 import { Submission } from '@/interfaces/submission.interface';
 import { thor } from '@/utils/connex';
 import { Service } from 'typedi';
-import { MugshotABI } from '@/utils/const/abi';
+import { EcoEarnABI } from '@/utils/const/abi';
 import { estimateGas } from '@/utils/gas';
 import { buildTransaction, sendTransaction, signTransaction } from '@/utils/tx';
 import { ethers } from 'ethers';
@@ -12,7 +12,7 @@ import { config } from '@repo/config-contract';
 @Service()
 export class ContractsService {
   public async registerSubmission(submission: Submission): Promise<void> {
-    const method = MugshotABI.find(abi => abi.name === 'registerValidSubmission');
+    const method = EcoEarnABI.find(abi => abi.name === 'registerValidSubmission');
 
     const clause = thor
       .account(config.CONTRACT_ADDRESS)
@@ -29,7 +29,7 @@ export class ContractsService {
   }
 
   public async validateSubmission(submission: Submission): Promise<void> {
-    const method = MugshotABI.find(abi => abi.name === 'isUserMaxSubmissionsReached');
+    const method = EcoEarnABI.find(abi => abi.name === 'isUserMaxSubmissionsReached');
 
     const res = await thor.account(config.CONTRACT_ADDRESS).method(method).call(submission.address);
 
