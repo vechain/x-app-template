@@ -8,8 +8,9 @@
     "deploy:ecoearn:solo": "npx hardhat run scripts/deployEcoEarn.ts --network vechain_solo",
     "deploy:token:testnet": "npx hardhat run scripts/deployToken.ts --network vechain_testnet",
     "deploy:ecoearn:testnet": "npx hardhat run scripts/deployEcoEarn.ts --network vechain_testnet",
-    "deploy:solo": "yarn deploy:token:solo && yarn deploy:ecoearn:solo",
-    "deploy:testnet": "yarn deploy:token:testnet && yarn deploy:ecoearn:testnet"
+    "deploy:solo": "yarn solo-up && yarn deploy:token:solo && yarn deploy:ecoearn:solo",
+    "deploy:testnet": "yarn deploy:token:testnet && yarn deploy:ecoearn:testnet",
+    "solo-up": "make solo-up"
   },
   "dependencies": {
     "@repo/config-contract": "*",
