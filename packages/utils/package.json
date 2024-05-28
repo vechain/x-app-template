@@ -1,0 +1,25 @@
+{
+  "name": "@repo/utils",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "test": "vitest run",
+    "coverage": "vitest run --coverage"
+  },
+  "files": [
+    "AddressUtils",
+    "FormattingUtils",
+    "HexUtils"
+  ],
+  "dependencies": {
+    "lodash": "^4.17.21",
+    "nft.storage": "^7.1.1",
+    "thor-devkit": "^2.0.9"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.12",
+    "jsdom": "^24.0.0",
+    "vite": "^5.0.12",
+    "vitest": "^1.2.2"
+  }
+}
