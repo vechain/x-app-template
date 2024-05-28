@@ -105,6 +105,12 @@ Run the Frontend and Backend, connected to the Solo network and pointing to your
 yarn dev 
 ```
 
+### Setting up rewards
+Run vechain devpal 
+```bash
+npx @vechain/devpal http://localhost:8669
+```
+
 ## Disclaimer ⚠️
 
 This template serves as a foundational starting point and should be thoroughly reviewed and customized to suit your project’s specific requirements. Pay special attention to configurations, security settings, and environment variables to ensure a secure and efficient deployment.
