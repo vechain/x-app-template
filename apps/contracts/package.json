@@ -1,0 +1,47 @@
+{
+  "name": "@repo/contracts",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "npx hardhat test --network hardhat ",
+    "compile": "npx hardhat compile",
+    "deploy:token:solo": "npx hardhat run scripts/deployToken.ts --network vechain_solo",
+    "deploy:ecoearn:solo": "npx hardhat run scripts/deployEcoEarn.ts --network vechain_solo",
+    "deploy:token:testnet": "npx hardhat run scripts/deployToken.ts --network vechain_testnet",
+    "deploy:ecoearn:testnet": "npx hardhat run scripts/deployEcoEarn.ts --network vechain_testnet",
+    "deploy:solo": "yarn deploy:token:solo && yarn deploy:ecoearn:solo",
+    "deploy:testnet": "yarn deploy:token:testnet && yarn deploy:ecoearn:testnet"
+  },
+  "dependencies": {
+    "@repo/config-contract": "*",
+    "@nomicfoundation/hardhat-chai-matchers": "^2.0.2",
+    "@nomicfoundation/hardhat-ethers": "^3.0.4",
+    "@nomicfoundation/hardhat-network-helpers": "^1.0.0",
+    "@nomiclabs/hardhat-etherscan": "^3.0.0",
+    "@nomiclabs/hardhat-truffle5": "^2.0.7",
+    "@nomiclabs/hardhat-web3": "^2.0.0",
+    "@openzeppelin/contracts": "^5.0.1",
+    "@typechain/hardhat": "^8.0.0",
+    "@types/chai": "^4.2.0",
+    "@types/mocha": ">=9.1.0",
+    "@vechain/hardhat-ethers": "^0.1.4",
+    "@vechain/hardhat-vechain": "^0.1.4",
+    "@vechain/web3-providers-connex": "^1.1.2",
+    "chai": "^4.2.0",
+    "dayjs": "^1.11.10",
+    "hardhat": "^2.12.6",
+    "hardhat-gas-reporter": "^1.0.8",
+    "react-slot-counter": "^2.2.5",
+    "solidity-coverage": "^0.8.1",
+    "ts-node": ">=8.0.0",
+    "typechain": "^8.1.0",
+    "typescript": ">=4.5.0"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^3.0.0",
+    "@nomicfoundation/hardhat-verify": "^1.1.1",
+    "@typechain/ethers-v6": "^0.4.3",
+    "ethers": "^6.7.1",
+    "ganache-cli": "^6.12.2",
+    "hardhat": "^2.19.1"
+  }
+}

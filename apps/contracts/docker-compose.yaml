@@ -1,0 +1,21 @@
+version: "3.7"
+services:
+  thor-solo:
+    image: vechain/thor:latest
+    hostname: thor-solo
+    container_name: thor-solo
+    user: root
+    environment:
+      - DOCKER=1
+    entrypoint:
+      [
+        "/bin/sh",
+        "-c",
+        "apk update && apk upgrade && apk add curl && thor solo --on-demand --data-dir /data/thor --api-addr 0.0.0.0:8669 --api-cors '*' --api-backtrace-limit -1 --verbosity 4",
+      ]
+    ports:
+      - "8669:8669"
+    healthcheck:
+      test: curl --fail 0.0.0.0:8669/blocks/0 || exit 1
+      interval: "2s"
+      retries: 30
