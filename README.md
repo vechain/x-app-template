@@ -33,9 +33,6 @@ Ensure your development environment is set up with the following:
 - **Hardhat (for smart contracts):** [Getting Started with Hardhat](https://hardhat.org/hardhat-runner/docs/getting-started) ⛑️
 
 ## Project Structure
-
-Our project is meticulously organized into three main components:
-
 ### Frontend (apps/frontend) 🌐
 
 A blazing-fast React application powered by Vite:
