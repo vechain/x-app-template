@@ -110,9 +110,13 @@ npx @vechain/devpal http://localhost:8669
 
 Open the `Inspector` tab and perform the following transactions:
 - **Add Contracts:** Add the EcoEarn contract and the Token contract deployed previously. Addresses can be found in the `config-contracts` package. ABIs can be found in the artifacts folder of the `contracts` app.
+![image](https://github.com/vechain/x-app-template/assets/64158778/e288ada4-5973-4428-9e72-a362388b1826)
 - **Approve token:** Approve the EcoEarn contract to spend your tokens
+![image](https://github.com/vechain/x-app-template/assets/64158778/70787d8d-ae60-40ea-b277-87359aaca4ee)
 - **Claim rewards:** Claim rewards for the EcoEarn contract
+![image](https://github.com/vechain/x-app-template/assets/64158778/834437e5-8de1-4802-9ed7-dca6fe4df332)
 - **Trigger cycle:** Trigger the cycle for the EcoEarn contract
+![image](https://github.com/vechain/x-app-template/assets/64158778/00236dcd-5b64-4493-9acd-55c6a7f0981f)
 
 ## Disclaimer ⚠️
 
