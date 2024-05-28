@@ -35,11 +35,9 @@ export class SubmissionController {
 
       const validityFactor = validationResult['validityFactor'];
 
-      let submission: Submission | undefined = undefined;
-
       if (validityFactor === 1) await this.contracts.registerSubmission(submissionRequest);
 
-      res.status(200).json({ submission, validation: validationResult });
+      res.status(200).json({ validation: validationResult });
     } catch (error) {
       next(error);
     }
