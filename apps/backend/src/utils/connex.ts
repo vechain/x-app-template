@@ -1,6 +1,6 @@
 import { NETWORK_TYPE, NETWORK_URL } from '../config';
 import { Driver, SimpleNet } from '@vechain/connex-driver';
-import { genesisBlock } from './network';
+import { genesisBlock } from './const';
 import { toNetwork } from './model';
 import { newThor } from '@vechain/connex-framework/dist/thor';
 
