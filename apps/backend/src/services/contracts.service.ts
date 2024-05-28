@@ -3,7 +3,7 @@ import { HttpException } from '@/exceptions/HttpException';
 import { Submission } from '@/interfaces/submission.interface';
 import { thor } from '@/utils/connex';
 import { Service } from 'typedi';
-import { EcoEarnABI } from '@/utils/const/abi';
+import { EcoEarnABI } from '@/utils/const';
 import { estimateGas } from '@/utils/gas';
 import { buildTransaction, sendTransaction, signTransaction } from '@/utils/tx';
 import { ethers } from 'ethers';
