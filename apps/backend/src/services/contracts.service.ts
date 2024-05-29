@@ -1,38 +1,39 @@
 import { ADMIN_ADDRESS, ADMIN_PRIVATE_KEY, REWARD_AMOUNT } from '@/config';
 import { HttpException } from '@/exceptions/HttpException';
 import { Submission } from '@/interfaces/submission.interface';
-import { thor } from '@/utils/connex';
+import { thor } from '@/utils/thor';
 import { Service } from 'typedi';
 import { EcoEarnABI } from '@/utils/const';
-import { estimateGas } from '@/utils/gas';
-import { buildTransaction, sendTransaction, signTransaction } from '@/utils/tx';
 import { ethers } from 'ethers';
 import { config } from '@repo/config-contract';
-
+import { TransactionHandler, clauseBuilder, coder } from '@vechain/sdk-core';
 @Service()
 export class ContractsService {
   public async registerSubmission(submission: Submission): Promise<void> {
-    const method = EcoEarnABI.find(abi => abi.name === 'registerValidSubmission');
+    const clause = clauseBuilder.functionInteraction(
+      config.CONTRACT_ADDRESS,
+      coder.createInterface(EcoEarnABI).getFunction('registerValidSubmission'),
+      [submission.address, `0x${ethers.parseEther(REWARD_AMOUNT).toString(16)}`],
+    );
 
-    const clause = thor
-      .account(config.CONTRACT_ADDRESS)
-      .method(method)
-      .asClause(submission.address, `0x${ethers.parseEther(REWARD_AMOUNT).toString(16)}`);
+    const gasResult = await thor.gas.estimateGas([clause], ADMIN_ADDRESS);
 
-    const gasResult = await estimateGas([clause], 0, ADMIN_ADDRESS);
+    if (gasResult.reverted === true) throw new HttpException(500, `EcoEarn: Internal server error: ${gasResult.revertReasons}`);
 
-    if (gasResult.reverted === true) throw new HttpException(500, `EcoEarn: Internal server error: ${gasResult.revertReason}`);
+    const txBody = await thor.transactions.buildTransactionBody([clause], gasResult.totalGas);
 
-    const tx = signTransaction(buildTransaction([clause], gasResult.gas), ADMIN_PRIVATE_KEY);
+    const signedTx = TransactionHandler.sign(txBody, Buffer.from(ADMIN_PRIVATE_KEY));
 
-    await sendTransaction(tx);
+    await thor.transactions.sendTransaction(signedTx);
   }
 
   public async validateSubmission(submission: Submission): Promise<void> {
-    const method = EcoEarnABI.find(abi => abi.name === 'isUserMaxSubmissionsReached');
+    const isMaxSubmissionsReached = await thor.contracts.executeCall(
+      config.CONTRACT_ADDRESS,
+      coder.createInterface(EcoEarnABI).getFunction('isUserMaxSubmissionsReached'),
+      [submission.address],
+    );
 
-    const res = await thor.account(config.CONTRACT_ADDRESS).method(method).call(submission.address);
-
-    if (res.decoded[0] === true) throw new HttpException(409, `EcoEarn: Max submissions reached for this cycle`);
+    if (Boolean(isMaxSubmissionsReached[0]) === true) throw new HttpException(409, `EcoEarn: Max submissions reached for this cycle`);
   }
 }

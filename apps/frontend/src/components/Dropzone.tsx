@@ -82,7 +82,7 @@ export const Dropzone = () => {
         setIsLoading(false);
       }
     },
-    [account, handleCaptchaVerify, setIsLoading, setResponse]
+    [account, handleCaptchaVerify, onOpen, setIsLoading, setResponse]
   );
 
   return (
