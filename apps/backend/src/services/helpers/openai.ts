@@ -1,6 +1,6 @@
-import { OPENAI_API_KEY } from "@/config";
-import OpenAI from "openai";
-import { ChatCompletion } from "openai/resources";
+import { OPENAI_API_KEY } from '@/config';
+import OpenAI from 'openai';
+import { ChatCompletion } from 'openai/resources';
 
 export class OpenAIHelper {
   private openai: OpenAI;
@@ -19,28 +19,20 @@ export class OpenAIHelper {
       dangerouslyAllowBrowser: true, // TODO: Check if this is necessary
     });
 
-  public askChatGPTAboutImage = async ({
-    base64Image,
-    maxTokens = 350,
-    prompt,
-  }: {
-    base64Image: string;
-    prompt: string;
-    maxTokens?: number;
-  }) =>
+  public askChatGPTAboutImage = async ({ base64Image, maxTokens = 350, prompt }: { base64Image: string; prompt: string; maxTokens?: number }) =>
     this.openai.chat.completions.create({
-      model: "gpt-4-vision-preview",
+      model: 'gpt-4-vision-preview',
       max_tokens: maxTokens,
       messages: [
         {
-          role: "user",
+          role: 'user',
           content: [
             {
-              type: "text",
+              type: 'text',
               text: prompt,
             },
             {
-              type: "image_url",
+              type: 'image_url',
               image_url: {
                 url: base64Image,
               },
@@ -50,15 +42,11 @@ export class OpenAIHelper {
       ],
     });
 
-  public getResponseJSONString = (response: ChatCompletion) =>
-    response.choices[0].message.content;
+  public getResponseJSONString = (response: ChatCompletion) => response.choices[0].message.content;
 
-  private cleanChatGPTJSONString = (jsonString: string) =>
-    jsonString.replace("```json", "").replace("```", "");
+  private cleanChatGPTJSONString = (jsonString: string) => jsonString.replace('```json', '').replace('```', '');
 
-  public parseChatGPTJSONString = <Response>(
-    jsonString?: string | null
-  ): Response | undefined => {
+  public parseChatGPTJSONString = <Response>(jsonString?: string | null): Response | undefined => {
     if (!jsonString) {
       return;
     }
@@ -68,7 +56,7 @@ export class OpenAIHelper {
         const parsed = JSON.parse(content);
         return parsed;
       } catch (e) {
-        console.error("Failing parsing Chat GPT response:", e);
+        console.error('Failing parsing Chat GPT response:', e);
       }
     }
   };
