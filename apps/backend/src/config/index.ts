@@ -1,5 +1,5 @@
 import { config } from 'dotenv';
-import { mnemonic } from 'thor-devkit';
+import { mnemonic } from '@vechain/sdk-core';
 config({ path: `.env.${process.env.NODE_ENV || 'development'}.local` });
 
 export const CREDENTIALS = process.env.CREDENTIALS === 'true';
