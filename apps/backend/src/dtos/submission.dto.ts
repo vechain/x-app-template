@@ -18,4 +18,3 @@ export class SubmitDto {
   @IsNotEmpty()
   public captcha: string;
 }
-  
