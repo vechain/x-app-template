@@ -22,7 +22,7 @@ export class ContractsService {
 
     const txBody = await thor.transactions.buildTransactionBody([clause], gasResult.totalGas);
 
-    const signedTx = TransactionHandler.sign(txBody, ADMIN_PRIVATE_KEY);
+    const signedTx = TransactionHandler.sign(txBody, Buffer.from(ADMIN_PRIVATE_KEY));
 
     await thor.transactions.sendTransaction(signedTx);
   }
