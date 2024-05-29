@@ -62,6 +62,8 @@
     "@vechain/connex-driver": "^2.1.0",
     "@vechain/connex-framework": "^2.1.0",
     "@vechain/connex-types": "^2.1.0",
+    "@vechain/sdk-core": "^1.0.0-beta.7",
+    "@vechain/sdk-network": "^1.0.0-beta.7",
     "axios": "^1.6.7",
     "cross-env": "^7.0.3",
     "crypto": "^1.0.1",
