@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "test": "npx hardhat test --network hardhat ",
+    "test:solo": "npx hardhat test --network vechain_solo",
     "compile": "npx hardhat compile",
     "deploy:token:solo": "npx hardhat run scripts/deployToken.ts --network vechain_solo",
     "deploy:ecoearn:solo": "npx hardhat run scripts/deployEcoEarn.ts --network vechain_solo",
