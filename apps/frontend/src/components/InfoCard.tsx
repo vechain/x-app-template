@@ -7,6 +7,7 @@ import {
   Text,
   Button,
   Flex,
+  Link,
 } from "@chakra-ui/react";
 import { MdOutlineArrowOutward } from "react-icons/md";
 
@@ -32,23 +33,18 @@ export const InfoCard = () => {
               mt={{ base: 4, md: 0 }}
               direction={{ base: "column", md: "row" }}
             >
-              <Button
-                rounded={"full"}
-                colorScheme="primary"
-                size={"md"}
-                leftIcon={<MdOutlineArrowOutward />}
-              >
-                Build your X-Dapp
-              </Button>
-              <Button
-                rounded={"full"}
-                size={"md"}
-                leftIcon={<MdOutlineArrowOutward />}
-                mt={{ base: 2, md: 0 }}
-                ml={{ base: 0, md: 2 }}
-              >
-                Github repository
-              </Button>
+              <Link isExternal href="https://github.com/vechain/x-app-template">
+                <Button
+                  rounded={"full"}
+                  colorScheme="primary"
+                  size={"md"}
+                  leftIcon={<MdOutlineArrowOutward />}
+                  mt={{ base: 2, md: 0 }}
+                  ml={{ base: 0, md: 2 }}
+                >
+                  Github repository
+                </Button>
+              </Link>
             </Flex>
           </Flex>
         </VStack>
