@@ -33,14 +33,6 @@ export const InfoCard = () => {
               mt={{ base: 4, md: 0 }}
               direction={{ base: "column", md: "row" }}
             >
-              {/*  <Button
-                rounded={"full"}
-                colorScheme="primary"
-                size={"md"}
-                leftIcon={<MdOutlineArrowOutward />}
-              >
-                Build your X-Dapp
-              </Button> */}
               <Link isExternal href="https://github.com/vechain/x-app-template">
                 <Button
                   rounded={"full"}
