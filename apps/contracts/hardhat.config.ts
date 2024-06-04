@@ -2,8 +2,7 @@ import { HardhatUserConfig } from 'hardhat/config';
 import '@nomicfoundation/hardhat-toolbox';
 
 import '@nomiclabs/hardhat-truffle5';
-import '@vechain/hardhat-vechain';
-import '@vechain/hardhat-ethers';
+import '@vechain/sdk-hardhat-plugin';
 import { VECHAIN_URL_SOLO } from '@vechain/hardhat-vechain';
 
 require('dotenv').config();
