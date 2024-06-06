@@ -11,7 +11,7 @@ export class CaptchaService {
     try {
       const response = await axios.post(verifyURL);
 
-      if (response.data.success === false) return false;
+      if (!response.data.success) return false;
       if (response.data.action !== 'submit_receipt') return false;
       if (response.data.score < 0.7) return false;
 
