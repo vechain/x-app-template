@@ -120,7 +120,8 @@ Open the `Inspector` tab and perform the following transactions:
 
 ## Disclaimer ⚠️
 
-This template serves as a foundational starting point and should be thoroughly reviewed and customized to suit your project’s specific requirements. Pay special attention to configurations, security settings, and environment variables to ensure a secure and efficient deployment.
+This template serves as a foundational starting point and should be thoroughly reviewed and customized to suit your project’s specific requirements and unique use case. Pay special attention to configurations, security settings, and environment variables to ensure a secure and efficient deployment.
+The use case of this template is inspired by the GreenCart Dapp ([greencart.vet](https://www.greencart.vet/)). The code has been built from scratch and does not contain any references to the GreenCart codebase.
 
 ---
 

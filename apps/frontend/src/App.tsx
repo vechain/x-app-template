@@ -1,5 +1,14 @@
 import { DAppKitProvider } from "@vechain/dapp-kit-react";
-import { ChakraProvider, Container, Flex } from "@chakra-ui/react";
+import {
+  Alert,
+  AlertDescription,
+  AlertIcon,
+  AlertTitle,
+  ChakraProvider,
+  Container,
+  Flex,
+  Link
+} from "@chakra-ui/react";
 import {
   Dropzone,
   Footer,
@@ -45,7 +54,11 @@ function App() {
             </Container>
           </Flex>
           <Footer />
-
+          <Alert status='warning'>
+            <AlertIcon />
+            <AlertTitle>Disclaimer</AlertTitle>
+            <AlertDescription>The use case of this template is inspired by the <Link color='teal.500' className="hover:underline text-blue-500" href={"https://www.greencart.vet/"}>GreenCart Dapp</Link>. The code has been built from scratch and does not contain any references to the GreenCart codebase.</AlertDescription>
+          </Alert>
           {/* MODALS  */}
           <SubmissionModal />
         </DAppKitProvider>
