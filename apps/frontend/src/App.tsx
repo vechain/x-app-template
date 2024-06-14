@@ -7,7 +7,7 @@ import {
   ChakraProvider,
   Container,
   Flex,
-  Link
+  Link,
 } from "@chakra-ui/react";
 import {
   Dropzone,
@@ -19,6 +19,7 @@ import {
 } from "./components";
 import { lightTheme } from "./theme";
 import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
+import { Disclaimer } from "./components/Disclaimer/Disclaimer.tsx";
 
 // RECaptcha V3 site key (https://developers.google.com/recaptcha/docs/v3)
 const VITE_RECAPTCHA_V3_SITE_KEY = import.meta.env
@@ -54,11 +55,8 @@ function App() {
             </Container>
           </Flex>
           <Footer />
-          <Alert status='warning'>
-            <AlertIcon />
-            <AlertTitle>Disclaimer</AlertTitle>
-            <AlertDescription>The use case of this template is inspired by the <Link color='teal.500' href={"https://www.greencart.vet/"}>GreenCart Dapp</Link>. The code has been built from scratch and does not contain any references to the GreenCart codebase.</AlertDescription>
-          </Alert>
+          {/* DISCLAIMER */}
+          <Disclaimer />
           {/* MODALS  */}
           <SubmissionModal />
         </DAppKitProvider>
