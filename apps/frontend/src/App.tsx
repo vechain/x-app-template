@@ -57,7 +57,7 @@ function App() {
           <Alert status='warning'>
             <AlertIcon />
             <AlertTitle>Disclaimer</AlertTitle>
-            <AlertDescription>The use case of this template is inspired by the <Link color='teal.500' className="hover:underline text-blue-500" href={"https://www.greencart.vet/"}>GreenCart Dapp</Link>. The code has been built from scratch and does not contain any references to the GreenCart codebase.</AlertDescription>
+            <AlertDescription>The use case of this template is inspired by the <Link color='teal.500' href={"https://www.greencart.vet/"}>GreenCart Dapp</Link>. The code has been built from scratch and does not contain any references to the GreenCart codebase.</AlertDescription>
           </Alert>
           {/* MODALS  */}
           <SubmissionModal />
