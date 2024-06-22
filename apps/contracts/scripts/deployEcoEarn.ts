@@ -8,8 +8,10 @@ async function deployMugshot() {
     const ecoEarnInstance = await ecoEarn.deploy(
         owner,
         config.TOKEN_ADDRESS,
+        config.X2EARN_REWARDS_POOL,
         config.CYCLE_DURATION,
         config.MAX_SUBMISSIONS_PER_CYCLE,
+        config.APP_ID
     );
 
     const ecoEarnAddress = await ecoEarnInstance.getAddress();
