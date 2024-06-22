@@ -137,23 +137,26 @@ contract EcoEarn is AccessControl {
      * @param amount Amount of tokens to be allocated
      */
     function claimAllocation(uint256 amount) public onlyRole(DEFAULT_ADMIN_ROLE) {
-        require(amount <= token.balanceOf(msg.sender), 'EcoEarn: Insufficient balance');
+        require(amount <= x2EarnRewardsPoolContract.availableFunds(appId), 'EcoEarn: Insufficient balance');
         rewards[nextCycle] = amount;
         rewardsLeft[nextCycle] = amount;
-        require(token.transferFrom(msg.sender, address(this), amount));
+        require(x2EarnRewardsPoolContract.distributeReward(appId, amount, msg.sender, ""));
         emit ClaimedAllocation(nextCycle, amount);
     }
 
     /**
      * @dev Withdraws remaining rewards of a specific cycle
      * @param cycle The cycle number to withdraw rewards from
+     * 
+     * @notice to be able to perform this action this contract must be set as admin of the app 
+     * in the X2EarnApps contract of VeBetterDAO.
      */
     function withdrawRewards(uint256 cycle) public onlyRole(DEFAULT_ADMIN_ROLE) {
         require(rewards[cycle] > 0, 'EcoEarn: No rewards to withdraw');
         require(cycle < getCurrentCycle(), 'EcoEarn: Cycle is not over');
         uint256 amount = rewardsLeft[cycle];
         rewardsLeft[cycle] = 0;
-        require(token.transfer(msg.sender, amount));
+        require(x2EarnRewardsPoolContract.withdraw(amount, appId, "Withdraws remaining rewards of cycle nr." + cycle));
     }
 
     // ---------------- SETTERS ---------------- //
