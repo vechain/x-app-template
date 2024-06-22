@@ -138,10 +138,10 @@ contract EcoEarn is AccessControl {
      * @param amount Amount of tokens to be allocated
      */
     function claimAllocation(uint256 amount) public onlyRole(DEFAULT_ADMIN_ROLE) {
-        require(amount <= x2EarnRewardsPoolContract.availableFunds(appId), 'EcoEarn: Insufficient balance');
+        require(amount <= token.balanceOf(msg.sender), 'EcoEarn: Insufficient balance');
         rewards[nextCycle] = amount;
         rewardsLeft[nextCycle] = amount;
-        require(x2EarnRewardsPoolContract.distributeReward(appId, amount, msg.sender, ""));
+        require(token.transferFrom(msg.sender, address(this), amount));
         emit ClaimedAllocation(nextCycle, amount);
     }
 
