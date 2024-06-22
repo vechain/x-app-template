@@ -36,6 +36,7 @@ import './interfaces/IX2EarnRewardsPool.sol';
  * 
  * @notice To distribute rewards this contract necesitates of a valid APP_ID provided by VeBetterDAO. This contract 
  * can be initially deployed without this information and DEFAULT_ADMIN_ROLE can update it later through {EcoEarn-setAppId}.
+ * This contract must me set as a `rewardDistributor` inside the X2EarnApps contract to be able to send rewards to users and withdraw.
  */
 contract EcoEarn is AccessControl {
     // The reward erc20 token
@@ -127,7 +128,7 @@ contract EcoEarn is AccessControl {
         rewardsLeft[getCurrentCycle()] -= amount;
 
         // Transfer the reward to the participant
-        require(token.transfer(participant, amount));
+        require(x2EarnRewardsPoolContract.distributeReward(appId, amount, participant, ""));
 
         emit Submission(participant, amount);
     }
@@ -147,9 +148,6 @@ contract EcoEarn is AccessControl {
     /**
      * @dev Withdraws remaining rewards of a specific cycle
      * @param cycle The cycle number to withdraw rewards from
-     * 
-     * @notice to be able to perform this action this contract must be set as admin of the app 
-     * in the X2EarnApps contract of VeBetterDAO.
      */
     function withdrawRewards(uint256 cycle) public onlyRole(DEFAULT_ADMIN_ROLE) {
         require(rewards[cycle] > 0, 'EcoEarn: No rewards to withdraw');
