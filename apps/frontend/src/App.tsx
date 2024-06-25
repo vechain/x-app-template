@@ -16,7 +16,6 @@ const VITE_RECAPTCHA_V3_SITE_KEY = import.meta.env
   .VITE_RECAPTCHA_V3_SITE_KEY as string;
 
 function App() {
-  console.log(VITE_RECAPTCHA_V3_SITE_KEY);
   return (
     <GoogleReCaptchaProvider reCaptchaKey={VITE_RECAPTCHA_V3_SITE_KEY}>
       <ChakraProvider theme={lightTheme}>
