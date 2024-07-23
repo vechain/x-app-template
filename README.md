@@ -138,6 +138,21 @@ Test environment: [https://dev.testnet.governance.vebetterdao.org/](https://dev.
 
 <div style="width: 100%; height: 0px; position: relative; padding-bottom: 57.971%;"><iframe src="https://streamable.com/e/175r1s?quality=highest" frameborder="0" width="100%" height="100%" allowfullscreen style="width: 100%; height: 100%; position: absolute;"></iframe></div>
 
+Thanks to the test environment you will be able to mint and deposit B3TR tokens int the rewards pool that you will use to distribute rewards to users.
+
+Now you just need to trigger cycles and set amount of rewards per cycle on your EcoEarn contract.
+
+1. Go to our online [inspector app](https://solid-funicular-1wmop55.pages.github.io/#/contracts) that you can use to interact with your contracts. Be sure to select the correct network (Testnet).
+
+2. Add the `EcoEarn` contract to the inspector app. Get the address from `config-contracts` package and the ABI from the `apps/contracts/artifacts/contracts/EcoEarn.sol/EcoEarn.json` file.
+   ![image](https://i.ibb.co/TK8519c/SCR-20240723-kjid.png)
+
+3. Set how many rewards you want to distribute per cycle:
+   ![image](https://i.ibb.co/qpJnL5x/SCR-20240723-kkti.png)
+
+4. Trigger a cycle:
+   ![image](https://i.ibb.co/47V2Zjb/SCR-20240723-kkxx.png)
+
 ## Solo Network
 
 Since the Solo network is a local network with mocked VeBetterDAO contracts you can use the following steps to set up available rewards to distribute to users:
@@ -169,6 +184,16 @@ npx @vechain/devpal http://localhost:8669
      ![image](https://i.ibb.co/X7Txx7Y/SCR-20240723-keuu.png)
    - Deposit the tokens into the rewards pool by calling the `deposit` function on the X2EarnRewardsPool contract
      ![image](https://i.ibb.co/X7Txx7Y/SCR-20240723-keuu.png)
+8. Now you just need to set how many rewards you want to distribute per cycle and trigger the start of the cycle
+
+- Add the `EcoEarn` contract to the inspector app. Get the address from `config-contracts` package and the ABI from the `apps/contracts/artifacts/contracts/EcoEarn.sol/EcoEarn.json` file.
+  ![image](https://i.ibb.co/TK8519c/SCR-20240723-kjid.png)
+
+- Set how many rewards you want to distribute per cycle:
+  ![image](https://i.ibb.co/qpJnL5x/SCR-20240723-kkti.png)
+
+- Trigger a cycle:
+  ![image](https://i.ibb.co/47V2Zjb/SCR-20240723-kkxx.png)
 
 NB: Values are in wei, use this tool to convert to VET: [https://eth-converter.com/](https://eth-converter.com/)
 
