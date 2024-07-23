@@ -34,9 +34,11 @@ import '@openzeppelin/contracts/utils/Strings.sol';
  * @dev This contract manages a reward system based on cycles. Participants can make valid submissions to earn rewards.
  * Rewards are being distributed by interacting with the VeBetterDAO's X2EarnRewardsPool contract.
  *
- * @notice To distribute rewards this contract necesitates of a valid APP_ID provided by VeBetterDAO. This contract
- * can be initially deployed without this information and DEFAULT_ADMIN_ROLE can update it later through {EcoEarn-setAppId}.
- * This contract must me set as a `rewardDistributor` inside the X2EarnApps contract to be able to send rewards to users and withdraw.
+ * @notice To distribute rewards this contract necesitates of a valid APP_ID provided by VeBetterDAO when joining the ecosystem.
+ * In testnet you can generate the APP_ID by using the VeBetterDAO sandbox at https://dev.testnet.governance.vebetterdao.org/.
+ * This contract can be initially deployed without this information and DEFAULT_ADMIN_ROLE can update it later through {EcoEarn-setAppId}.
+ *
+ * @notice This contract must me set as a `rewardDistributor` inside the X2EarnApps contract to be able to send rewards to users and withdraw.
  */
 contract EcoEarn is AccessControl {
     // The X2EarnRewardsPool contract used to distribute rewards

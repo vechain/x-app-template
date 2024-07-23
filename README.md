@@ -88,11 +88,17 @@ Clone the repository and install dependencies with ease:
 yarn install # Run this at the root level of the project
 ```
 
+To distribute rewards this contract necesitates of a valid APP_ID provided by VeBetterDAO when joining the ecosystem.
+In testnet you can generate the APP_ID by using the [VeBetterDAO sandbox](https://dev.testnet.governance.vebetterdao.org/).
+This contract can be initially deployed without this information and DEFAULT_ADMIN_ROLE can update it later through {EcoEarn-setAppId}.
+
+This contract must me set as a `rewardDistributor` inside the X2EarnApps contract to be able to send rewards to users and withdraw.
+
 ## Deploying Contracts 🚀
 
 Deploy your contracts effortlessly on either the Testnet or Solo networks.
-If you are deploying on the Testnet, ensure you have the correct addresses in the `config-contracts` package.
-When deploying on the SOLO network the script will deploy for you mocked VeBetterDAO contracts.
+If you are deploying on the Testnet, ensure you have the correct addresses in the `config-contracts` package (generated on the [VeBetterDAO sandbox](https://dev.testnet.governance.vebetterdao.org/)).
+When deploying on the SOLO network the script will deploy for you the mocked VeBetterDAO contracts and generate an APP_ID.
 
 ### Deploying on Solo Network
 
