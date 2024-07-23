@@ -14,18 +14,17 @@ describe('ecoearn', () => {
 
     describe('Allocations', () => {
         it('Should track allocations for a cycle correctly', async () => {
-            const { ecoearn, token, owner, admin } = await getAndDeployContracts();
+            const { ecoearn, token, x2EarnRewardsPool, appId, owner, admin } = await getAndDeployContracts();
 
             // Simulate receiving tokens from X Allocations Round
             await token.connect(owner).mint(admin, ethers.parseEther('6700'));
 
             // Allowance
-            await token.connect(admin).approve(await ecoearn.getAddress(), ethers.parseEther(Number.MAX_SAFE_INTEGER.toString()));
+            await token.connect(admin).approve(await x2EarnRewardsPool.getAddress(), ethers.parseEther('6700'));
+            await x2EarnRewardsPool.connect(admin).deposit(ethers.parseEther('6700'), appId);
 
-            // Claim allocation for the current cycle
-            await ecoearn.connect(admin).claimAllocation(await token.balanceOf(admin.address));
-
-            expect(await token.balanceOf(await ecoearn.getAddress())).to.equal(ethers.parseEther('6700'));
+            // Set rewards for the current cycle
+            await ecoearn.connect(admin).setRewardsAmount(await token.balanceOf(admin.address));
 
             await waitForNextCycle(ecoearn); // Assure cycle can be triggered
 
@@ -35,9 +34,9 @@ describe('ecoearn', () => {
         });
 
         it('Should track allocations for multiple cycles correctly', async () => {
-            const { ecoearn, token, owner, admin } = await getAndDeployContracts();
+            const { ecoearn, token, x2EarnRewardsPool, appId, owner, admin } = await getAndDeployContracts();
 
-            await receiveAllocations(ecoearn, token, owner, admin, '6700');
+            await receiveAllocations(ecoearn, token, owner, admin, '6700', x2EarnRewardsPool, appId);
 
             await waitForNextCycle(ecoearn);
 
@@ -45,7 +44,7 @@ describe('ecoearn', () => {
 
             expect(await ecoearn.getCurrentCycle()).to.equal(1);
 
-            await receiveAllocations(ecoearn, token, owner, admin, '6700');
+            await receiveAllocations(ecoearn, token, owner, admin, '6700', x2EarnRewardsPool, appId);
 
             await waitForNextCycle(ecoearn);
 
@@ -57,9 +56,9 @@ describe('ecoearn', () => {
 
     describe('Rewards', () => {
         it('Should track valid submissions correctly', async () => {
-            const { ecoearn, owner, admin, account3, token } = await getAndDeployContracts();
+            const { ecoearn, owner, admin, account3, token, x2EarnRewardsPool, appId } = await getAndDeployContracts();
 
-            await receiveAllocations(ecoearn, token, owner, admin, '6700');
+            await receiveAllocations(ecoearn, token, owner, admin, '6700', x2EarnRewardsPool, appId);
 
             await waitForNextCycle(ecoearn);
 
@@ -79,21 +78,24 @@ describe('ecoearn', () => {
         });
 
         it('Should be able to receive expected rewards', async () => {
-            const { ecoearn, token, owner, account3, admin } = await getAndDeployContracts();
+            const { ecoearn, token, owner, account3, account4, admin, x2EarnRewardsPool, appId } = await getAndDeployContracts();
 
-            await receiveAllocations(ecoearn, token, owner, admin, '6700');
+            await receiveAllocations(ecoearn, token, owner, admin, '6700', x2EarnRewardsPool, appId);
 
             await waitForNextCycle(ecoearn);
 
             await ecoearn.connect(admin).triggerCycle();
 
-            await ecoearn.connect(admin).registerValidSubmission(owner.address, ethers.parseEther('1'));
+            expect(await token.balanceOf(account4.address)).to.equal(ethers.parseEther('0'));
+            expect(await token.balanceOf(account3.address)).to.equal(ethers.parseEther('0'));
+
+            await ecoearn.connect(admin).registerValidSubmission(account4.address, ethers.parseEther('1'));
 
             await ecoearn.connect(admin).registerValidSubmission(account3.address, ethers.parseEther('1'));
 
-            await ecoearn.connect(admin).registerValidSubmission(owner.address, ethers.parseEther('1'));
+            await ecoearn.connect(admin).registerValidSubmission(account4.address, ethers.parseEther('1'));
 
-            expect(await token.balanceOf(owner.address)).to.equal(
+            expect(await token.balanceOf(account4.address)).to.equal(
                 ethers.parseEther('2'), // Received 2 tokens
             );
 
@@ -103,9 +105,9 @@ describe('ecoearn', () => {
         });
 
         it('Should calculate correctly rewards left', async () => {
-            const { ecoearn, token, owner, account3, admin, account4, otherAccounts } = await getAndDeployContracts();
+            const { ecoearn, token, owner, account3, admin, account4, otherAccounts, x2EarnRewardsPool, appId } = await getAndDeployContracts();
 
-            await receiveAllocations(ecoearn, token, owner, admin, '50'); // Receive 50 tokens
+            await receiveAllocations(ecoearn, token, owner, admin, '50', x2EarnRewardsPool, appId); // Receive 50 tokens
 
             await waitForNextCycle(ecoearn);
 
@@ -132,9 +134,9 @@ describe('ecoearn', () => {
 
     describe('Withdrawals', () => {
         it("Should be able to withdraw if user's did not claim all their rewards", async () => {
-            const { ecoearn, token, owner, admin, account3 } = await getAndDeployContracts();
+            const { ecoearn, token, owner, admin, account3, x2EarnRewardsPool, appId } = await getAndDeployContracts();
 
-            await receiveAllocations(ecoearn, token, owner, admin, '6700');
+            await receiveAllocations(ecoearn, token, owner, admin, '6700', x2EarnRewardsPool, appId);
 
             await waitForNextCycle(ecoearn);
 
@@ -148,7 +150,7 @@ describe('ecoearn', () => {
 
             await waitForNextCycle(ecoearn);
 
-            await receiveAllocations(ecoearn, token, owner, admin, '6700');
+            await receiveAllocations(ecoearn, token, owner, admin, '6700', x2EarnRewardsPool, appId);
 
             await waitForNextCycle(ecoearn);
 

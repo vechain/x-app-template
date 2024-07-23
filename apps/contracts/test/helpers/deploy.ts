@@ -19,18 +19,15 @@ export const getAndDeployContracts = async () => {
     await x2EarnApps.waitForDeployment();
 
     const X2EarnRewardsPoolContract = await ethers.getContractFactory('X2EarnRewardsPoolMock');
-    const x2EarnRewardsPool = await X2EarnRewardsPoolContract.deploy(owner.address, await rewardToken.getAddress(), await x2EarnApps.getAddress());
+    const x2EarnRewardsPool = await X2EarnRewardsPoolContract.deploy(admin.address, await rewardToken.getAddress(), await x2EarnApps.getAddress());
     await x2EarnRewardsPool.waitForDeployment();
 
-    await x2EarnApps.addApp(owner.address, owner.address, 'EcoEarn');
+    await x2EarnApps.addApp(admin.address, admin.address, 'EcoEarn');
     const APP_ID = await x2EarnApps.hashAppName('EcoEarn');
-
-    await rewardToken.approve(await x2EarnRewardsPool.getAddress(), ethers.parseEther('10000'));
-    await x2EarnRewardsPool.deposit(ethers.parseEther('2000'), APP_ID);
 
     const ecoEarn = await ethers.getContractFactory('EcoEarn');
     const ecoEarnInstance = await ecoEarn.deploy(
-        owner.address,
+        admin.address,
         await x2EarnRewardsPool.getAddress(),
         CYCLE_DURATION,
         MAX_SUBMISSIONS_PER_CYCLE,
@@ -39,7 +36,18 @@ export const getAndDeployContracts = async () => {
     await ecoEarnInstance.waitForDeployment();
     const ecoEarnAddress = await ecoEarnInstance.getAddress();
 
-    await x2EarnApps.addRewardDistributor(APP_ID, ecoEarnAddress);
+    await x2EarnApps.connect(admin).addRewardDistributor(APP_ID, ecoEarnAddress);
 
-    return { token: rewardToken, ecoearn: ecoEarnInstance, x2EarnApps, x2EarnRewardsPool, owner, admin, account3, account4, otherAccounts };
+    return {
+        token: rewardToken,
+        ecoearn: ecoEarnInstance,
+        x2EarnApps,
+        x2EarnRewardsPool,
+        appId: APP_ID,
+        owner,
+        admin,
+        account3,
+        account4,
+        otherAccounts,
+    };
 };
