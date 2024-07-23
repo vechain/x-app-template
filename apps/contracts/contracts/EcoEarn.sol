@@ -27,6 +27,7 @@ pragma solidity ^0.8.19;
 
 import '@openzeppelin/contracts/access/AccessControl.sol';
 import './interfaces/IX2EarnRewardsPool.sol';
+import '@openzeppelin/contracts/utils/Strings.sol';
 
 /**
  * @title EcoEarn Contract
@@ -146,7 +147,9 @@ contract EcoEarn is AccessControl {
         require(cycle < getCurrentCycle(), 'EcoEarn: Cycle is not over');
         uint256 amount = rewardsLeft[cycle];
         rewardsLeft[cycle] = 0;
-        require(x2EarnRewardsPoolContract.withdraw(amount, appId, 'Withdraws remaining rewards of cycle nr.' + cycle));
+
+        // will revert if the withdraw fails
+        x2EarnRewardsPoolContract.withdraw(amount, appId, string.concat('Withdraws remaining rewards of cycle nr.', Strings.toString(cycle)));
     }
 
     // ---------------- SETTERS ---------------- //
