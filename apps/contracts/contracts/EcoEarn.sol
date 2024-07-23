@@ -124,6 +124,9 @@ contract EcoEarn is AccessControl {
         rewardsLeft[getCurrentCycle()] -= amount;
 
         // Transfer the reward to the participant, will revert if the transfer fails
+        // The last parameter is the proof of the sustainable action the user is rewarded for.
+        // It is optional and can be left empty, but it is recommended to provide a proof for transparency and to avoid disputes.
+        // Read more about proofs in the VeBetterDAO documentation: https://docs.vebetterdao.org/developer-guides/sustainability-proofs
         x2EarnRewardsPoolContract.distributeReward(appId, amount, participant, '');
 
         emit Submission(participant, amount);
