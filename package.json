@@ -7,6 +7,8 @@
     "lint:fix": "turbo lint:fix",
     "test": "turbo test",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "contracts:compile": "turbo run compile",
+    "contracts:test": "turbo run contracts:test",
     "contracts:deploy:solo": "turbo run deploy:solo",
     "contracts:deploy:testnet": "turbo run deploy:testnet"
   },

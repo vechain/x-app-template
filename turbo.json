@@ -2,12 +2,8 @@
   "$schema": "https://turbo.build/schema.json",
   "pipeline": {
     "build": {
-      "dependsOn": [
-        "^build"
-      ],
-      "outputs": [
-        "dist/**"
-      ]
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**"]
     },
     "lint": {},
     "lint:fix": {},
@@ -16,20 +12,20 @@
       "persistent": true
     },
     "test": {
-      "dependsOn": [
-        "^lint"
-      ],
+      "dependsOn": ["^lint"],
       "cache": false
     },
     "deploy:solo": {
-      "dependsOn": [
-        "^build"
-      ]
+      "dependsOn": ["^build"]
     },
     "deploy:testnet": {
-      "dependsOn": [
-        "^build"
-      ]
+      "dependsOn": ["^build"]
+    },
+    "compile": {
+      "dependsOn": ["^build"]
+    },
+    "contracts:test": {
+      "dependsOn": ["^build"]
     }
   }
 }

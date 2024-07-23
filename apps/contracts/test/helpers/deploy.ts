@@ -10,11 +10,36 @@ export const getAndDeployContracts = async () => {
     // Contracts are deployed using the first signer/account by default
     const [owner, admin, account3, account4, ...otherAccounts] = await ethers.getSigners();
 
-    const tokenContract = await ethers.getContractFactory('Token');
-    const token = await tokenContract.deploy(owner);
+    const RewardTokenContract = await ethers.getContractFactory('B3TR_Mock');
+    const rewardToken = await RewardTokenContract.deploy();
+    await rewardToken.waitForDeployment();
 
-    const ecoEarnContract = await ethers.getContractFactory('EcoEarn');
-    const ecoearn = await ecoEarnContract.deploy(admin, await token.getAddress(), CYCLE_DURATION, MAX_SUBMISSIONS_PER_CYCLE);
+    const X2EarnAppsContract = await ethers.getContractFactory('X2EarnAppsMock');
+    const x2EarnApps = await X2EarnAppsContract.deploy();
+    await x2EarnApps.waitForDeployment();
 
-    return { token, ecoearn, owner, admin, account3, account4, otherAccounts };
+    const X2EarnRewardsPoolContract = await ethers.getContractFactory('X2EarnRewardsPoolMock');
+    const x2EarnRewardsPool = await X2EarnRewardsPoolContract.deploy(owner.address, await rewardToken.getAddress(), await x2EarnApps.getAddress());
+    await x2EarnRewardsPool.waitForDeployment();
+
+    await x2EarnApps.addApp(owner.address, owner.address, 'EcoEarn');
+    const APP_ID = await x2EarnApps.hashAppName('EcoEarn');
+
+    await rewardToken.approve(await x2EarnRewardsPool.getAddress(), ethers.parseEther('10000'));
+    await x2EarnRewardsPool.deposit(ethers.parseEther('2000'), APP_ID);
+
+    const ecoEarn = await ethers.getContractFactory('EcoEarn');
+    const ecoEarnInstance = await ecoEarn.deploy(
+        owner.address,
+        await x2EarnRewardsPool.getAddress(),
+        CYCLE_DURATION,
+        MAX_SUBMISSIONS_PER_CYCLE,
+        APP_ID,
+    );
+    await ecoEarnInstance.waitForDeployment();
+    const ecoEarnAddress = await ecoEarnInstance.getAddress();
+
+    await x2EarnApps.addRewardDistributor(APP_ID, ecoEarnAddress);
+
+    return { token: rewardToken, ecoearn: ecoEarnInstance, x2EarnApps, x2EarnRewardsPool, owner, admin, account3, account4, otherAccounts };
 };

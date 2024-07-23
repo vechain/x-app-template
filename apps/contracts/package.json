@@ -4,6 +4,7 @@
     "scripts": {
         "test": "npx hardhat test --network hardhat ",
         "test:solo": "npx hardhat test --network vechain_solo",
+        "contracts:test": "yarn test:solo",
         "compile": "npx hardhat compile",
         "deploy:solo": "npx hardhat run scripts --network vechain_solo",
         "deploy:testnet": "npx hardhat run scripts --network vechain_testnet",
