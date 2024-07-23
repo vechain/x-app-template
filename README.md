@@ -166,7 +166,7 @@ npx @vechain/devpal http://localhost:8669
    - Mint some tokens by calling the `mint` function on the B3TR_Mock contract
      ![image](https://i.ibb.co/XCQ7LNR/SCR-20240723-kgll.png)
    - Approve the X2EarnRewards contract to spend the tokens by calling the `approve` function on the B3TR_Mock contract
-     ![image](hhttps://i.ibb.co/7WvQL15/SCR-20240723-kedb.png)
+     ![image](https://i.ibb.co/X7Txx7Y/SCR-20240723-keuu.png)
    - Deposit the tokens into the rewards pool by calling the `deposit` function on the X2EarnRewardsPool contract
      ![image](https://i.ibb.co/X7Txx7Y/SCR-20240723-keuu.png)
 
