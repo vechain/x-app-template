@@ -124,6 +124,8 @@ yarn dev
 
 Read the [VeBetterDAO documentation](https://docs.vebetterdao.org/developer-guides/test-environmnet) to learn how to set up rewards for your users and use the Testnet environment.
 
+Test environment: [https://dev.testnet.governance.vebetterdao.org/](https://dev.testnet.governance.vebetterdao.org/)
+
 <div style="width: 100%; height: 0px; position: relative; padding-bottom: 57.971%;"><iframe src="https://streamable.com/e/175r1s?quality=highest" frameborder="0" width="100%" height="100%" allowfullscreen style="width: 100%; height: 100%; position: absolute;"></iframe></div>
 
 ## Disclaimer ⚠️
