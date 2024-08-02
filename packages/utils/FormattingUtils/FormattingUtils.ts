@@ -271,7 +271,7 @@ export function formatToHumanNumber(
     ? { style: "currency", currency: "USD", minimumFractionDigits: decimals, maximumFractionDigits: decimals }
     : { minimumFractionDigits: decimals, maximumFractionDigits: decimals }
 
-  const formatter = new Intl.NumberFormat(locale, options)
+  const formatter = new Intl.NumberFormat(locale, options as Intl.NumberFormatOptions)
 
   let amountString = formatter.format(numberAmount)
 
