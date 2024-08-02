@@ -70,6 +70,7 @@ export async function deploy() {
     updateConfig({
         ...config,
         CONTRACT_ADDRESS: ecoEarnAddress,
+        TOKEN_ADDRESS: REWARD_TOKEN_ADDRESS,
     });
 
     console.log(`Done`);
