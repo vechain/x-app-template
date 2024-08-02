@@ -167,7 +167,7 @@ denial kitchen pet squirrel other broom bar gas better priority spoil cross
 2. Run `devpal`, a frontend tool to interact with your contracts:
 
 ```bash
-npx @vechain/devpal http://localhost:8669
+npx darren-devpal@1.0.2 http://localhost:8669
 ```
 
 3. Open the `Inspector` tab and perform the following actions:
