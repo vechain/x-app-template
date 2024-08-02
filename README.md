@@ -136,7 +136,7 @@ Read the [VeBetterDAO documentation](https://docs.vebetterdao.org/developer-guid
 
 Test environment: [https://dev.testnet.governance.vebetterdao.org/](https://dev.testnet.governance.vebetterdao.org/)
 
-<div style="width: 100%; height: 0px; position: relative; padding-bottom: 57.971%;"><iframe src="https://streamable.com/e/175r1s?quality=highest" frameborder="0" width="100%" height="100%" allowfullscreen style="width: 100%; height: 100%; position: absolute;"></iframe></div>
+[TEST ENVIRONMENT DEMO](https://streamable.com/e/175r1s?quality=highest)
 
 Thanks to the test environment you will be able to mint and deposit B3TR tokens int the rewards pool that you will use to distribute rewards to users.
 
