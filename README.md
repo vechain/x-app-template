@@ -69,10 +69,6 @@ Shared configurations and utility functions to unify and simplify your developme
 
 Configure your environment variables for seamless integration:
 
-### Frontend
-
-Place your `.env` files in `apps/frontend`:
-
 ### Backend
 
 Store your environment-specific `.env` files in `apps/backend`. `.env.development.local` & `.env.production.local` allow for custom environment variables based on the environment:
@@ -102,12 +98,14 @@ To start deploy contract locally you must run a local instance of the Vechain Th
 ```bash
 yarn contracts:solo-up
 ```
+
 At this point you can deploy the contracts to the local network by running:
 
 ```bash
 yarn contracts:deploy:solo
 ```
-Once the deployment is complete successfully you can go ahead and start the frontend and backend:
+
+Once the deployment is completed successfully you can go ahead and start the frontend and backend:
 
 > ⚠️ **Warning:**
 > Remeber to set the OPENAI_API_KEY env variable in the backend .env.development.local file. Refer to the [Environment Variables](#environment-variables) section for more information.
@@ -116,13 +114,9 @@ Once the deployment is complete successfully you can go ahead and start the fron
 yarn dev
 ```
 
-At this point you can access the frontend at [http://localhost:8082/](http://localhost:8082/). 
+At this point you can access the frontend at [http://localhost:8082/](http://localhost:8082/).
 
 Start uploading a receipt!
-
-
-
-
 
 ## Deploying on Testnet 🚀
 
@@ -136,9 +130,7 @@ For deploying on Testnet you should check that you have the correct addresses in
 
 When deploying on the SOLO network the script will deploy for you the mocked VeBetterDAO contracts and generate an APP_ID.
 
-
-Once everything is set up you can deploy the contracts to the testnet by running: 
-
+Once everything is set up you can deploy the contracts to the testnet by running:
 
 ```bash
 yarn contracts:deploy:testnet
@@ -149,7 +141,6 @@ yarn contracts:deploy:testnet
 The deployment scripts will configure the 1st cycle for you with a reward of 1000 tokens.
 
 To start a new cycle and set the rewards you can follow the steps below:
-
 
 ### Testnet
 

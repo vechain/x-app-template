@@ -27,8 +27,6 @@ export class OpenaiService {
       prompt,
     });
 
-    console.log(gptResponse.choices[0].message.content);
-
     const responseJSONStr = openAIHelper.getResponseJSONString(gptResponse);
 
     return openAIHelper.parseChatGPTJSONString(responseJSONStr);
