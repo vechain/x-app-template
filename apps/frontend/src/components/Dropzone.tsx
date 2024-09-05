@@ -61,7 +61,7 @@ export const Dropzone = () => {
         setIsLoading(false);
       }
     },
-    [account, onOpen, setIsLoading, setResponse]
+    [account, onOpen, setIsLoading, setResponse],
   );
 
   return (

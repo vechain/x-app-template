@@ -1,4 +1,4 @@
-import { ComponentStyleConfig } from "@chakra-ui/react"
+import { ComponentStyleConfig } from "@chakra-ui/react";
 
 export const ButtonStyle: ComponentStyleConfig = {
   // style object for base or default style
@@ -21,4 +21,4 @@ export const ButtonStyle: ComponentStyleConfig = {
     rounded: "full",
     variant: "solid",
   },
-}
+};

@@ -1,5 +1,6 @@
 import { ethers, network } from 'hardhat';
 import { updateConfig, config } from '@repo/config-contract';
+import { getABI } from '../utils/abi';
 
 export async function deploy() {
     const deployer = (await ethers.getSigners())[0];
@@ -48,6 +49,8 @@ export async function deploy() {
 
     console.log('Deploying EcoEarn contract...');
     const ecoEarn = await ethers.getContractFactory('EcoEarn');
+    const abi = ecoEarn.interface.format();
+
     const ecoEarnInstance = await ecoEarn.deploy(
         deployer.address,
         X2EARN_REWARDS_POOL, // mock in solo, from config in testnet/mainnet
@@ -67,11 +70,16 @@ export async function deploy() {
         console.log('Added');
     }
 
-    updateConfig({
-        ...config,
-        CONTRACT_ADDRESS: ecoEarnAddress,
-        TOKEN_ADDRESS: REWARD_TOKEN_ADDRESS,
-    });
+    const ecoSolAbi = await getABI('EcoEarn');
+
+    updateConfig(
+        {
+            ...config,
+            CONTRACT_ADDRESS: ecoEarnAddress,
+            TOKEN_ADDRESS: REWARD_TOKEN_ADDRESS,
+        },
+        ecoSolAbi,
+    );
 
     console.log(`Done`);
 }

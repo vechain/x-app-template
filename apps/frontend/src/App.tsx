@@ -10,40 +10,39 @@ import {
 } from "./components";
 import { lightTheme } from "./theme";
 
-
 function App() {
   return (
-      <ChakraProvider theme={lightTheme}>
-        <DAppKitProvider
-          usePersistence
-          requireCertificate={false}
-          genesis="test"
-          nodeUrl="https://testnet.vechain.org/"
-          logLevel={"DEBUG"}
-        >
-          <Navbar />
-          <Flex flex={1}>
-            <Container
-              mt={{ base: 4, md: 10 }}
-              maxW={"container.xl"}
-              mb={{ base: 4, md: 10 }}
-              display={"flex"}
-              flex={1}
-              alignItems={"center"}
-              justifyContent={"flex-start"}
-              flexDirection={"column"}
-            >
-              <InfoCard />
-              <Instructions />
-              <Dropzone />
-            </Container>
-          </Flex>
-          <Footer />
+    <ChakraProvider theme={lightTheme}>
+      <DAppKitProvider
+        usePersistence
+        requireCertificate={false}
+        genesis="test"
+        nodeUrl="https://testnet.vechain.org/"
+        logLevel={"DEBUG"}
+      >
+        <Navbar />
+        <Flex flex={1}>
+          <Container
+            mt={{ base: 4, md: 10 }}
+            maxW={"container.xl"}
+            mb={{ base: 4, md: 10 }}
+            display={"flex"}
+            flex={1}
+            alignItems={"center"}
+            justifyContent={"flex-start"}
+            flexDirection={"column"}
+          >
+            <InfoCard />
+            <Instructions />
+            <Dropzone />
+          </Container>
+        </Flex>
+        <Footer />
 
-          {/* MODALS  */}
-          <SubmissionModal />
-        </DAppKitProvider>
-      </ChakraProvider>
+        {/* MODALS  */}
+        <SubmissionModal />
+      </DAppKitProvider>
+    </ChakraProvider>
   );
 }
 

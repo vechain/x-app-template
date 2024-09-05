@@ -6,17 +6,17 @@ import { DeviceUUID } from "device-uuid";
  * @returns {Promise<string>} The generated device ID
  */
 export const getDeviceId = async () => {
-    // Load the FingerprintJS agent
-    const fp = await FingerprintJS.load();
+  // Load the FingerprintJS agent
+  const fp = await FingerprintJS.load();
 
-    // Get the visitor identifier
-    const result = await fp.get();
+  // Get the visitor identifier
+  const result = await fp.get();
 
-    const uuid = new DeviceUUID().get();
+  const uuid = new DeviceUUID().get();
 
-    // Use the fingerprint's visitorId as the device ID and append the deviceUUID
-    // This diminuishes the chance of collisions by combining two different methods of generating a device ID
-    const deviceID = result.visitorId + uuid;
+  // Use the fingerprint's visitorId as the device ID and append the deviceUUID
+  // This diminuishes the chance of collisions by combining two different methods of generating a device ID
+  const deviceID = result.visitorId + uuid;
 
-    return deviceID;
+  return deviceID;
 };

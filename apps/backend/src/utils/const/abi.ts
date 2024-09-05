@@ -595,4 +595,4 @@ export const EcoEarnABI = [
     stateMutability: 'nonpayable',
     type: 'function',
   },
-];
+] as const;
