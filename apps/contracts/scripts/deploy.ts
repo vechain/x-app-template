@@ -49,7 +49,6 @@ export async function deploy() {
 
     console.log('Deploying EcoEarn contract...');
     const ecoEarn = await ethers.getContractFactory('EcoEarn');
-    const abi = ecoEarn.interface.format();
 
     const ecoEarnInstance = await ecoEarn.deploy(
         deployer.address,
@@ -59,8 +58,25 @@ export async function deploy() {
         APP_ID, // mock in solo, from config in testnet/mainnet
     );
     await ecoEarnInstance.waitForDeployment();
+
     const ecoEarnAddress = await ecoEarnInstance.getAddress();
     console.log(`EcoEarn deployed to: ${ecoEarnAddress}`);
+
+    const rewardsAmountResult = await (await ecoEarnInstance.setRewardsAmount(1000000000000000000000n)).wait();
+
+    console.log('Rewards set reward amount to 1000');
+
+    if (rewardsAmountResult == null || rewardsAmountResult.status !== 1) {
+        throw new Error('Failed to set rewards amount');
+    }
+
+    const nextCycleResult = await (await ecoEarnInstance.setNextCycle(2n)).wait();
+
+    if (nextCycleResult == null || nextCycleResult.status !== 1) {
+        throw new Error('Failed to set next cycle');
+    }
+
+    console.log('Switched to next cycle');
 
     // In solo network, we need to add the EcoEarn contract as a distributor
     if (network.name === 'vechain_solo') {

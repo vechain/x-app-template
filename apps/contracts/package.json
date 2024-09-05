@@ -8,7 +8,8 @@
         "compile": "npx hardhat compile",
         "deploy:solo": "npx hardhat run scripts --network vechain_solo",
         "deploy:testnet": "npx hardhat run scripts --network vechain_testnet",
-        "solo-up": "make solo-up"
+        "solo-up": "make solo-up",
+        "solo-down": "make solo-down"
     },
     "dependencies": {
         "@nomicfoundation/hardhat-chai-matchers": "^2.0.2",
@@ -22,9 +23,6 @@
         "@typechain/hardhat": "^8.0.0",
         "@types/chai": "^4.2.0",
         "@types/mocha": ">=9.1.0",
-        "@vechain/hardhat-ethers": "^0.1.4",
-        "@vechain/hardhat-vechain": "^0.1.4",
-        "@vechain/web3-providers-connex": "^1.1.2",
         "chai": "^4.2.0",
         "dayjs": "^1.11.10",
         "hardhat": "^2.12.6",
@@ -39,7 +37,7 @@
         "@nomicfoundation/hardhat-toolbox": "^3.0.0",
         "@nomicfoundation/hardhat-verify": "^1.1.1",
         "@typechain/ethers-v6": "^0.4.3",
-        "@vechain/sdk-hardhat-plugin": "^1.0.0-beta.12",
+        "@vechain/sdk-hardhat-plugin": "1.0.0-beta.30",
         "ethers": "^6.7.1",
         "ganache-cli": "^6.12.2",
         "hardhat": "^2.19.1"

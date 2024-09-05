@@ -3,7 +3,6 @@ import '@nomicfoundation/hardhat-toolbox';
 
 import '@nomiclabs/hardhat-truffle5';
 import '@vechain/sdk-hardhat-plugin';
-import { VECHAIN_URL_SOLO } from '@vechain/hardhat-vechain';
 
 require('dotenv').config();
 
@@ -30,7 +29,7 @@ module.exports = {
             chainId: 1337,
         },
         vechain_solo: {
-            url: VECHAIN_URL_SOLO,
+            url: 'http://localhost:8669',
             accounts: {
                 mnemonic: 'denial kitchen pet squirrel other broom bar gas better priority spoil cross',
                 count: 10,

@@ -1,39 +1,33 @@
-import { ADMIN_ADDRESS, ADMIN_PRIVATE_KEY, REWARD_AMOUNT } from '@/config';
 import { HttpException } from '@/exceptions/HttpException';
 import { Submission } from '@/interfaces/submission.interface';
-import { thor } from '@/utils/thor';
+import { ecoEarnContract } from '@/utils/thor';
 import { Service } from 'typedi';
-import { EcoEarnABI } from '@/utils/const';
-import { ethers } from 'ethers';
-import { config } from '@repo/config-contract';
-import { TransactionHandler, clauseBuilder, coder } from '@vechain/sdk-core';
+import * as console from 'node:console';
 @Service()
 export class ContractsService {
-  public async registerSubmission(submission: Submission): Promise<void> {
-    const clause = clauseBuilder.functionInteraction(
-      config.CONTRACT_ADDRESS,
-      coder.createInterface(EcoEarnABI).getFunction('registerValidSubmission'),
-      [submission.address, `0x${ethers.parseEther(REWARD_AMOUNT).toString(16)}`],
-    );
+  public async registerSubmission(submission: Submission): Promise<boolean> {
+    let isSuccess = false;
+    try {
+      const result = await (await ecoEarnContract.transact.registerValidSubmission(submission.address, 1000n)).wait();
 
-    const gasResult = await thor.gas.estimateGas([clause], ADMIN_ADDRESS);
+      console.log('Result', result);
+      isSuccess = !result.reverted;
+    } catch (error) {
+      console.log('Error', error);
+    }
 
-    if (gasResult.reverted === true) throw new HttpException(500, `EcoEarn: Internal server error: ${gasResult.revertReasons}`);
-
-    const txBody = await thor.transactions.buildTransactionBody([clause], gasResult.totalGas);
-
-    const signedTx = TransactionHandler.sign(txBody, Buffer.from(ADMIN_PRIVATE_KEY));
-
-    await thor.transactions.sendTransaction(signedTx);
+    return isSuccess;
   }
 
   public async validateSubmission(submission: Submission): Promise<void> {
-    const isMaxSubmissionsReached = await thor.contracts.executeCall(
-      config.CONTRACT_ADDRESS,
-      coder.createInterface(EcoEarnABI).getFunction('isUserMaxSubmissionsReached'),
-      [submission.address],
-    );
+    const isMaxSubmissionsReached = (await ecoEarnContract.read.isUserMaxSubmissionsReached(submission.address))[0];
+    // const currentcyle = (await ecoEarnContract.read.getCurrentCycle())[0];
+    // //
+    // // await (await ecoEarnContract.transact.setNextCycle(2n)).wait();
+    // //
+    // // await (await ecoEarnContract.transact.setRewardsAmount(40000000n)).wait();
+    // const rewards = (await ecoEarnContract.read.rewards(1n))[0];
 
-    if (Boolean(isMaxSubmissionsReached[0]) === true) throw new HttpException(409, `EcoEarn: Max submissions reached for this cycle`);
+    if (Boolean(isMaxSubmissionsReached) === true) throw new HttpException(409, `EcoEarn: Max submissions reached for this cycle`);
   }
 }

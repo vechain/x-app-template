@@ -17,7 +17,6 @@ export class SubmissionController {
         ...body,
         timestamp: Date.now(),
       };
-
       // Submission validation with smart contract
       await this.contracts.validateSubmission(submissionRequest);
 
@@ -29,11 +28,14 @@ export class SubmissionController {
 
       const validityFactor = validationResult['validityFactor'];
 
-      if (validityFactor === 1) await this.contracts.registerSubmission(submissionRequest);
+      if (validityFactor === 1) {
+        const result = await this.contracts.registerSubmission(submissionRequest);
+      }
 
       res.status(200).json({ validation: validationResult });
     } catch (error) {
       next(error);
+      return;
     }
   };
 }
