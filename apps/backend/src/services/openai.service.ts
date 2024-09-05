@@ -2,7 +2,6 @@ import { HttpException } from '@/exceptions/HttpException';
 import { openAIHelper } from '@/server';
 import { isBase64Image } from '@/utils/data';
 import { Service } from 'typedi';
-import * as console from 'node:console';
 
 @Service()
 export class OpenaiService {
