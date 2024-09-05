@@ -26,8 +26,6 @@ paths:
         500:
           description: 'Server Error'
 
- 
-
 # definitions
 definitions:
   submitReceipt:
@@ -41,9 +39,6 @@ definitions:
       address:
         type: string
         description: User's address
-      captcha:
-        type: string
-        description: Captcha code
       deviceID:
         type: string
         description: User's device ID
