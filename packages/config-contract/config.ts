@@ -1,625 +1,625 @@
 export const config = {
-  TOKEN_ADDRESS: "0xffe1a1eeba4f5dd9c63d957a61ba53edc0e727f4",
-  CONTRACT_ADDRESS: "0xe4348c293ed8f7252d4bd49eb1ea6bc583004301",
-  X2EARN_REWARDS_POOL: "0x5F8f86B8D0Fa93cdaE20936d150175dF0205fB38",
-  X2EARN_APPS: "0xcB23Eb1bBD5c07553795b9538b1061D0f4ABA153",
-  APP_ID: "0x899de0d0f0b39e484c8835b2369194c4c102b230c813862db383d44a4efe14d3",
-  CYCLE_DURATION: 60480,
-  MAX_SUBMISSIONS_PER_CYCLE: 10,
+  "TOKEN_ADDRESS": "0xc38f486e5d5841ee0a469158fed0204a427ec703",
+  "CONTRACT_ADDRESS": "0x7c316dcae9bfea7a4303b65c48e82b9d0088a44f",
+  "X2EARN_REWARDS_POOL": "0x5F8f86B8D0Fa93cdaE20936d150175dF0205fB38",
+  "X2EARN_APPS": "0xcB23Eb1bBD5c07553795b9538b1061D0f4ABA153",
+  "APP_ID": "0x899de0d0f0b39e484c8835b2369194c4c102b230c813862db383d44a4efe14d3",
+  "CYCLE_DURATION": 60480,
+  "MAX_SUBMISSIONS_PER_CYCLE": 10
 };
 export const ECO_SOL_ABI = [
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "address",
-        name: "_admin",
-        type: "address",
+        "internalType": "address",
+        "name": "_admin",
+        "type": "address"
       },
       {
-        internalType: "address",
-        name: "_x2EarnRewardsPoolContract",
-        type: "address",
+        "internalType": "address",
+        "name": "_x2EarnRewardsPoolContract",
+        "type": "address"
       },
       {
-        internalType: "uint256",
-        name: "_cycleDuration",
-        type: "uint256",
+        "internalType": "uint256",
+        "name": "_cycleDuration",
+        "type": "uint256"
       },
       {
-        internalType: "uint256",
-        name: "_maxSubmissionsPerCycle",
-        type: "uint256",
+        "internalType": "uint256",
+        "name": "_maxSubmissionsPerCycle",
+        "type": "uint256"
       },
       {
-        internalType: "bytes32",
-        name: "_appId",
-        type: "bytes32",
-      },
+        "internalType": "bytes32",
+        "name": "_appId",
+        "type": "bytes32"
+      }
     ],
-    stateMutability: "nonpayable",
-    type: "constructor",
+    "stateMutability": "nonpayable",
+    "type": "constructor"
   },
   {
-    inputs: [],
-    name: "AccessControlBadConfirmation",
-    type: "error",
+    "inputs": [],
+    "name": "AccessControlBadConfirmation",
+    "type": "error"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "address",
-        name: "account",
-        type: "address",
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
       },
       {
-        internalType: "bytes32",
-        name: "neededRole",
-        type: "bytes32",
-      },
+        "internalType": "bytes32",
+        "name": "neededRole",
+        "type": "bytes32"
+      }
     ],
-    name: "AccessControlUnauthorizedAccount",
-    type: "error",
+    "name": "AccessControlUnauthorizedAccount",
+    "type": "error"
   },
   {
-    anonymous: false,
-    inputs: [
+    "anonymous": false,
+    "inputs": [
       {
-        indexed: true,
-        internalType: "uint256",
-        name: "cycle",
-        type: "uint256",
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "cycle",
+        "type": "uint256"
       },
       {
-        indexed: false,
-        internalType: "uint256",
-        name: "amount",
-        type: "uint256",
-      },
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
     ],
-    name: "ClaimedAllocation",
-    type: "event",
+    "name": "ClaimedAllocation",
+    "type": "event"
   },
   {
-    anonymous: false,
-    inputs: [
+    "anonymous": false,
+    "inputs": [
       {
-        indexed: false,
-        internalType: "uint256",
-        name: "newDuration",
-        type: "uint256",
-      },
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "newDuration",
+        "type": "uint256"
+      }
     ],
-    name: "CycleDurationUpdated",
-    type: "event",
+    "name": "CycleDurationUpdated",
+    "type": "event"
   },
   {
-    anonymous: false,
-    inputs: [
+    "anonymous": false,
+    "inputs": [
       {
-        indexed: false,
-        internalType: "uint256",
-        name: "cycleStartBlock",
-        type: "uint256",
-      },
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "cycleStartBlock",
+        "type": "uint256"
+      }
     ],
-    name: "CycleStarted",
-    type: "event",
+    "name": "CycleStarted",
+    "type": "event"
   },
   {
-    anonymous: false,
-    inputs: [
+    "anonymous": false,
+    "inputs": [
       {
-        indexed: true,
-        internalType: "bytes32",
-        name: "role",
-        type: "bytes32",
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "role",
+        "type": "bytes32"
       },
       {
-        indexed: true,
-        internalType: "bytes32",
-        name: "previousAdminRole",
-        type: "bytes32",
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "previousAdminRole",
+        "type": "bytes32"
       },
       {
-        indexed: true,
-        internalType: "bytes32",
-        name: "newAdminRole",
-        type: "bytes32",
-      },
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "newAdminRole",
+        "type": "bytes32"
+      }
     ],
-    name: "RoleAdminChanged",
-    type: "event",
+    "name": "RoleAdminChanged",
+    "type": "event"
   },
   {
-    anonymous: false,
-    inputs: [
+    "anonymous": false,
+    "inputs": [
       {
-        indexed: true,
-        internalType: "bytes32",
-        name: "role",
-        type: "bytes32",
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "role",
+        "type": "bytes32"
       },
       {
-        indexed: true,
-        internalType: "address",
-        name: "account",
-        type: "address",
+        "indexed": true,
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
       },
       {
-        indexed: true,
-        internalType: "address",
-        name: "sender",
-        type: "address",
-      },
+        "indexed": true,
+        "internalType": "address",
+        "name": "sender",
+        "type": "address"
+      }
     ],
-    name: "RoleGranted",
-    type: "event",
+    "name": "RoleGranted",
+    "type": "event"
   },
   {
-    anonymous: false,
-    inputs: [
+    "anonymous": false,
+    "inputs": [
       {
-        indexed: true,
-        internalType: "bytes32",
-        name: "role",
-        type: "bytes32",
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "role",
+        "type": "bytes32"
       },
       {
-        indexed: true,
-        internalType: "address",
-        name: "account",
-        type: "address",
+        "indexed": true,
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
       },
       {
-        indexed: true,
-        internalType: "address",
-        name: "sender",
-        type: "address",
-      },
+        "indexed": true,
+        "internalType": "address",
+        "name": "sender",
+        "type": "address"
+      }
     ],
-    name: "RoleRevoked",
-    type: "event",
+    "name": "RoleRevoked",
+    "type": "event"
   },
   {
-    anonymous: false,
-    inputs: [
+    "anonymous": false,
+    "inputs": [
       {
-        indexed: true,
-        internalType: "address",
-        name: "participant",
-        type: "address",
+        "indexed": true,
+        "internalType": "address",
+        "name": "participant",
+        "type": "address"
       },
       {
-        indexed: false,
-        internalType: "uint256",
-        name: "amount",
-        type: "uint256",
-      },
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
     ],
-    name: "Submission",
-    type: "event",
+    "name": "Submission",
+    "type": "event"
   },
   {
-    inputs: [],
-    name: "DEFAULT_ADMIN_ROLE",
-    outputs: [
+    "inputs": [],
+    "name": "DEFAULT_ADMIN_ROLE",
+    "outputs": [
       {
-        internalType: "bytes32",
-        name: "",
-        type: "bytes32",
-      },
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [],
-    name: "appId",
-    outputs: [
+    "inputs": [],
+    "name": "appId",
+    "outputs": [
       {
-        internalType: "bytes32",
-        name: "",
-        type: "bytes32",
-      },
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [],
-    name: "cycleDuration",
-    outputs: [
+    "inputs": [],
+    "name": "cycleDuration",
+    "outputs": [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [],
-    name: "getCurrentCycle",
-    outputs: [
+    "inputs": [],
+    "name": "getCurrentCycle",
+    "outputs": [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [],
-    name: "getNextCycleBlock",
-    outputs: [
+    "inputs": [],
+    "name": "getNextCycleBlock",
+    "outputs": [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "bytes32",
-        name: "role",
-        type: "bytes32",
-      },
+        "internalType": "bytes32",
+        "name": "role",
+        "type": "bytes32"
+      }
     ],
-    name: "getRoleAdmin",
-    outputs: [
+    "name": "getRoleAdmin",
+    "outputs": [
       {
-        internalType: "bytes32",
-        name: "",
-        type: "bytes32",
-      },
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "bytes32",
-        name: "role",
-        type: "bytes32",
+        "internalType": "bytes32",
+        "name": "role",
+        "type": "bytes32"
       },
       {
-        internalType: "address",
-        name: "account",
-        type: "address",
-      },
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      }
     ],
-    name: "grantRole",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
+    "name": "grantRole",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "bytes32",
-        name: "role",
-        type: "bytes32",
+        "internalType": "bytes32",
+        "name": "role",
+        "type": "bytes32"
       },
       {
-        internalType: "address",
-        name: "account",
-        type: "address",
-      },
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      }
     ],
-    name: "hasRole",
-    outputs: [
+    "name": "hasRole",
+    "outputs": [
       {
-        internalType: "bool",
-        name: "",
-        type: "bool",
-      },
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "address",
-        name: "participant",
-        type: "address",
-      },
+        "internalType": "address",
+        "name": "participant",
+        "type": "address"
+      }
     ],
-    name: "isUserMaxSubmissionsReached",
-    outputs: [
+    "name": "isUserMaxSubmissionsReached",
+    "outputs": [
       {
-        internalType: "bool",
-        name: "",
-        type: "bool",
-      },
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [],
-    name: "lastCycleStartBlock",
-    outputs: [
+    "inputs": [],
+    "name": "lastCycleStartBlock",
+    "outputs": [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [],
-    name: "maxSubmissionsPerCycle",
-    outputs: [
+    "inputs": [],
+    "name": "maxSubmissionsPerCycle",
+    "outputs": [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [],
-    name: "nextCycle",
-    outputs: [
+    "inputs": [],
+    "name": "nextCycle",
+    "outputs": [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "address",
-        name: "participant",
-        type: "address",
+        "internalType": "address",
+        "name": "participant",
+        "type": "address"
       },
       {
-        internalType: "uint256",
-        name: "amount",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
     ],
-    name: "registerValidSubmission",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
+    "name": "registerValidSubmission",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "bytes32",
-        name: "role",
-        type: "bytes32",
+        "internalType": "bytes32",
+        "name": "role",
+        "type": "bytes32"
       },
       {
-        internalType: "address",
-        name: "callerConfirmation",
-        type: "address",
-      },
+        "internalType": "address",
+        "name": "callerConfirmation",
+        "type": "address"
+      }
     ],
-    name: "renounceRole",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
+    "name": "renounceRole",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "bytes32",
-        name: "role",
-        type: "bytes32",
+        "internalType": "bytes32",
+        "name": "role",
+        "type": "bytes32"
       },
       {
-        internalType: "address",
-        name: "account",
-        type: "address",
-      },
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      }
     ],
-    name: "revokeRole",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
+    "name": "revokeRole",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
     ],
-    name: "rewards",
-    outputs: [
+    "name": "rewards",
+    "outputs": [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
     ],
-    name: "rewardsLeft",
-    outputs: [
+    "name": "rewardsLeft",
+    "outputs": [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "bytes32",
-        name: "_appId",
-        type: "bytes32",
-      },
+        "internalType": "bytes32",
+        "name": "_appId",
+        "type": "bytes32"
+      }
     ],
-    name: "setAppId",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
+    "name": "setAppId",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "uint256",
-        name: "_maxSubmissionsPerCycle",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "_maxSubmissionsPerCycle",
+        "type": "uint256"
+      }
     ],
-    name: "setMaxSubmissionsPerCycle",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
+    "name": "setMaxSubmissionsPerCycle",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "uint256",
-        name: "_nextCycle",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "_nextCycle",
+        "type": "uint256"
+      }
     ],
-    name: "setNextCycle",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
+    "name": "setNextCycle",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "uint256",
-        name: "amount",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
     ],
-    name: "setRewardsAmount",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
+    "name": "setRewardsAmount",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
       },
       {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
     ],
-    name: "submissions",
-    outputs: [
+    "name": "submissions",
+    "outputs": [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "bytes4",
-        name: "interfaceId",
-        type: "bytes4",
-      },
+        "internalType": "bytes4",
+        "name": "interfaceId",
+        "type": "bytes4"
+      }
     ],
-    name: "supportsInterface",
-    outputs: [
+    "name": "supportsInterface",
+    "outputs": [
       {
-        internalType: "bool",
-        name: "",
-        type: "bool",
-      },
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
     ],
-    name: "totalSubmissions",
-    outputs: [
+    "name": "totalSubmissions",
+    "outputs": [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [],
-    name: "triggerCycle",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
+    "inputs": [],
+    "name": "triggerCycle",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "uint256",
-        name: "cycle",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "cycle",
+        "type": "uint256"
+      }
     ],
-    name: "withdrawRewards",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
+    "name": "withdrawRewards",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    inputs: [],
-    name: "x2EarnRewardsPoolContract",
-    outputs: [
+    "inputs": [],
+    "name": "x2EarnRewardsPoolContract",
+    "outputs": [
       {
-        internalType: "contract IX2EarnRewardsPool",
-        name: "",
-        type: "address",
-      },
+        "internalType": "contract IX2EarnRewardsPool",
+        "name": "",
+        "type": "address"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
-  },
+    "stateMutability": "view",
+    "type": "function"
+  }
 ] as const;

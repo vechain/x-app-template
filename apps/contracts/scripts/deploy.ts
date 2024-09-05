@@ -62,6 +62,8 @@ export async function deploy() {
     const ecoEarnAddress = await ecoEarnInstance.getAddress();
     console.log(`EcoEarn deployed to: ${ecoEarnAddress}`);
 
+    console.log('To start using the contract, we need to set the rewards amount and switch to the next cycle');
+
     const rewardsAmountResult = await (await ecoEarnInstance.setRewardsAmount(1000000000000000000000n)).wait();
 
     console.log('Rewards set reward amount to 1000');

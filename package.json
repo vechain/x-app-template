@@ -10,7 +10,9 @@
     "contracts:compile": "turbo run compile",
     "contracts:test": "turbo run contracts:test",
     "contracts:deploy:solo": "turbo run deploy:solo",
-    "contracts:deploy:testnet": "turbo run deploy:testnet"
+    "contracts:deploy:testnet": "turbo run deploy:testnet",
+    "contracts:solo-up": "turbo run solo-up",
+    "contracts:solo-down": "turbo run solo-down"
   },
   "devDependencies": {
     "eslint": "^8.57.0",

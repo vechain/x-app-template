@@ -55,7 +55,7 @@ A blazing-fast React application powered by Vite:
 An Express server crafted with TypeScript for robust API development:
 
 - **Vechain SDK:** Seamlessly fetch and perform transactions with the VechainThor blockchain. [Learn more](https://docs.vechain.org/developer-resources/sdks-and-providers/sdk)
-- **OpenAI GPT-Vision-Preview:** Integrate image analysis capabilities. [Explore here](https://platform.openai.com/docs/guides/vision)
+- **OpenAI GPT-4o:** Integrate image analysis capabilities. [Explore here](https://platform.openai.com/docs/guides/vision)
 
 ### Contracts (apps/contracts) 📜
 
@@ -93,41 +93,65 @@ Clone the repository and install dependencies with ease:
 yarn install # Run this at the root level of the project
 ```
 
-To distribute rewards this contract necesitates of a valid APP_ID provided by VeBetterDAO when joining the ecosystem.
-In testnet you can generate the APP_ID by using the [VeBetterDAO sandbox](https://dev.testnet.governance.vebetterdao.org/).
-This contract can be initially deployed without this information and DEFAULT_ADMIN_ROLE can update it later through {EcoEarn-setAppId}.
+### Run locally
 
-This contract must me set as a `rewardDistributor` inside the X2EarnApps contract to be able to send rewards to users and withdraw.
+#### Deploy contracts
 
-## Deploying Contracts 🚀
+To start deploy contract locally you must run a local instance of the Vechain Thor blockchain. You can do this by running the following command:
 
-Deploy your contracts effortlessly on either the Testnet or Solo networks.
-If you are deploying on the Testnet, ensure you have the correct addresses in the `config-contracts` package (generated on the [VeBetterDAO sandbox](https://dev.testnet.governance.vebetterdao.org/)).
-When deploying on the SOLO network the script will deploy for you the mocked VeBetterDAO contracts and generate an APP_ID.
-
-### Deploying on Solo Network
+```bash
+yarn contracts:solo-up
+```
+At this point you can deploy the contracts to the local network by running:
 
 ```bash
 yarn contracts:deploy:solo
 ```
+Once the deployment is complete successfully you can go ahead and start the frontend and backend:
 
-### Deploying on Testnet
-
-```bash
-yarn contracts:deploy:testnet
-```
-
-## Running on Solo Network 🔧
-
-Run the Frontend and Backend, connected to the Solo network and pointing to your deployed contracts. Ensure all environment variables are properly configured:
+> ⚠️ **Warning:**
+> Remeber to set the OPENAI_API_KEY env variable in the backend .env.development.local file. Refer to the [Environment Variables](#environment-variables) section for more information.
 
 ```bash
 yarn dev
 ```
 
-### Setting up rewards
+At this point you can access the frontend at [http://localhost:8082/](http://localhost:8082/). 
 
-## Testnet
+Start uploading a receipt!
+
+
+
+
+
+## Deploying on Testnet 🚀
+
+To distribute rewards this contract needs of a valid APP_ID provided by VeBetterDAO when joining the ecosystem.
+In testnet you can generate the APP_ID by using the [VeBetterDAO sandbox](https://dev.testnet.governance.vebetterdao.org/).
+This contract can be initially deployed without this information and DEFAULT_ADMIN_ROLE can update it later through {EcoEarn-setAppId}.
+
+This contract must be set as a `rewardDistributor` inside the X2EarnApps contract to be able to send rewards to users and withdraw.
+
+For deploying on Testnet you should check that you have the correct addresses in the `config-contracts` package (generated on the [VeBetterDAO sandbox](https://dev.testnet.governance.vebetterdao.org/)).
+
+When deploying on the SOLO network the script will deploy for you the mocked VeBetterDAO contracts and generate an APP_ID.
+
+
+Once everything is set up you can deploy the contracts to the testnet by running: 
+
+
+```bash
+yarn contracts:deploy:testnet
+```
+
+## Triggering Cycles and Setting the Rewards
+
+The deployment scripts will configure the 1st cycle for you with a reward of 1000 tokens.
+
+To start a new cycle and set the rewards you can follow the steps below:
+
+
+### Testnet
 
 Read the [VeBetterDAO documentation](https://docs.vebetterdao.org/developer-guides/test-environmnet) to learn how to set up rewards for your users and use the Testnet environment.
 
@@ -150,7 +174,7 @@ Now you just need to trigger cycles and set amount of rewards per cycle on your 
 4. Trigger a cycle:
    ![image](https://i.ibb.co/47V2Zjb/SCR-20240723-kkxx.png)
 
-## Solo Network
+### Solo Network
 
 Since the Solo network is a local network with mocked VeBetterDAO contracts you can use the following steps to set up available rewards to distribute to users:
 

@@ -26,6 +26,12 @@
     },
     "contracts:test": {
       "dependsOn": ["^build"]
+    },
+    "solo-up": {
+      "dependsOn": ["^build"]
+    },
+    "solo-down": {
+      "dependsOn": ["^build"]
     }
   }
 }
