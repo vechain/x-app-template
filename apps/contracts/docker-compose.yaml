@@ -29,3 +29,32 @@ services:
       interval: 5s
       timeout: 10s
       retries: 10
+    networks:
+      - vechain-thor
+
+  insight:
+    image: ghcr.io/vechain/insight-app:master
+    hostname: insight
+    container_name: insight
+    environment:
+      - VUE_APP_SOLO_URL=http://localhost:8669
+    ports:
+      - "8080:80"
+    networks:
+      - vechain-thor
+
+  inspector:
+    image: ghcr.io/vechain/inspector-app:master
+    hostname: inspector
+    container_name: inspector
+    environment:
+      - VUE_APP_SOLO_URL=http://localhost:8669
+    ports:
+      - "8081:80"
+    networks:
+      - vechain-thor
+
+networks:
+  vechain-thor:
+    driver: bridge
+    name: vechain-thor
