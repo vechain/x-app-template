@@ -30,7 +30,7 @@ export const resizeImage = async (file: File) => {
             resolve(blob);
           },
           file.type,
-          0.7 // Adjust compression rate here
+          0.7, // Adjust compression rate here
         );
       };
       // @ts-expect-error img src is a string

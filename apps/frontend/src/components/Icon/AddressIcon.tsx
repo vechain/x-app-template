@@ -1,6 +1,6 @@
 import React from "react";
 import { HTMLChakraProps, Img } from "@chakra-ui/react";
-import { PicassoUtils } from "@repo/utils"
+import { PicassoUtils } from "@repo/utils";
 const { getPicassoImgSrc } = PicassoUtils;
 
 interface IAddressIcon extends HTMLChakraProps<"img"> {

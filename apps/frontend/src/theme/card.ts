@@ -1,7 +1,11 @@
-import { StyleFunctionProps, createMultiStyleConfigHelpers } from "@chakra-ui/react"
-import { cardAnatomy } from "@chakra-ui/anatomy"
+import {
+  StyleFunctionProps,
+  createMultiStyleConfigHelpers,
+} from "@chakra-ui/react";
+import { cardAnatomy } from "@chakra-ui/anatomy";
 
-const { definePartsStyle, defineMultiStyleConfig } = createMultiStyleConfigHelpers(cardAnatomy.keys)
+const { definePartsStyle, defineMultiStyleConfig } =
+  createMultiStyleConfigHelpers(cardAnatomy.keys);
 
 // define custom styles for funky variant
 const variants = {
@@ -36,7 +40,7 @@ const variants = {
         borderColor: props.colorMode === "dark" ? "#2D2D2F" : "gray.100",
       },
     }),
-}
+};
 
 // export variants in the component theme
 export const cardTheme = defineMultiStyleConfig({
@@ -44,4 +48,4 @@ export const cardTheme = defineMultiStyleConfig({
   defaultProps: {
     variant: "base", // default is solid
   },
-})
+});

@@ -4,14 +4,11 @@ import { Box, HStack, Text, VStack } from "@chakra-ui/react";
 import { ScanIcon } from "./Icon";
 import { blobToBase64, getDeviceId, resizeImage } from "../util";
 import { useWallet } from "@vechain/dapp-kit-react";
-import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import { submitReceipt } from "../networking";
 import { useDisclosure, useSubmission } from "../hooks";
 
 export const Dropzone = () => {
   const { account } = useWallet();
-
-  const { executeRecaptcha } = useGoogleReCaptcha();
 
   const { setIsLoading, setResponse } = useSubmission();
   const { onOpen } = useDisclosure();
@@ -25,16 +22,6 @@ export const Dropzone = () => {
       "image/*": [], // Accept only image files
     },
   });
-
-  const handleCaptchaVerify = useCallback(async () => {
-    if (!executeRecaptcha) {
-      alert("Recaptcha not loaded");
-      return;
-    }
-
-    const token = await executeRecaptcha("submit_receipt");
-    return token;
-  }, [executeRecaptcha]);
 
   const onFileUpload = useCallback(
     async (files: File[]) => {
@@ -56,19 +43,11 @@ export const Dropzone = () => {
       const resizedBlob = await resizeImage(file);
       const base64Image = await blobToBase64(resizedBlob as Blob);
 
-      const captcha = await handleCaptchaVerify();
-
-      if (!captcha) {
-        alert("Captcha failed, please try again");
-        return;
-      }
-
       const deviceID = await getDeviceId();
 
       try {
         const response = await submitReceipt({
           address: account,
-          captcha,
           deviceID,
           image: base64Image,
         });
@@ -82,7 +61,7 @@ export const Dropzone = () => {
         setIsLoading(false);
       }
     },
-    [account, handleCaptchaVerify, onOpen, setIsLoading, setResponse]
+    [account, onOpen, setIsLoading, setResponse],
   );
 
   return (

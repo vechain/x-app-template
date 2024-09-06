@@ -1,1 +1,1 @@
-export * from "./FormattingUtils"
+export * from "./FormattingUtils";

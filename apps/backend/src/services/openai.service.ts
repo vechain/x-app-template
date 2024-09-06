@@ -14,10 +14,10 @@ export class OpenaiService {
                         2. It must not be a screenshot.
                         3. It must include the date of the purchase.
                         4. It must include the name of the store where the purchase was made.
-                    Please respond using a JSON object without comments and do not add any other descriptions and comments:
+                    Please respond always and uniquely with the following JSON object as you are REST API that returns the following object:
                     {
-                    'validityFactor': number, // 0-1, 1 if it satisfies all the criteria, 0 otherwise
-                    'descriptionOfAnalysis': string, // indicate your analysis of the image and why it satisfies or not the criteria. The analysis will be shown to the user so make him understand why the image doesn't satisfy the criteria if it doesn't without going into detail on exact criteria. Remember we are rewarding users that drink coffee in a sustainable way.
+                    "validityFactor": {validityFactorNumber}, // 0-1, 1 if it satisfies all the criteria, 0 otherwise
+                    "descriptionOfAnalysis": "{analysis}", // indicate your analysis of the image and why it satisfies or not the criteria. The analysis will be shown to the user so make him understand why the image doesn't satisfy the criteria if it doesn't without going into detail on exact criteria. Remember we are rewarding users that drink coffee in a sustainable way.
                     }
                     `;
 
