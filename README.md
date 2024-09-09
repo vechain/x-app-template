@@ -93,7 +93,7 @@ yarn install # Run this at the root level of the project
 
 #### Deploy contracts
 
-To start deploy contract locally you must run a local instance of the Vechain Thor blockchain. You can do this by running the following command:
+To start deploying contract locally you must run a local instance of the Vechain Thor blockchain. You can do this by running the following command:
 
 ```bash
 yarn contracts:solo-up
@@ -110,7 +110,7 @@ yarn contracts:deploy:solo
 Once the deployment is completed successfully you can go ahead and start the frontend and backend:
 
 > ⚠️ **Warning:**
-> Remeber to set the OPENAI_API_KEY env variable in the backend .env.development.local file. Refer to the [Environment Variables](#environment-variables) section for more information.
+> Remember to set the OPENAI_API_KEY env variable in the backend .env.development.local file. Refer to the [Environment Variables](#environment-variables) section for more information.
 
 ```bash
 yarn dev
