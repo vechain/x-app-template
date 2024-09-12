@@ -1,3 +1,7 @@
+## Watch the Tutorial
+
+[![Watch the video](https://github.com/user-attachments/assets/462958d6-1be5-4598-b035-95f4ef818f16)](https://www.youtube.com/watch?v=fmm2IDMuYjE)
+
 # X-App Template for VeBetterDAO 🚀
 
                                      #######
