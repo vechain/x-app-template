@@ -108,7 +108,7 @@ interface IX2EarnRewardsPool {
         bytes32 appId,
         uint256 amount,
         address receiver,
-        string[] memory proofTypes, // link, photo, video, text, etc.
+        string[] memory proofTypes, // link, image, video, text, etc.
         string[] memory proofValues, // "https://...", "Qm...", etc.,
         string[] memory impactCodes, // carbon, water, etc.
         uint256[] memory impactValues, // 100, 200, etc.,
