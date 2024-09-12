@@ -1,4 +1,5 @@
 {
+  "name": "x-app-template",
   "private": true,
   "scripts": {
     "build": "turbo build",
