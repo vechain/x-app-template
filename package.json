@@ -18,7 +18,7 @@
   "devDependencies": {
     "eslint": "^8.57.0",
     "prettier": "^3.2.5",
-    "turbo": "latest"
+    "turbo": "^2.1.2"
   },
   "packageManager": "yarn@1.22.21",
   "workspaces": [

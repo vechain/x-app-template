@@ -28,10 +28,10 @@
       "dependsOn": ["^build"]
     },
     "solo-up": {
-      "dependsOn": ["^build"]
+      "cache": false
     },
     "solo-down": {
-      "dependsOn": ["^build"]
+      "cache": false
     }
   }
 }
