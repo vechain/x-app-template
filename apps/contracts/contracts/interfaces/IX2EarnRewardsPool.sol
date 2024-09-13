@@ -77,7 +77,59 @@ interface IX2EarnRewardsPool {
      * @param appId the app id that is emitting the reward
      * @param amount the amount of B3TR token the user is rewarded with
      * @param receiver the address of the user that performed the sustainable action and is rewarded
-     * @param proof a JSON file uploaded on IPFS by the app that adds information on the type of action that was performed
+     * @param proof deprecated argument, pass an empty string instead
      */
     function distributeReward(bytes32 appId, uint256 amount, address receiver, string memory proof) external;
+
+    /**
+     * @dev Function used by x2earn apps to reward users that performed sustainable actions.
+     * @notice This function is depracted in favor of distributeRewardWithProof.
+     *
+     * @param appId the app id that is emitting the reward
+     * @param amount the amount of B3TR token the user is rewarded with
+     * @param receiver the address of the user that performed the sustainable action and is rewarded
+     * @param proof the JSON string that contains the proof and impact of the sustainable action
+     */
+    function distributeRewardDeprecated(bytes32 appId, uint256 amount, address receiver, string memory proof) external;
+
+    /**
+     * @dev Function used by x2earn apps to reward users that performed sustainable actions.
+     *
+     * @param appId the app id that is emitting the reward
+     * @param amount the amount of B3TR token the user is rewarded with
+     * @param receiver the address of the user that performed the sustainable action and is rewarded
+     * @param proofTypes the types of the proof of the sustainable action
+     * @param proofValues the values of the proof of the sustainable action
+     * @param impactCodes the codes of the impacts of the sustainable action
+     * @param impactValues the values of the impacts of the sustainable action
+     * @param description the description of the sustainable action
+     */
+    function distributeRewardWithProof(
+        bytes32 appId,
+        uint256 amount,
+        address receiver,
+        string[] memory proofTypes, // link, image, video, text, etc.
+        string[] memory proofValues, // "https://...", "Qm...", etc.,
+        string[] memory impactCodes, // carbon, water, etc.
+        uint256[] memory impactValues, // 100, 200, etc.,
+        string memory description
+    ) external;
+
+    /**
+     * @dev Builds the JSON proof string that will be stored
+     * on chain regarding the proofs, impacts and description of the sustainable action.
+     *
+     * @param proofTypes the types of the proof of the sustainable action
+     * @param proofValues the values of the proof of the sustainable action
+     * @param impactCodes the codes of the impacts of the sustainable action
+     * @param impactValues the values of the impacts of the sustainable action
+     * @param description the description of the sustainable action
+     */
+    function buildProof(
+        string[] memory proofTypes, // link, photo, video, text, etc.
+        string[] memory proofValues, // "https://...", "Qm...", etc.,
+        string[] memory impactCodes, // carbon, water, etc.
+        uint256[] memory impactValues, // 100, 200, etc.,
+        string memory description
+    ) external returns (string memory);
 }
