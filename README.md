@@ -21,6 +21,9 @@
                                   ##############
                                   #########
 
+> [!TIP]
+> Impatient? Check out the [QuickStart](./QuickStart.md) to instantly run the app template.
+
 Unlock the potential of decentralized application development on Vechain with our X-App template for VeBetterDAO. Designed for the Vechain Thor blockchain, this template integrates cutting-edge technologies such as React, TypeScript, Hardhat, and Express, ensuring a seamless and efficient DApp development experience. 🌟
 
 Read more about the implementation and key features of this template in our [Developer Docs](https://docs.vebetterdao.org/developer-guides/integration-examples/pattern-2-use-smart-contracts-and-backend).
