@@ -4,7 +4,7 @@ Get a local development environment up and running with as few steps as possible
 
 ## Required Variables
 
-- **OPENAI_API_KEY:** [Get your GPT-4 OpenAI key](https://platform.openai.com/api-keys)
+- **OPENAI_API_KEY:** An OpenAI API key needs to be obtained manually from [OpenAI](https://platform.openai.com/api-keys):
 
 ## Start
 
@@ -14,12 +14,8 @@ yarn install
 yarn contracts:solo-up
 yarn contracts:deploy:solo
 
-PORT=3000 \
- ORIGIN="*" \
- OPENAI_API_KEY="sk-proj-.." \
+OPENAI_API_KEY="" \
  ADMIN_MNEMONIC="denial kitchen pet squirrel other broom bar gas better priority spoil cross" \
- NETWORK_URL=http://localhost:8669 \
- REWARD_AMOUNT=1 \
  yarn dev
 ```
 
