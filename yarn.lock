@@ -9697,7 +9697,11 @@ hardhat-gas-reporter@^1.0.8:
     eth-gas-reporter "^0.2.25"
     sha1 "^1.1.1"
 
+<<<<<<< Updated upstream
 hardhat@^2.0.0, hardhat@^2.0.2, hardhat@^2.0.4, hardhat@^2.11.0, hardhat@^2.19.1, hardhat@^2.6.4, hardhat@^2.9.4, hardhat@^2.9.5, hardhat@^2.9.9:
+=======
+hardhat@^2.19.1:
+>>>>>>> Stashed changes
   version "2.22.10"
   resolved "https://registry.npmjs.org/hardhat/-/hardhat-2.22.10.tgz"
   integrity sha512-JRUDdiystjniAvBGFmJRsiIZSOP2/6s++8xRDe3TzLeQXlWWHsXBrd9wd3JWFyKXvgMqMeLL5Sz/oNxXKYw9vg==
