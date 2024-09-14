@@ -16,8 +16,8 @@ interface FoodLabel {
 
 // Function to detect food using an image recognition API (e.g., Azure, Amazon Rekognition)
 const detectFood = async (imageData: string) => {
-    const apiEndpoint = 'https://vechaininventoryimagerecognition.cognitiveservices.azure.com/'; // Replace with your API endpoint 
-    const apiKey = '37ca5e9ed1564366b231f0bc6e925781'; // Replace with your API key 
+    const apiEndpoint = '.'; // Replace with your API endpoint 
+    const apiKey = '.'; // Replace with your API key 
     
     try {
         const response = await axios.post(apiEndpoint, { image: imageData }, {
@@ -52,7 +52,7 @@ const detectFood = async (imageData: string) => {
 
 // Function to estimate expiry date based on description
 const estimateExpiryDate = async (description: string) => {
-    const apiKey = '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'; // OpenAI API key
+    const apiKey = '.'; // OpenAI API key
     const endpoint = 'https://api.openai.com/v1/completions'; // Updated endpoint
     
     const prompt = `Given the description of a food item, estimate the expiry date. Description: ${description}`;
