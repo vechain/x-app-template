@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useWallet } from "@vechain/dapp-kit-react";
+import {useConnex, useWallet} from "@vechain/dapp-kit-react";
 
 export default function Profile() {
     const { account } = useWallet();

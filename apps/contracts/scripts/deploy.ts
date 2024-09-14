@@ -14,6 +14,8 @@ export async function deploy() {
     // If we are running on the solo network, we need to deploy the mock contracts
     // and generate the appID
     if (network.name === 'vechain_solo') {
+
+
         console.log(`Deploying mock RewardToken...`);
         const RewardTokenContract = await ethers.getContractFactory('B3TR_Mock');
         const rewardToken = await RewardTokenContract.deploy();

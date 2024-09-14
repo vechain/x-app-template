@@ -24,5 +24,11 @@
   "workspaces": [
     "apps/*",
     "packages/*"
-  ]
+  ],
+  "dependencies": {
+    "@vechain/dapp-kit-react": "^1.0.13",
+    "@vechain/dapp-kit-ui": "^1.0.13",
+    "@vechain/sdk-core": "^1.0.0-beta.31",
+    "@vechain/sdk-network": "^1.0.0-beta.31"
+  }
 }

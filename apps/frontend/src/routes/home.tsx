@@ -1,8 +1,25 @@
 import { Card, CardBody, Flex, Button, Image, Text } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import "./home.css";
+import {useConnex, useWallet} from "@vechain/dapp-kit-react";
+import {useEffect} from "react";
+import {unitsUtils} from "@vechain/sdk-core";
 
 export default function Home() {
+  const {account} = useWallet()
+  const connex = useConnex();
+
+  useEffect(() => {
+    // Run this code when the component loads
+    connex.thor.account(account).get()
+        .then(({ balance }) => {
+          console.log('VET Balance:', unitsUtils.formatVET(balance));
+        })
+        .catch(error => {
+          console.error('Error fetching account balance:', error);
+        });
+  }, [account]); // Empty array means the effect will only run once when the component mounts
+
   return (
     <div style={{ backgroundColor: "#c5dcc2" }}>
       <div style={{ position: "absolute", top: "10px", right: "10px" }}>
