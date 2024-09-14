@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { saveMealPlan } from '../utils/localStorageUtils';
 import MealCalendar from './MealCalendar';
 import DietaryPreferences from './DietaryPreferences';
+import { Link } from 'react-router-dom';
 import {
   Button,
   Modal,
@@ -33,6 +34,7 @@ const MealPlanning: React.FC = () => {
   const handleDateChange = (date: Date) => {
     setMealPlan((prev) => ({ ...prev, date }));
   };
+  
 
   const handlePreferenceChange = (preference: string) => {
     setMealPlan((prev) => ({ ...prev, preference }));
@@ -43,6 +45,10 @@ const MealPlanning: React.FC = () => {
   };
 
   const handleSubmit = () => {
+    if (!mealPlan.date) {
+        alert("Please select a date before submitting."); // Alert if no date is selected
+        return;
+      }
     saveMealPlan(mealPlan); // Save the meal plan to localStorage
     console.log("Meal Plan Saved:", mealPlan);
     onOpen(); // Open the modal to confirm the meal plan was saved
@@ -90,7 +96,12 @@ const MealPlanning: React.FC = () => {
         <ModalContent>
           <ModalHeader>Preference Saved!</ModalHeader>
           <ModalCloseButton />
-          <ModalBody>Your dietary preference and exclusions have been saved.</ModalBody>
+          <ModalBody>Your dietary preference and exclusions have been saved.
+            <br />
+            <Button mt={2} colorScheme="blue">
+                <Link to="/viewSavedPlans" style={{ color: 'inherit', textDecoration: 'none' }}>View Saved Meals</Link>
+            </Button>
+          </ModalBody>
         </ModalContent>
       </Modal>
     </Center>
