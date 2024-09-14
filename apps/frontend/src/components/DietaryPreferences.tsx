@@ -1,14 +1,5 @@
 import React, { useState } from 'react';
-import {
-  Box,
-  Select,
-  Checkbox,
-  VStack,
-  FormControl,
-  FormLabel,
-  CheckboxGroup,
-  Heading,
-} from '@chakra-ui/react';
+import { Box, Select, Checkbox, VStack, FormControl, FormLabel, CheckboxGroup, Heading } from '@chakra-ui/react';
 
 interface DietaryPreferencesProps {
   onPreferenceChange: (preference: string) => void;
@@ -19,7 +10,7 @@ const DietaryPreferences: React.FC<DietaryPreferencesProps> = ({
   onPreferenceChange,
   onExclusionsChange,
 }) => {
-  const preferences = ['Vegan', 'Vegetarian', 'Keto', 'Paleo', 'Gluten-Free'];
+  const preferences = ['Vegan', 'Vegetarian', 'Keto', 'Paleo', 'Gluten-Free', 'No Preferences'];
   const exclusions = ['Nuts', 'Dairy', 'Soy', 'Eggs', 'Seafood'];
 
   const [selectedExclusions, setSelectedExclusions] = useState<string[]>([]);
@@ -34,16 +25,12 @@ const DietaryPreferences: React.FC<DietaryPreferencesProps> = ({
       checked ? [...prev, value] : prev.filter((exclusion) => exclusion !== value)
     );
     onExclusionsChange(
-      checked
-        ? [...selectedExclusions, value]
-        : selectedExclusions.filter((exclusion) => exclusion !== value)
+      checked ? [...selectedExclusions, value] : selectedExclusions.filter((exclusion) => exclusion !== value)
     );
   };
 
   return (
     <Box p={5} borderWidth="1px" borderRadius="md" boxShadow="lg" maxWidth="400px" bg="gray.50">
-      
-      {/* Meal Type Dropdown */}
       <FormControl mb={6}>
         <FormLabel>Meal Type</FormLabel>
         <Select placeholder="Select" onChange={handlePreferenceChange}>
@@ -55,18 +42,12 @@ const DietaryPreferences: React.FC<DietaryPreferencesProps> = ({
         </Select>
       </FormControl>
 
-      {/* Dietary Exclusions Checklist */}
       <FormControl>
         <FormLabel>Dietary Exclusions</FormLabel>
         <CheckboxGroup colorScheme="green">
           <VStack align="start">
             {exclusions.map((exclusion, index) => (
-              <Checkbox
-                key={index}
-                value={exclusion}
-                onChange={handleExclusionChange}
-                isChecked={selectedExclusions.includes(exclusion)}
-              >
+              <Checkbox key={index} value={exclusion} onChange={handleExclusionChange}>
                 {exclusion}
               </Checkbox>
             ))}

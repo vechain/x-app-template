@@ -1,4 +1,7 @@
+// src/components/MealPlanning.tsx
+
 import React, { useState } from 'react';
+import { saveMealPlan } from '../utils/localStorageUtils';
 import MealCalendar from './MealCalendar';
 import DietaryPreferences from './DietaryPreferences';
 import {
@@ -40,8 +43,9 @@ const MealPlanning: React.FC = () => {
   };
 
   const handleSubmit = () => {
+    saveMealPlan(mealPlan); // Save the meal plan to localStorage
     console.log("Meal Plan Saved:", mealPlan);
-    onOpen(); // Open the modal when the button is clicked
+    onOpen(); // Open the modal to confirm the meal plan was saved
   };
 
   return (
@@ -50,82 +54,43 @@ const MealPlanning: React.FC = () => {
         <Heading color="black" as="h1" size="lg" my={10}>Meal Planning</Heading>
       </Box>
 
-      <Grid
-        templateColumns="1fr 1fr 1fr"
-        gap={4}
-        mb={4}
-        width="100%"
-        maxWidth="1200px" // Adjust as needed
-      >
+      <Grid templateColumns="1fr 1fr 1fr" gap={4} mb={4} width="100%" maxWidth="1200px">
         <Box textAlign="center" mb={4}>
-          <Heading display="flex" justifyContent="center" alignItems="center" color="black" as="h2" size="md" my={10}>Step 1</Heading>
-          <Text display="flex" justifyContent="center" alignItems="center" height="50px" bg='rgba(0, 128, 0, 0.1)' borderRadius="12px">Select Date</Text>
+          <Heading color="black" as="h2" size="md" my={10}>Step 1</Heading>
+          <Text bg='rgba(0, 128, 0, 0.1)' borderRadius="12px">Select Date</Text>
         </Box>
         <Box textAlign="center" mb={4}>
-          <Heading display="flex" justifyContent="center" alignItems="center" color="black" as="h2" size="md" my={10}>Step 2</Heading>
-          <Text display="flex" justifyContent="center" alignItems="center" height="50px" bg='rgba(0, 128, 0, 0.1)' borderRadius="12px">Select Dietary Preferences</Text>
+          <Heading color="black" as="h2" size="md" my={10}>Step 2</Heading>
+          <Text bg='rgba(0, 128, 0, 0.1)' borderRadius="12px">Select Dietary Preferences</Text>
         </Box>
         <Box textAlign="center" mb={4}>
-          <Heading display="flex" justifyContent="center" alignItems="center" color="black" as="h2" size="md" my={10}>Step 3</Heading>
-          <Text display="flex" justifyContent="center" alignItems="center" height="50px" bg='rgba(0, 128, 0, 0.1)' borderRadius="12px">Verify Selected Plan</Text>
+          <Heading color="black" as="h2" size="md" my={10}>Step 3</Heading>
+          <Text bg='rgba(0, 128, 0, 0.1)' borderRadius="12px">Verify Selected Plan</Text>
         </Box>
       </Grid>
 
-      {/* First Row: Grid Layout */}
-      <Grid
-        templateColumns="1fr 1fr 1fr"
-        gap={4}
-        mb={4}
-        width="100%"
-        maxWidth="1200px" // Adjust as needed
-      >
-        {/* Calendar (leftmost column) */}
-        <Box display="flex" justifyContent="center" alignItems="center" height="100%">
+      <Grid templateColumns="1fr 1fr 1fr" gap={4} mb={4} width="100%" maxWidth="1200px">
+        <Box display="flex" justifyContent="center" alignItems="center">
           <MealCalendar onDateChange={handleDateChange} />
         </Box>
-
-        {/* Dietary Preferences (middle column) */}
-        <Box display="flex" justifyContent="center" alignItems="center" height="100%" p={8}>
-          <DietaryPreferences
-            onPreferenceChange={handlePreferenceChange}
-            onExclusionsChange={handleExclusionsChange}
-          />
+        <Box display="flex" justifyContent="center" alignItems="center">
+          <DietaryPreferences onPreferenceChange={handlePreferenceChange} onExclusionsChange={handleExclusionsChange} />
         </Box>
-
-        {/* Remaining display (rightmost column) */}
-        <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center" height="100%">
-          <Text textDecoration="underline">You have Selected</Text>
-          <br/>
-          <Text>Date : <Text as="span" fontWeight="bold">{mealPlan.date?.toLocaleDateString()}</Text></Text>
-          <br/>
-          <Text> Dietary Preference : <Text as="span" fontWeight="bold">{mealPlan.preference}</Text></Text>
-          <br/>
-          <Text>Exclusions : <Text as="span" fontWeight="bold">{mealPlan.exclusions.join(', ')}</Text></Text>
-          <br/>
-          <Button onClick={handleSubmit} border="solid 1px black" sx={{
-                color: 'black', // Default text color
-                _hover: {
-                  bg: 'rgba(0, 128, 0, 0.2)',  // Background color on hover
-                }}} my={12}>
-          Submit
-        </Button>
+        <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center">
+          <Text>You have Selected</Text>
+          <Text>Date: {mealPlan.date?.toLocaleDateString()}</Text>
+          <Text>Dietary Preference: {mealPlan.preference}</Text>
+          <Text>Exclusions: {mealPlan.exclusions.join(', ')}</Text>
+          <Button onClick={handleSubmit} my={12}>Submit</Button>
         </Box>
       </Grid>
 
-      {/* Second Row: Submit Button */}
-      <Box textAlign="center" mb={4}>
-        
-      </Box>
-
-      {/* Modal */}
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Preference Saved!</ModalHeader>
           <ModalCloseButton />
-          <ModalBody>
-            Your dietary preference and exclusions have been saved.
-          </ModalBody>
+          <ModalBody>Your dietary preference and exclusions have been saved.</ModalBody>
         </ModalContent>
       </Modal>
     </Center>
