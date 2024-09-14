@@ -12,3 +12,4 @@ public/dist
 .idea
 .yarn
 .pnp.*js
+apps/backend/.env.production.local.example
