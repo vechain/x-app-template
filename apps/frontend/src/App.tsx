@@ -9,40 +9,41 @@ import {
   SubmissionModal,
 } from "./components";
 import { lightTheme } from "./theme";
+import { Routes, Route, BrowserRouter } from 'react-router-dom'
+
+import Home from "./routes/home";
+import Protected from './routes/protected'
+import Settings from './routes/settings'
+import Login from './routes/login'
 
 function App() {
   return (
-    <ChakraProvider theme={lightTheme}>
-      <DAppKitProvider
-        usePersistence
-        requireCertificate={false}
-        genesis="test"
-        nodeUrl="https://testnet.vechain.org/"
-        logLevel={"DEBUG"}
-      >
-        <Navbar />
-        <Flex flex={1}>
-          <Container
-            mt={{ base: 4, md: 10 }}
-            maxW={"container.xl"}
-            mb={{ base: 4, md: 10 }}
-            display={"flex"}
-            flex={1}
-            alignItems={"center"}
-            justifyContent={"flex-start"}
-            flexDirection={"column"}
-          >
-            <InfoCard />
-            <Instructions />
-            <Dropzone />
-          </Container>
-        </Flex>
-        <Footer />
-
-        {/* MODALS  */}
-        <SubmissionModal />
-      </DAppKitProvider>
-    </ChakraProvider>
+    <BrowserRouter>
+      <ChakraProvider theme={lightTheme}>
+        <DAppKitProvider
+          usePersistence
+          requireCertificate={false}
+          genesis="test"
+          nodeUrl="https://testnet.vechain.org/"
+          logLevel={"DEBUG"}
+        >
+          <div className="">
+            <Navbar />
+            <div className="min-h-[80vh] relative">
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/protected" element={<Protected />} />
+                <Route path="/settings" element={<Settings />} />
+                <Route path="/login" element={<Login />} />
+              </Routes>
+            </div>
+            <Footer />
+          </div>
+          {/* MODALS  */}
+          <SubmissionModal />
+        </DAppKitProvider>
+      </ChakraProvider>
+    </BrowserRouter>
   );
 }
 
