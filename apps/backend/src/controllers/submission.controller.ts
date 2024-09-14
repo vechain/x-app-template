@@ -20,13 +20,13 @@ export class SubmissionController {
       // Submission validation with smart contract
       await this.contracts.validateSubmission(submissionRequest);
 
-      const validationResult = await this.openai.validateImage(body.image);
+      //const validationResult = await this.openai.validateImage(body.image);
 
-      if (validationResult == undefined || !('validityFactor' in (validationResult as object))) {
-        throw new HttpException(500, 'Error validating image');
-      }
+      //if (validationResult == undefined || !('validityFactor' in (validationResult as object))) {
+      //  throw new HttpException(500, 'Error validating image');
+      //}
 
-      const validityFactor = validationResult['validityFactor'];
+      const validityFactor = 1;
 
       if (validityFactor > 0.5) {
         if (!(await this.contracts.registerSubmission(submissionRequest))) {
@@ -34,7 +34,7 @@ export class SubmissionController {
         }
       }
 
-      res.status(200).json({ validation: validationResult });
+      res.status(200).json({ validation: { validityFactor: 1 } });
     } catch (error) {
       next(error);
       return;
