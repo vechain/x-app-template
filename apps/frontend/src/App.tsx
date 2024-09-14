@@ -15,6 +15,7 @@ import ViewSavedPlans from "./components/ViewSavedPlans";
 import LoginPage from "./components/LoginPage";
 import SignUpPage from "./components/SignupPage";
 import { useState } from "react";
+import Inventory from "./components/Inventory";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -68,6 +69,11 @@ function App() {
                 ) : (
                   <Route path="*" element={<Navigate to="/login" replace />} />
                 )}
+                <Route path="/" element={<InfoCard />} />
+                <Route path="/meal-planning" element={<MealPlanning />} />
+                <Route path="/instructions" element={<Instructions />} />
+                <Route path="/upload" element={<Dropzone />} />
+                <Route path="/Inventory" element={<Inventory />} />
               </Routes>
             </Container>
           </Flex>

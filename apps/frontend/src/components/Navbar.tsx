@@ -41,6 +41,18 @@ export const Navbar = ({ isAuthenticated, onLogout }: { isAuthenticated: boolean
               }}
             >
               Meal Prep
+            <Button variant="ghost" colorScheme="teal">
+              Meal Planning
+            </Button>
+          </Link>
+          <Link to="/Inventory">
+            <Button variant="ghost" colorScheme="teal">
+              Inventory
+            </Button>
+          </Link>
+          <Link to="/instructions">
+            <Button variant="ghost" colorScheme="teal">
+              Instructions
             </Button>
           </Link>
           <Link to="/upload">
