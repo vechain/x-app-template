@@ -1,7 +1,24 @@
+// src/components/MealPlanning.tsx
+
 import React, { useState } from 'react';
+import { saveMealPlan } from '../utils/localStorageUtils';
 import MealCalendar from './MealCalendar';
 import DietaryPreferences from './DietaryPreferences';
-import { Button, Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalCloseButton, useDisclosure } from "@chakra-ui/react";
+import {
+  Button,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalCloseButton,
+  useDisclosure,
+  Grid,
+  Box,
+  Text,
+  Center,
+  Heading,
+} from "@chakra-ui/react";
 
 interface MealPlan {
   date: Date | null;
@@ -26,41 +43,57 @@ const MealPlanning: React.FC = () => {
   };
 
   const handleSubmit = () => {
+    saveMealPlan(mealPlan); // Save the meal plan to localStorage
     console.log("Meal Plan Saved:", mealPlan);
-    onOpen(); // Open the modal when the button is clicked
+    onOpen(); // Open the modal to confirm the meal plan was saved
   };
 
   return (
-    <div>
-      <h1>Meal Planning</h1>
-      <MealCalendar onDateChange={handleDateChange} />
-      <DietaryPreferences
-        onPreferenceChange={handlePreferenceChange}
-        onExclusionsChange={handleExclusionsChange}
-      />
-      <div>
-        <h2>Selected Plan</h2>
-        <p>Date: {mealPlan.date?.toLocaleDateString()}</p>
-        <p>Dietary Preference: {mealPlan.preference}</p>
-        <p>Exclusions: {mealPlan.exclusions.join(', ')}</p>
-      </div>
+    <Center minHeight="70vh" flexDirection="column" p={4}>
+      <Box textAlign="center" mb={4}>
+        <Heading color="black" as="h1" size="lg" my={10}>Meal Planning</Heading>
+      </Box>
 
-      <Button colorScheme="teal" onClick={handleSubmit}>
-        Submit
-      </Button>
+      <Grid templateColumns="1fr 1fr 1fr" gap={4} mb={4} width="100%" maxWidth="1200px">
+        <Box textAlign="center" mb={4}>
+          <Heading color="black" as="h2" size="md" my={10}>Step 1</Heading>
+          <Text bg='rgba(0, 128, 0, 0.1)' borderRadius="12px">Select Date</Text>
+        </Box>
+        <Box textAlign="center" mb={4}>
+          <Heading color="black" as="h2" size="md" my={10}>Step 2</Heading>
+          <Text bg='rgba(0, 128, 0, 0.1)' borderRadius="12px">Select Dietary Preferences</Text>
+        </Box>
+        <Box textAlign="center" mb={4}>
+          <Heading color="black" as="h2" size="md" my={10}>Step 3</Heading>
+          <Text bg='rgba(0, 128, 0, 0.1)' borderRadius="12px">Verify Selected Plan</Text>
+        </Box>
+      </Grid>
 
-      {/* Modal */}
+      <Grid templateColumns="1fr 1fr 1fr" gap={4} mb={4} width="100%" maxWidth="1200px">
+        <Box display="flex" justifyContent="center" alignItems="center">
+          <MealCalendar onDateChange={handleDateChange} />
+        </Box>
+        <Box display="flex" justifyContent="center" alignItems="center">
+          <DietaryPreferences onPreferenceChange={handlePreferenceChange} onExclusionsChange={handleExclusionsChange} />
+        </Box>
+        <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center">
+          <Text>You have Selected</Text>
+          <Text>Date: {mealPlan.date?.toLocaleDateString()}</Text>
+          <Text>Dietary Preference: {mealPlan.preference}</Text>
+          <Text>Exclusions: {mealPlan.exclusions.join(', ')}</Text>
+          <Button onClick={handleSubmit} my={12}>Submit</Button>
+        </Box>
+      </Grid>
+
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Preference Saved!</ModalHeader>
           <ModalCloseButton />
-          <ModalBody>
-            Your dietary preference and exclusions have been saved.
-          </ModalBody>
+          <ModalBody>Your dietary preference and exclusions have been saved.</ModalBody>
         </ModalContent>
       </Modal>
-    </div>
+    </Center>
   );
 };
 

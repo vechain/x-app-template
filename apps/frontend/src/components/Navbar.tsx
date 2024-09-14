@@ -9,7 +9,7 @@ export const Navbar = () => {
       position={"sticky"}
       top={0}
       zIndex={10}
-      py={4}
+      py={2}
       h={"auto"}
       w={"full"}
       bg={"#f7f7f7"}
@@ -25,14 +25,55 @@ export const Navbar = () => {
         {/* Logo and Navigation Links */}
         <HStack flex={1} justifyContent={"start"}>
           <Link to="/">
-            <Image src="/vebetterdao-logo.svg" alt="Logo" />
+            <Image src="/Gemini_Generated_Image_ptpsw1ptpsw1ptps.png" alt="Logo" width="70px"/>
           </Link>
           <Link to="/meal-planning">
-            <Button variant="ghost" colorScheme="teal">
-              Meal Planning
+            <Button
+              variant="ghost"
+              p="30px 20px"
+              ms="40px"
+              me="10px"
+              sx={{
+                color: 'black', // Default text color
+                _hover: {
+                  bg: 'rgba(0, 128, 0, 0.2)',  // Background color on hover
+                },
+              }}
+            >
+              Meal Prep
             </Button>
           </Link>
-          <Link to="/instructions">
+          <Link to="/upload">
+            <Button
+              variant="ghost"
+              p="30px 20px"
+              m="10px"
+              sx={{
+                color: 'black', // Default text color
+                _hover: {
+                  bg: 'rgba(0, 128, 0, 0.2)',  // Background color on hover
+                },
+              }}
+            >
+              Inventory
+            </Button>
+          </Link>
+          <Link to="/viewSavedPlans">
+            <Button
+              variant="ghost"
+              p="30px 20px"
+              m="10px"
+              sx={{
+                color: 'black', // Default text color
+                _hover: {
+                  bg: 'rgba(0, 128, 0, 0.2)',  // Background color on hover
+                },
+              }}
+            >
+              Saved Plans
+            </Button>
+          </Link>
+          {/* <Link to="/instructions">
             <Button variant="ghost" colorScheme="teal">
               Instructions
             </Button>
@@ -41,7 +82,7 @@ export const Navbar = () => {
             <Button variant="ghost" colorScheme="teal">
               Upload
             </Button>
-          </Link>
+          </Link> */}
         </HStack>
 
         {/* Wallet Button */}
