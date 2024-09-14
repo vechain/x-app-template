@@ -25,11 +25,37 @@ export const Navbar = () => {
         {/* Logo and Navigation Links */}
         <HStack flex={1} justifyContent={"start"}>
           <Link to="/">
-            <Image src="/vebetterdao-logo.svg" alt="Logo" />
+            <Image src="/Gemini_Generated_Image_ptpsw1ptpsw1ptps.png" alt="Logo" width="70px"/>
           </Link>
           <Link to="/meal-planning">
-            <Button variant="ghost" colorScheme="teal">
+            <Button
+              variant="ghost"
+              p="30px 20px"
+              ms="40px"
+              me="10px"
+              sx={{
+                color: 'black', // Default text color
+                _hover: {
+                  bg: 'rgba(0, 128, 0, 0.2)',  // Background color on hover
+                },
+              }}
+            >
               Meal Planning
+            </Button>
+          </Link>
+          <Link to="/meal-planning">
+            <Button
+              variant="ghost"
+              p="30px 20px"
+              m="10px"
+              sx={{
+                color: 'black', // Default text color
+                _hover: {
+                  bg: 'rgba(0, 128, 0, 0.2)',  // Background color on hover
+                },
+              }}
+            >
+              Meal Prep
             </Button>
           </Link>
           <Link to="/instructions">
