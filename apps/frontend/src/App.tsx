@@ -9,8 +9,11 @@ import {
   SubmissionModal,
 } from "./components";
 import { lightTheme } from "./theme";
-import Home from "./routes/home";
 import { Routes, Route, BrowserRouter } from 'react-router-dom'
+
+import Home from "./routes/home";
+import Protected from './routes/protected'
+import Settings from './routes/settings'
 
 function App() {
   return (
@@ -23,13 +26,17 @@ function App() {
           nodeUrl="https://testnet.vechain.org/"
           logLevel={"DEBUG"}
         >
-          <Navbar />
-
-          <Routes>
-            <Route path="/" element={<Home />} />
-          </Routes>
-          <Footer />
-
+          <div className="">
+            <Navbar />
+            <div className="min-h-[80vh] relative">
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/protected" element={<Protected />} />
+                <Route path="/settings" element={<Settings />} />
+              </Routes>
+            </div>
+            <Footer />
+          </div>
           {/* MODALS  */}
           <SubmissionModal />
         </DAppKitProvider>
