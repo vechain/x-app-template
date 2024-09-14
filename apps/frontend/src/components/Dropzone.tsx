@@ -21,6 +21,7 @@ export const Dropzone = () => {
     accept: {
       "image/*": [], // Accept only image files
     },
+
   });
 
   const onFileUpload = useCallback(

@@ -23,9 +23,8 @@ function App() {
           nodeUrl="https://testnet.vechain.org/"
           logLevel={"DEBUG"}
         >
-          <div className="">
-            {/* {path === "/" || path === "/form" ? null : <Navbar />} */}
-
+          <div className="bg-[#506c4c]">
+            <Navbar />
             <div className="min-h-[80vh] relative">
               <Routes>
                 <Route path="/" element={<Home />} />
