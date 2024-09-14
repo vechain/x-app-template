@@ -1,3 +1,5 @@
+// src/components/ViewSavedPlans.tsx
+
 import React, { useEffect, useState } from 'react';
 import { getMealPlans } from '../utils/localStorageUtils'; // Import the utility function
 import { Box, Text, Heading, VStack } from '@chakra-ui/react';
@@ -6,6 +8,7 @@ interface MealPlan {
   date: Date | null;
   preference: string;
   exclusions: string[];
+  recipe?: string; // Added recipe field
 }
 
 const ViewSavedPlans: React.FC = () => {
@@ -28,6 +31,14 @@ const ViewSavedPlans: React.FC = () => {
               <Text><strong>Date:</strong> {new Date(plan.date as Date).toLocaleDateString()}</Text>
               <Text><strong>Preference:</strong> {plan.preference}</Text>
               <Text><strong>Exclusions:</strong> {plan.exclusions.join(', ')}</Text>
+              {plan.recipe && (
+                <>
+                  <Text fontWeight="bold">Generated Recipe:</Text>
+                  <Box bg="gray.100" p={3} borderRadius="md">
+                    <Text whiteSpace="pre-wrap">{plan.recipe}</Text>
+                  </Box>
+                </>
+              )}
             </Box>
           ))}
         </VStack>

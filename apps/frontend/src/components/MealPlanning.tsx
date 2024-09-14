@@ -1,9 +1,8 @@
-// src/components/MealPlanning.tsx
-
 import React, { useState } from 'react';
 import { saveMealPlan } from '../utils/localStorageUtils';
 import MealCalendar from './MealCalendar';
 import DietaryPreferences from './DietaryPreferences';
+import { Link } from 'react-router-dom';
 import {
   Button,
   Modal,
@@ -18,16 +17,19 @@ import {
   Text,
   Center,
   Heading,
+  VStack,
 } from "@chakra-ui/react";
 
 interface MealPlan {
   date: Date | null;
   preference: string;
   exclusions: string[];
+  recipe?: string;
 }
 
 const MealPlanning: React.FC = () => {
   const [mealPlan, setMealPlan] = useState<MealPlan>({ date: null, preference: '', exclusions: [] });
+  const [isGeneratingRecipe, setIsGeneratingRecipe] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const handleDateChange = (date: Date) => {
@@ -42,10 +44,54 @@ const MealPlanning: React.FC = () => {
     setMealPlan((prev) => ({ ...prev, exclusions }));
   };
 
-  const handleSubmit = () => {
-    saveMealPlan(mealPlan); // Save the meal plan to localStorage
+  const generateRecipe = async () => {
+    setIsGeneratingRecipe(true);
+    try {
+      const response = await fetch('https://api-inference.huggingface.co/models/gpt2', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${process.env.API_KEY}`, // Replace with your actual Hugging Face API key
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          inputs: `Generate a recipe based on the following dietary preference and exclusions:\n
+            Dietary Preference: ${mealPlan.preference}\n
+            Exclusions: ${mealPlan.exclusions.join(', ')}\n
+            Recipe:\n`,
+          parameters: {
+            max_new_tokens: 150,
+            temperature: 0.7,
+          },
+        }),
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`Failed to generate recipe: ${errorText}`);
+      }
+
+      const data = await response.json();
+      const recipe = data[0].generated_text || 'No recipe generated.';
+      setMealPlan((prev) => ({ ...prev, recipe }));
+    } catch (error) {
+      // Type assertion for 'error'
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred.';
+      console.error('Error generating recipe:', error);
+      alert(`Failed to generate recipe. Please try again.\n\nError: ${errorMessage}`);
+    } finally {
+      setIsGeneratingRecipe(false);
+    }
+  };
+
+  const handleSubmit = async () => {
+    if (!mealPlan.date) {
+      alert("Please select a date before submitting.");
+      return;
+    }
+    await generateRecipe();
+    saveMealPlan(mealPlan);
     console.log("Meal Plan Saved:", mealPlan);
-    onOpen(); // Open the modal to confirm the meal plan was saved
+    onOpen();
   };
 
   return (
@@ -77,20 +123,38 @@ const MealPlanning: React.FC = () => {
           <DietaryPreferences onPreferenceChange={handlePreferenceChange} onExclusionsChange={handleExclusionsChange} />
         </Box>
         <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center">
-          <Text>You have Selected</Text>
-          <Text>Date: {mealPlan.date?.toLocaleDateString()}</Text>
-          <Text>Dietary Preference: {mealPlan.preference}</Text>
-          <Text>Exclusions: {mealPlan.exclusions.join(', ')}</Text>
-          <Button onClick={handleSubmit} my={12}>Submit</Button>
+          <VStack spacing={2} align="start">
+            <Text>You have Selected</Text>
+            <Text>Date: {mealPlan.date?.toLocaleDateString()}</Text>
+            <Text>Dietary Preference: {mealPlan.preference}</Text>
+            <Text>Exclusions: {mealPlan.exclusions.join(', ')}</Text>
+          </VStack>
+          <Button onClick={handleSubmit} my={12} isLoading={isGeneratingRecipe}>
+            {isGeneratingRecipe ? 'Generating Recipe...' : 'Generate Recipe and Submit'}
+          </Button>
         </Box>
       </Grid>
 
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={isOpen} onClose={onClose} size="xl">
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Preference Saved!</ModalHeader>
+          <ModalHeader>Meal Plan Saved!</ModalHeader>
           <ModalCloseButton />
-          <ModalBody>Your dietary preference and exclusions have been saved.</ModalBody>
+          <ModalBody>
+            <VStack spacing={4} align="start">
+              <Text>Your meal plan has been saved with the following details:</Text>
+              <Text>Date: {mealPlan.date?.toLocaleDateString()}</Text>
+              <Text>Dietary Preference: {mealPlan.preference}</Text>
+              <Text>Exclusions: {mealPlan.exclusions.join(', ')}</Text>
+              <Text fontWeight="bold">Generated Recipe:</Text>
+              <Box bg="gray.100" p={4} borderRadius="md" w="100%">
+                <Text whiteSpace="pre-wrap">{mealPlan.recipe}</Text>
+              </Box>
+              <Button colorScheme="blue">
+                <Link to="/viewSavedPlans" style={{ color: 'inherit', textDecoration: 'none' }}>View Saved Meals</Link>
+              </Button>
+            </VStack>
+          </ModalBody>
         </ModalContent>
       </Modal>
     </Center>
