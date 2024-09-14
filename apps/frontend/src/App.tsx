@@ -11,6 +11,7 @@ import {
 } from "./components";
 import { lightTheme } from "./theme";
 import MealPlanning from "./components/MealPlanning";
+import Inventory from "./components/Inventory";
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
                 <Route path="/meal-planning" element={<MealPlanning />} />
                 <Route path="/instructions" element={<Instructions />} />
                 <Route path="/upload" element={<Dropzone />} />
+                <Route path="/Inventory" element={<Inventory />} />
               </Routes>
             </Container>
           </Flex>
