@@ -23,6 +23,18 @@ export const Navbar = () => {
         <HStack flex={1} justifyContent={"start"}>
           <Image src="/vebetterdao-logo.svg" />
         </HStack>
+        <HStack flex={1} spacing={4} justifyContent={"center"}>
+          <a className="hidden sm:block hover:cursor-pointer hover:underline" href="/">Home</a>
+        </HStack>
+        <HStack flex={1} spacing={4} justifyContent={"center"}>
+          <a className="hidden sm:block hover:cursor-pointer hover:underline" href="/protected">Protected</a>
+        </HStack>
+        <HStack flex={1} spacing={4} justifyContent={"center"}>
+          <a className="hidden sm:block hover:cursor-pointer hover:underline" href="/settings">Settings</a>
+        </HStack>
+        <HStack flex={1} spacing={4} justifyContent={"center"}>
+          <a className="hidden sm:block hover:cursor-pointer hover:underline" href="/contact">Contact</a>
+        </HStack>
 
         <HStack flex={1} spacing={4} justifyContent={"end"}>
           <ConnectWalletButton />

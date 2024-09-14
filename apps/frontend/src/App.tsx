@@ -14,6 +14,7 @@ import { Routes, Route, BrowserRouter } from 'react-router-dom'
 import Home from "./routes/home";
 import Protected from './routes/protected'
 import Settings from './routes/settings'
+import Login from './routes/login'
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/protected" element={<Protected />} />
                 <Route path="/settings" element={<Settings />} />
+                <Route path="/login" element={<Login />} />
               </Routes>
             </div>
             <Footer />
