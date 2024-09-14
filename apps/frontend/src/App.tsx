@@ -1,22 +1,16 @@
 import { DAppKitProvider } from "@vechain/dapp-kit-react";
-import { ChakraProvider, Container, Flex } from "@chakra-ui/react";
-import {
-  Dropzone,
-  Footer,
-  InfoCard,
-  Instructions,
-  Navbar,
-  SubmissionModal,
-} from "./components";
+import { ChakraProvider } from "@chakra-ui/react";
+import { Footer, Navbar, SubmissionModal } from "./components";
 import { lightTheme } from "./theme";
-import { Routes, Route, BrowserRouter } from 'react-router-dom'
-
+import { Routes, Route, BrowserRouter } from "react-router-dom";
 import Home from "./routes/home";
-import Protected from './routes/protected'
-import Settings from './routes/settings'
-import Login from './routes/login'
+import Protected from "./routes/protected";
+import Settings from "./routes/settings";
+import Login from "./routes/login";
 
 function App() {
+  const path = location.pathname;
+  
   return (
     <BrowserRouter>
       <ChakraProvider theme={lightTheme}>
@@ -28,7 +22,7 @@ function App() {
           logLevel={"DEBUG"}
         >
           <div className="">
-            <Navbar />
+            {path != "/" ? <Navbar /> : <></>}
             <div className="min-h-[80vh] relative">
               <Routes>
                 <Route path="/" element={<Home />} />
@@ -37,7 +31,7 @@ function App() {
                 <Route path="/login" element={<Login />} />
               </Routes>
             </div>
-            <Footer />
+            {path != "/" ? <Footer /> : <></>}
           </div>
           {/* MODALS  */}
           <SubmissionModal />
