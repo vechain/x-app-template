@@ -1,6 +1,6 @@
 import { DAppKitProvider } from "@vechain/dapp-kit-react";
 import { ChakraProvider, Container, Flex } from "@chakra-ui/react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom"; // Import React Router components
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import {
   Dropzone,
   Footer,
@@ -12,8 +12,22 @@ import {
 import { lightTheme } from "./theme";
 import MealPlanning from "./components/MealPlanning";
 import ViewSavedPlans from "./components/ViewSavedPlans";
+import LoginPage from "./components/LoginPage";
+import SignUpPage from "./components/SignupPage";
+import { useState } from "react";
 
 function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  const handleLogin = (credentials: { email: string; password: string }) => {
+    // Implement your login logic here
+    setIsAuthenticated(true); // Set to true if login is successful
+  };
+
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+  };
+
   return (
     <ChakraProvider theme={lightTheme}>
       <DAppKitProvider
@@ -24,7 +38,7 @@ function App() {
         logLevel={"DEBUG"}
       >
         <Router>
-          <Navbar />
+        <Navbar isAuthenticated={isAuthenticated} onLogout={handleLogout} />
           <Flex flex={1}>
             <Container
               mt={{ base: 4, md: 10 }}
@@ -36,19 +50,28 @@ function App() {
               justifyContent={"flex-start"}
               flexDirection={"column"}
             >
-              {/* Define your routes here */}
               <Routes>
-                <Route path="/" element={<InfoCard />} />
-                <Route path="/meal-planning" element={<MealPlanning />} />
-                <Route path="/instructions" element={<Instructions />} />
-                <Route path="/upload" element={<Dropzone />} />
-                <Route path="/viewSavedPlans" element={<ViewSavedPlans />} />
+                {/* Public Routes */}
+                <Route path="/login" element={<LoginPage onLogin={handleLogin} />} />
+                <Route path="/signup" element={<SignUpPage />} />
+
+                {/* Protected Routes */}
+                {isAuthenticated ? (
+                  <>
+                    <Route path="/" element={<InfoCard />} />
+                    <Route path="/meal-planning" element={<MealPlanning />} />
+                    <Route path="/instructions" element={<Instructions />} />
+                    <Route path="/upload" element={<Dropzone />} />
+                    <Route path="/viewSavedPlans" element={<ViewSavedPlans />} />
+                    <Route path="*" element={<Navigate to="/" replace />} />
+                  </>
+                ) : (
+                  <Route path="*" element={<Navigate to="/login" replace />} />
+                )}
               </Routes>
             </Container>
           </Flex>
           <Footer />
-
-          {/* MODALS */}
           <SubmissionModal />
         </Router>
       </DAppKitProvider>
@@ -57,3 +80,4 @@ function App() {
 }
 
 export default App;
+
