@@ -16,7 +16,10 @@ export const InfoCard = () => {
     <Card w={"full"}>
       <Box p={3}>
         <VStack w={"full"} spacing={{ base: 2, md: 4 }}>
-          <Image src="/ecology-bag-with-leaves.png" borderRadius={16} />
+          <Text fontSize={24} fontWeight={500}>
+            Welcome
+          </Text>
+          {/* <Image src="/ecology-bag-with-leaves.png" borderRadius={16} />
           <Flex
             w={"full"}
             justifyContent={"space-between"}
@@ -46,7 +49,7 @@ export const InfoCard = () => {
                 </Button>
               </Link>
             </Flex>
-          </Flex>
+          </Flex> */}
         </VStack>
       </Box>
     </Card>

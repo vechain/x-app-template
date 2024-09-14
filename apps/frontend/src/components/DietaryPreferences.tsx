@@ -1,4 +1,14 @@
 import React, { useState } from 'react';
+import {
+  Box,
+  Select,
+  Checkbox,
+  VStack,
+  FormControl,
+  FormLabel,
+  CheckboxGroup,
+  Heading,
+} from '@chakra-ui/react';
 
 interface DietaryPreferencesProps {
   onPreferenceChange: (preference: string) => void;
@@ -23,35 +33,47 @@ const DietaryPreferences: React.FC<DietaryPreferencesProps> = ({
     setSelectedExclusions((prev) =>
       checked ? [...prev, value] : prev.filter((exclusion) => exclusion !== value)
     );
-    onExclusionsChange(checked ? [...selectedExclusions, value] : selectedExclusions.filter((exclusion) => exclusion !== value));
+    onExclusionsChange(
+      checked
+        ? [...selectedExclusions, value]
+        : selectedExclusions.filter((exclusion) => exclusion !== value)
+    );
   };
 
   return (
-    <div>
-      <label>Choose Dietary Preference:</label>
-      <select onChange={handlePreferenceChange}>
-        {preferences.map((preference, index) => (
-          <option key={index} value={preference}>
-            {preference}
-          </option>
-        ))}
-      </select>
+    <Box p={5} borderWidth="1px" borderRadius="md" boxShadow="lg" maxWidth="400px" bg="gray.50">
+      
+      {/* Meal Type Dropdown */}
+      <FormControl mb={6}>
+        <FormLabel>Meal Type</FormLabel>
+        <Select placeholder="Select" onChange={handlePreferenceChange}>
+          {preferences.map((preference, index) => (
+            <option key={index} value={preference}>
+              {preference}
+            </option>
+          ))}
+        </Select>
+      </FormControl>
 
-      <div>
-        <h4>Dietary Exclusions:</h4>
-        {exclusions.map((exclusion, index) => (
-          <div key={index}>
-            <input
-              type="checkbox"
-              value={exclusion}
-              onChange={handleExclusionChange}
-              id={`exclusion-${index}`}
-            />
-            <label htmlFor={`exclusion-${index}`}>{exclusion}</label>
-          </div>
-        ))}
-      </div>
-    </div>
+      {/* Dietary Exclusions Checklist */}
+      <FormControl>
+        <FormLabel>Dietary Exclusions</FormLabel>
+        <CheckboxGroup colorScheme="green">
+          <VStack align="start">
+            {exclusions.map((exclusion, index) => (
+              <Checkbox
+                key={index}
+                value={exclusion}
+                onChange={handleExclusionChange}
+                isChecked={selectedExclusions.includes(exclusion)}
+              >
+                {exclusion}
+              </Checkbox>
+            ))}
+          </VStack>
+        </CheckboxGroup>
+      </FormControl>
+    </Box>
   );
 };
 
