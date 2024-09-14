@@ -13,4 +13,8 @@ export class SubmitDto {
   @IsString()
   @IsNotEmpty()
   public deviceID: string;
+
+  @IsString()
+  @IsNotEmpty()
+  public promptType: string;
 }

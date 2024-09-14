@@ -5,4 +5,5 @@ export interface Submission {
   timestamp: number;
   image?: string;
   deviceID?: string;
+  promptType?: string;
 }

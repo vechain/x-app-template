@@ -7,7 +7,7 @@ import { useWallet } from "@vechain/dapp-kit-react";
 import { submitReceipt } from "../networking";
 import { useDisclosure, useSubmission } from "../hooks";
 
-export const Dropzone = () => {
+export const Dropzone = ({ promptType }: { promptType: string }) => {
   const { account } = useWallet();
 
   const { setIsLoading, setResponse } = useSubmission();
@@ -51,6 +51,7 @@ export const Dropzone = () => {
           address: account,
           deviceID,
           image: base64Image,
+          promptType,
         });
 
         console.log(response);
@@ -62,7 +63,7 @@ export const Dropzone = () => {
         setIsLoading(false);
       }
     },
-    [account, onOpen, setIsLoading, setResponse],
+    [account, onOpen, setIsLoading, setResponse]
   );
 
   return (

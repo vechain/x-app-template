@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import "./form.css";
 
 export default function Form({ type }: { type: "reduce" | "offset" }) {
-  const [category, setCategory] = useState("All");
+  const [category, setCategory] = useState("Transport");
 
   // Define categories based on the type prop
   const categories =
@@ -65,7 +65,7 @@ export default function Form({ type }: { type: "reduce" | "offset" }) {
         Step 2{" "}
       </Text>
       <Text> Step 1asdkjndsfkjcnkjsd </Text>
-      <Dropzone />
+      <Dropzone promptType={category} />
 
       {/* Submit area */}
       <Text fontSize="2xl" fontWeight="bold" paddingTop="2">
