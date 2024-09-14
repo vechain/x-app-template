@@ -24,7 +24,6 @@ function App() {
         >
           <div className="">
             {path != "/" ? <Navbar /> : <></>}
-
             <div className="min-h-[80vh] relative">
               <Routes>
                 <Route path="/" element={<Home />} />
