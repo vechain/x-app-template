@@ -1,0 +1,14 @@
+.parallax {
+  min-height: 70px;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.scroll-container {
+  height: 870px;
+  background-color: #4e6b4c;
+  font-size: 36px;
+  padding: 40px;
+}

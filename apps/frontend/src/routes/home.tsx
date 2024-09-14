@@ -1,28 +1,102 @@
-import React from "react";
-import { Container, Flex } from "@chakra-ui/react";
-import {
-    Dropzone,
-    InfoCard,
-    Instructions,
-} from "../components";
+import { Card, CardBody, Flex, Button, Image, Text } from "@chakra-ui/react";
+import "./home.css";
 
 export default function Home() {
-    return (
-        <Flex flex={1}>
-            <Container
-                mt={{ base: 4, md: 10 }}
-                maxW={"container.xl"}
-                mb={{ base: 4, md: 10 }}
-                display={"flex"}
-                flex={1}
-                alignItems={"center"}
-                justifyContent={"flex-start"}
-                flexDirection={"column"}
+  return (
+    <div style={{ backgroundColor: "#c5dcc2" }}>
+      <div style={{ position: "absolute", top: "10px", right: "10px" }}>
+        <Button
+          bg="#2a3d29"
+          color="#c5dcc2"
+          _hover={{ bg: "#c5dcc2", color: "#2a3d29" }}
+          width="100px"
+          margin="3"
+        >
+          Profile
+        </Button>
+      </div>
+      <div className="parallax"></div>
+      <Image src="/hill.png" />
+
+      <div className="scroll-container">
+        <Flex justifyContent="center" alignItems="center" height="100%" gap={8}>
+          <div>
+            <Text color="#efefef" fontSize="5xl">
+              REDUCE
+            </Text>
+            <Card
+              bg="#efefef"
+              minHeight="350"
+              paddingTop="200"
+              borderRadius="25"
             >
-                <InfoCard />
-                <Instructions />
-                <Dropzone />
-            </Container>
+              <Image
+                src="/reduce.png"
+                position="absolute"
+                top="-80px"
+                left="50%"
+                transform="translateX(-50%)"
+                width="300px"
+              />
+
+              <CardBody>
+                <Text fontSize="md">
+                  View a summary of all your customers over the last month.
+                </Text>
+
+                <Flex justify="center" mt="4">
+                  <Button
+                    bg="#2a3d29"
+                    color="#c5dcc2"
+                    _hover={{ bg: "#c5dcc2", color: "#2a3d29" }}
+                    width="200px"
+                  >
+                    Button
+                  </Button>
+                </Flex>
+              </CardBody>
+            </Card>
+          </div>
+
+          <div>
+            <Text color="#efefef" fontSize="5xl" textAlign="right">
+              OFFSET
+            </Text>
+            <Card
+              bg="#efefef"
+              minHeight="350"
+              paddingTop="200"
+              borderRadius="25"
+            >
+              <Image
+                src="/offset.png"
+                position="absolute"
+                top="-90px"
+                left="50%"
+                transform="translateX(-70%)"
+                width="300px"
+              />
+
+              <CardBody>
+                <Text fontSize="md">
+                  View a summary of all your customers over the last month.
+                </Text>
+
+                <Flex justify="center" mt="4">
+                  <Button
+                    bg="#2a3d29"
+                    color="#c5dcc2"
+                    _hover={{ bg: "#c5dcc2", color: "#2a3d29" }}
+                    width="200px"
+                  >
+                    Button
+                  </Button>
+                </Flex>
+              </CardBody>
+            </Card>
+          </div>
         </Flex>
-    );
+      </div>
+    </div>
+  );
 }
