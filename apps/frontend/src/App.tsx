@@ -1,5 +1,6 @@
 import { DAppKitProvider } from "@vechain/dapp-kit-react";
 import { ChakraProvider, Container, Flex } from "@chakra-ui/react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"; // Import React Router components
 import {
   Dropzone,
   Footer,
@@ -9,7 +10,7 @@ import {
   SubmissionModal,
 } from "./components";
 import { lightTheme } from "./theme";
-import MealPlanning from "./components/MealPlanning";  // Import the MealPlanning component
+import MealPlanning from "./components/MealPlanning";
 
 function App() {
   return (
@@ -21,29 +22,33 @@ function App() {
         nodeUrl="https://testnet.vechain.org/"
         logLevel={"DEBUG"}
       >
-        <Navbar />
-        <Flex flex={1}>
-          <Container
-            mt={{ base: 4, md: 10 }}
-            maxW={"container.xl"}
-            mb={{ base: 4, md: 10 }}
-            display={"flex"}
-            flex={1}
-            alignItems={"center"}
-            justifyContent={"flex-start"}
-            flexDirection={"column"}
-          >
-            <InfoCard />
-            <Instructions />
-            <Dropzone />
-            {/* Insert MealPlanning component here */}
-            <MealPlanning />
-          </Container>
-        </Flex>
-        <Footer />
+        <Router>
+          <Navbar />
+          <Flex flex={1}>
+            <Container
+              mt={{ base: 4, md: 10 }}
+              maxW={"container.xl"}
+              mb={{ base: 4, md: 10 }}
+              display={"flex"}
+              flex={1}
+              alignItems={"center"}
+              justifyContent={"flex-start"}
+              flexDirection={"column"}
+            >
+              {/* Define your routes here */}
+              <Routes>
+                <Route path="/" element={<InfoCard />} />
+                <Route path="/meal-planning" element={<MealPlanning />} />
+                <Route path="/instructions" element={<Instructions />} />
+                <Route path="/upload" element={<Dropzone />} />
+              </Routes>
+            </Container>
+          </Flex>
+          <Footer />
 
-        {/* MODALS */}
-        <SubmissionModal />
+          {/* MODALS */}
+          <SubmissionModal />
+        </Router>
       </DAppKitProvider>
     </ChakraProvider>
   );
