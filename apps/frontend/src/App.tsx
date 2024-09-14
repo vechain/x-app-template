@@ -7,10 +7,12 @@ import Home from "./routes/home";
 import Protected from "./routes/protected";
 import Settings from "./routes/settings";
 import Login from "./routes/login";
+import Form from "./routes/form";
+import Milestones from "./routes/milestones";
 
 function App() {
-  const path = location.pathname;
-  
+  // const path = location.pathname;
+
   return (
     <BrowserRouter>
       <ChakraProvider theme={lightTheme}>
@@ -22,16 +24,21 @@ function App() {
           logLevel={"DEBUG"}
         >
           <div className="">
-            {path != "/" ? <Navbar /> : <></>}
+            {/* {path === "/" || path === "/form" ? null : <Navbar />} */}
+
             <div className="min-h-[80vh] relative">
               <Routes>
                 <Route path="/" element={<Home />} />
+                <Route path="/reduceForm" element={<Form type="reduce" />} />
+                <Route path="/offsetForm" element={<Form type="offset" />} />
                 <Route path="/protected" element={<Protected />} />
                 <Route path="/settings" element={<Settings />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="/milestones" element={<Milestones />} />
               </Routes>
             </div>
-            {path != "/" ? <Footer /> : <></>}
+
+            {/* {path === "/" || path === "/form" ? null : <Footer />} */}
           </div>
           {/* MODALS  */}
           <SubmissionModal />
