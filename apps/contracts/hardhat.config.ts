@@ -31,7 +31,7 @@ module.exports = {
         vechain_solo: {
             url: 'http://localhost:8669',
             accounts: {
-                mnemonic: 'leave cycle dignity adapt gaze seat broccoli neck news joy sunset robust',
+                mnemonic: 'denial kitchen pet squirrel other broom bar gas better priority spoil cross',
                 count: 10,
                 path: "m/44'/818'/0'/0",
             },
