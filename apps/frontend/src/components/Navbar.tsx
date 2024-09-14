@@ -2,7 +2,7 @@ import { Box, Container, HStack, Image, Button } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { ConnectWalletButton } from "./ConnectWalletButton";
 
-export const Navbar = () => {
+export const Navbar = ({ isAuthenticated, onLogout }: { isAuthenticated: boolean, onLogout: () => void }) => {
   return (
     <Box
       px={0}
@@ -73,23 +73,22 @@ export const Navbar = () => {
               Saved Plans
             </Button>
           </Link>
-          {/* <Link to="/instructions">
-            <Button variant="ghost" colorScheme="teal">
-              Instructions
-            </Button>
-          </Link>
-          <Link to="/upload">
-            <Button variant="ghost" colorScheme="teal">
-              Upload
-            </Button>
-          </Link> */}
         </HStack>
 
-        {/* Wallet Button */}
+        {/* Wallet and Logout Buttons */}
         <HStack flex={1} spacing={4} justifyContent={"end"}>
           <ConnectWalletButton />
+          {isAuthenticated && (
+            <Button
+              colorScheme="green"
+              onClick={onLogout}
+            >
+              Logout
+            </Button>
+          )}
         </HStack>
       </Container>
     </Box>
   );
 };
+
