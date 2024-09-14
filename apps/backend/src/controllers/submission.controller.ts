@@ -22,7 +22,8 @@ export class SubmissionController {
       const validationResult = await this.openai.validateImage(body.image, req.body.promptType);
 
       const validityFactor = validationResult['validityFactor'];
-      if (validityFactor < 0.5) {
+
+      if (validityFactor > 0.5) {
         throw new HttpException(500, 'Error registering submission and sending rewards');
       }
 
