@@ -6,12 +6,17 @@ interface MealCalendarProps {
   onDateChange: (date: Date) => void;
 }
 
-const MealCalendar: React.FC<MealCalendarProps> = ({ onDateChange }) => {
-  const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
+type ValuePiece = Date | null;
+type Value = ValuePiece | [ValuePiece, ValuePiece];
 
-  const handleDateChange = (date: Date) => {
-    setSelectedDate(date);
-    onDateChange(date); // Callback to handle the date in the parent component
+const MealCalendar: React.FC<MealCalendarProps> = ({ onDateChange }) => {
+  const [selectedDate, setSelectedDate] = useState<Value>(new Date());
+
+  const handleDateChange = (value: Value) => {
+    setSelectedDate(value);
+    if (value instanceof Date) {
+      onDateChange(value);
+    }
   };
 
   return (
