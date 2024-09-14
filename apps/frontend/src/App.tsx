@@ -9,9 +9,10 @@ import Protected from "./routes/protected";
 import Settings from "./routes/settings";
 import Login from "./routes/login";
 import Form from "./routes/form";
+import Milestones from "./routes/milestones";
 
 function App() {
-  const path = location.pathname;
+  // const path = location.pathname;
 
   return (
     <BrowserRouter>
@@ -34,6 +35,7 @@ function App() {
                 <Route path="/protected" element={<Protected />} />
                 <Route path="/settings" element={<Settings />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="/milestones" element={<Milestones />} />
               </Routes>
             </div>
 
