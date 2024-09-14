@@ -9,7 +9,7 @@ export const Navbar = () => {
       position={"sticky"}
       top={0}
       zIndex={10}
-      py={4}
+      py={2}
       h={"auto"}
       w={"full"}
       bg={"#f7f7f7"}
@@ -40,7 +40,7 @@ export const Navbar = () => {
                 },
               }}
             >
-              Meal Planning
+              Meal Prep
             </Button>
           </Link>
           <Link to="/meal-planning">
@@ -55,10 +55,10 @@ export const Navbar = () => {
                 },
               }}
             >
-              Meal Prep
+              Inventory
             </Button>
           </Link>
-          <Link to="/instructions">
+          {/* <Link to="/instructions">
             <Button variant="ghost" colorScheme="teal">
               Instructions
             </Button>
@@ -67,7 +67,7 @@ export const Navbar = () => {
             <Button variant="ghost" colorScheme="teal">
               Upload
             </Button>
-          </Link>
+          </Link> */}
         </HStack>
 
         {/* Wallet Button */}
