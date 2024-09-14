@@ -1,4 +1,5 @@
 import { Card, CardBody, Flex, Button, Image, Text } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 import "./home.css";
 
 export default function Home() {
@@ -18,7 +19,7 @@ export default function Home() {
       <div className="parallax"></div>
       <Image src="/hill.png" />
 
-      <div className="scroll-container">
+      <div className="scroll-container" style={{ backgroundColor: "#4e6b4c" }}>
         <Flex justifyContent="center" alignItems="center" height="100%" gap={8}>
           <div>
             <Text color="#efefef" fontSize="5xl">
@@ -45,14 +46,16 @@ export default function Home() {
                 </Text>
 
                 <Flex justify="center" mt="4">
-                  <Button
-                    bg="#2a3d29"
-                    color="#c5dcc2"
-                    _hover={{ bg: "#c5dcc2", color: "#2a3d29" }}
-                    width="200px"
-                  >
-                    Button
-                  </Button>
+                  <Link to="/reduceForm" style={{ textDecoration: "none" }}>
+                    <Button
+                      bg="#2a3d29"
+                      color="#c5dcc2"
+                      _hover={{ bg: "#c5dcc2", color: "#2a3d29" }}
+                      width="200px"
+                    >
+                      Get your vet!
+                    </Button>
+                  </Link>
                 </Flex>
               </CardBody>
             </Card>
@@ -83,14 +86,16 @@ export default function Home() {
                 </Text>
 
                 <Flex justify="center" mt="4">
-                  <Button
-                    bg="#2a3d29"
-                    color="#c5dcc2"
-                    _hover={{ bg: "#c5dcc2", color: "#2a3d29" }}
-                    width="200px"
-                  >
-                    Button
-                  </Button>
+                  <Link to="/offsetForm" style={{ textDecoration: "none" }}>
+                    <Button
+                      bg="#2a3d29"
+                      color="#c5dcc2"
+                      _hover={{ bg: "#c5dcc2", color: "#2a3d29" }}
+                      width="200px"
+                    >
+                      Get your vet!
+                    </Button>
+                  </Link>
                 </Flex>
               </CardBody>
             </Card>

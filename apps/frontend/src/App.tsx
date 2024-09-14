@@ -24,19 +24,20 @@ function App() {
           logLevel={"DEBUG"}
         >
           <div className="">
-            {path === "/" || path === "/form" ? null : <Navbar />}
+            {/* {path === "/" || path === "/form" ? null : <Navbar />} */}
 
             <div className="min-h-[80vh] relative">
               <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/form" element={<Form />} />
+                <Route path="/reduceForm" element={<Form type="reduce" />} />
+                <Route path="/offsetForm" element={<Form type="offset" />} />
                 <Route path="/protected" element={<Protected />} />
                 <Route path="/settings" element={<Settings />} />
                 <Route path="/login" element={<Login />} />
               </Routes>
             </div>
 
-            {path === "/" || path === "/form" ? null : <Footer />}
+            {/* {path === "/" || path === "/form" ? null : <Footer />} */}
           </div>
           {/* MODALS  */}
           <SubmissionModal />
