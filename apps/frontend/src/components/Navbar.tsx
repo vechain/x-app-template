@@ -25,7 +25,7 @@ export const Navbar = ({ isAuthenticated, onLogout }: { isAuthenticated: boolean
         {/* Logo and Navigation Links */}
         <HStack flex={1} justifyContent={"start"}>
           <Link to="/">
-            <Image src="/Gemini_Generated_Image_ptpsw1ptpsw1ptps.png" alt="Logo" width="70px"/>
+            <Image src="/Gemini_Generated_Image_ptpsw1ptpsw1ptpsw.png" alt="Logo" width="70px"/>
           </Link>
           <Link to="/meal-planning">
             <Button
@@ -40,12 +40,10 @@ export const Navbar = ({ isAuthenticated, onLogout }: { isAuthenticated: boolean
                 },
               }}
             >
-              Meal Prep
-            <Button variant="ghost" colorScheme="teal">
               Meal Planning
             </Button>
           </Link>
-          <Link to="/Inventory">
+          <Link to="/inventory">
             <Button variant="ghost" colorScheme="teal">
               Inventory
             </Button>
@@ -67,7 +65,7 @@ export const Navbar = ({ isAuthenticated, onLogout }: { isAuthenticated: boolean
                 },
               }}
             >
-              Inventory
+              Upload
             </Button>
           </Link>
           <Link to="/viewSavedPlans">
@@ -103,4 +101,3 @@ export const Navbar = ({ isAuthenticated, onLogout }: { isAuthenticated: boolean
     </Box>
   );
 };
-
