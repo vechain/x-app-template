@@ -16,6 +16,7 @@
     "contracts:solo-down": "turbo run solo-down"
   },
   "devDependencies": {
+    "@shadcn/ui": "^0.0.4",
     "eslint": "^8.57.0",
     "prettier": "^3.2.5",
     "turbo": "^2.1.2"
@@ -24,5 +25,15 @@
   "workspaces": [
     "apps/*",
     "packages/*"
-  ]
+  ],
+  "dependencies": {
+    "@radix-ui/react-icons": "^1.3.0",
+    "@radix-ui/react-slot": "^1.1.0",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
+    "date-fns": "^4.0.0-beta.1",
+    "lucide-react": "^0.441.0",
+    "react-calendar": "^5.0.0",
+    "tailwind-merge": "^2.5.2"
+  }
 }

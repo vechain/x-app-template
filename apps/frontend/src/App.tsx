@@ -9,6 +9,7 @@ import {
   SubmissionModal,
 } from "./components";
 import { lightTheme } from "./theme";
+import MealPlanning from "./components/MealPlanning";  // Import the MealPlanning component
 
 function App() {
   return (
@@ -35,11 +36,13 @@ function App() {
             <InfoCard />
             <Instructions />
             <Dropzone />
+            {/* Insert MealPlanning component here */}
+            <MealPlanning />
           </Container>
         </Flex>
         <Footer />
 
-        {/* MODALS  */}
+        {/* MODALS */}
         <SubmissionModal />
       </DAppKitProvider>
     </ChakraProvider>
