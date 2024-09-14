@@ -43,7 +43,7 @@ export const Navbar = () => {
               Meal Prep
             </Button>
           </Link>
-          <Link to="/meal-planning">
+          <Link to="/upload">
             <Button
               variant="ghost"
               p="30px 20px"
@@ -56,6 +56,21 @@ export const Navbar = () => {
               }}
             >
               Inventory
+            </Button>
+          </Link>
+          <Link to="/viewSavedPlans">
+            <Button
+              variant="ghost"
+              p="30px 20px"
+              m="10px"
+              sx={{
+                color: 'black', // Default text color
+                _hover: {
+                  bg: 'rgba(0, 128, 0, 0.2)',  // Background color on hover
+                },
+              }}
+            >
+              Saved Plans
             </Button>
           </Link>
           {/* <Link to="/instructions">
