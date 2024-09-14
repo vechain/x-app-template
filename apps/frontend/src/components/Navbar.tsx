@@ -1,5 +1,7 @@
-import { Box, Container, HStack, Image } from "@chakra-ui/react";
+import { Box, Container, HStack, Image, Button } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 import { ConnectWalletButton } from "./ConnectWalletButton";
+
 export const Navbar = () => {
   return (
     <Box
@@ -20,10 +22,29 @@ export const Navbar = () => {
         alignItems={"center"}
         maxW={"container.xl"}
       >
+        {/* Logo and Navigation Links */}
         <HStack flex={1} justifyContent={"start"}>
-          <Image src="/vebetterdao-logo.svg" />
+          <Link to="/">
+            <Image src="/vebetterdao-logo.svg" alt="Logo" />
+          </Link>
+          <Link to="/meal-planning">
+            <Button variant="ghost" colorScheme="teal">
+              Meal Planning
+            </Button>
+          </Link>
+          <Link to="/instructions">
+            <Button variant="ghost" colorScheme="teal">
+              Instructions
+            </Button>
+          </Link>
+          <Link to="/upload">
+            <Button variant="ghost" colorScheme="teal">
+              Upload
+            </Button>
+          </Link>
         </HStack>
 
+        {/* Wallet Button */}
         <HStack flex={1} spacing={4} justifyContent={"end"}>
           <ConnectWalletButton />
         </HStack>
