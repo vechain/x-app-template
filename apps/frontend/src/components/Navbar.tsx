@@ -25,7 +25,13 @@ export const Navbar = ({ isAuthenticated, onLogout }: { isAuthenticated: boolean
         {/* Logo and Navigation Links */}
         <HStack flex={1} justifyContent={"start"}>
           <Link to="/">
-            <Image src="/Gemini_Generated_Image_ptpsw1ptpsw1ptpsw.png" alt="Logo" width="70px"/>
+            <Button p="30px 20px"
+              ms="40px"
+              me="10px"
+              bg= 'black'
+              color="white"
+              sx={{ _hover: {bg:"black",}}}
+              >B3TRBites</Button>
           </Link>
           <Link to="/meal-planning">
             <Button
