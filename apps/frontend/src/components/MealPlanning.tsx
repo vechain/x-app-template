@@ -50,7 +50,7 @@ const MealPlanning: React.FC = () => {
       const response = await fetch('https://api-inference.huggingface.co/models/gpt2', {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${process.env.API_KEY}`, // Replace with your actual Hugging Face API key
+          'Authorization': `Bearer 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`, // Replace with your actual Hugging Face API key
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
@@ -136,27 +136,31 @@ const MealPlanning: React.FC = () => {
       </Grid>
 
       <Modal isOpen={isOpen} onClose={onClose} size="xl">
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Meal Plan Saved!</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            <VStack spacing={4} align="start">
-              <Text>Your meal plan has been saved with the following details:</Text>
-              <Text>Date: {mealPlan.date?.toLocaleDateString()}</Text>
-              <Text>Dietary Preference: {mealPlan.preference}</Text>
-              <Text>Exclusions: {mealPlan.exclusions.join(', ')}</Text>
-              <Text fontWeight="bold">Generated Recipe:</Text>
-              <Box bg="gray.100" p={4} borderRadius="md" w="100%">
-                <Text whiteSpace="pre-wrap">{mealPlan.recipe}</Text>
-              </Box>
-              <Button colorScheme="blue">
-                <Link to="/viewSavedPlans" style={{ color: 'inherit', textDecoration: 'none' }}>View Saved Meals</Link>
-              </Button>
-            </VStack>
-          </ModalBody>
-        </ModalContent>
-      </Modal>
+  <ModalOverlay />
+  <ModalContent>
+    <ModalHeader>Meal Plan Saved!</ModalHeader>
+    <ModalCloseButton />
+    <ModalBody>
+      <VStack spacing={4} align="start">
+        <Text>Your meal plan has been saved with the following details:</Text>
+        <Text>Date: {mealPlan.date?.toLocaleDateString()}</Text>
+        <Text>Dietary Preference: {mealPlan.preference}</Text>
+        <Text>Exclusions: {mealPlan.exclusions.join(', ')}</Text>
+        <Text fontWeight="bold">Generated Recipe:</Text>
+        
+        {/* Scrollable Box for the Recipe */}
+        <Box bg="gray.100" p={4} borderRadius="md" w="100%" maxHeight="200px" overflowY="auto">
+          <Text whiteSpace="pre-wrap">{mealPlan.recipe}</Text>
+        </Box>
+        
+        <Button colorScheme="blue">
+          <Link to="/viewSavedPlans" style={{ color: 'inherit', textDecoration: 'none' }}>View Saved Meals</Link>
+        </Button>
+      </VStack>
+    </ModalBody>
+  </ModalContent>
+</Modal>
+
     </Center>
   );
 };
