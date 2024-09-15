@@ -45,3 +45,11 @@ export const lightTheme = extendTheme({
   ...themeConfig,
   colors: lightThemeColors,
 });
+
+// theme.ts or theme.js
+const theme = extendTheme({
+  fonts: {
+    heading: `"Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif`,
+    body: `"Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif`,
+  },
+});

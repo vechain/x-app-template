@@ -103,15 +103,15 @@ const MealPlanning: React.FC = () => {
       <Grid templateColumns="1fr 1fr 1fr" gap={4} mb={4} width="100%" maxWidth="1200px">
         <Box textAlign="center" mb={4}>
           <Heading color="black" as="h2" size="md" my={10}>Step 1</Heading>
-          <Text bg='rgba(0, 128, 0, 0.1)' borderRadius="12px">Select Date</Text>
+          <Text bg='rgba(0, 128, 0, 0.1)' borderRadius="12px" p={4} fontWeight={700}>Select Date</Text>
         </Box>
         <Box textAlign="center" mb={4}>
           <Heading color="black" as="h2" size="md" my={10}>Step 2</Heading>
-          <Text bg='rgba(0, 128, 0, 0.1)' borderRadius="12px">Select Dietary Preferences</Text>
+          <Text bg='rgba(0, 128, 0, 0.1)' borderRadius="12px" p={4} fontWeight={700}>Select Dietary Preferences</Text>
         </Box>
         <Box textAlign="center" mb={4}>
           <Heading color="black" as="h2" size="md" my={10}>Step 3</Heading>
-          <Text bg='rgba(0, 128, 0, 0.1)' borderRadius="12px">Verify Selected Plan</Text>
+          <Text bg='rgba(0, 128, 0, 0.1)' borderRadius="12px" p={4} fontWeight={700}>Verify Selected Plan</Text>
         </Box>
       </Grid>
 

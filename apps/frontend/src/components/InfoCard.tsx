@@ -13,14 +13,18 @@ import { MdOutlineArrowOutward } from "react-icons/md";
 
 export const InfoCard = () => {
   return (
-    <Card w={"full"}>
+    <Card w={"full"} borderRadius={16}>
       <Box p={3}>
         <VStack w={"full"} spacing={{ base: 2, md: 4 }}>
-          <Text fontSize={24} fontWeight={500}>
-            Welcome
-          </Text>
-          {/* <Image src="/ecology-bag-with-leaves.png" borderRadius={16} />
-          <Flex
+          <Image src="/homedisplay.jpg"/>
+          <Button p="30px 20px"
+              ms="40px"
+              me="10px"
+              bg= 'white'
+              color="black"
+              border="solid 1px black"
+              sx={{ _hover: {bg:"black", color:"white"}}}>Start now !</Button>
+          {/* <Flex
             w={"full"}
             justifyContent={"space-between"}
             direction={{ base: "column", md: "row" }}

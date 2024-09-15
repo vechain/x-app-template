@@ -32,6 +32,7 @@ export const Navbar = ({ isAuthenticated, onLogout }: { isAuthenticated: boolean
               color="white"
               sx={{ _hover: {bg:"black",}}}
               >B3TRBites</Button>
+              {/* <Image src="apps/frontend/public/B3TRBites.png"></Image> */}
           </Link>
           <Link to="/meal-planning">
             <Button
@@ -50,12 +51,30 @@ export const Navbar = ({ isAuthenticated, onLogout }: { isAuthenticated: boolean
             </Button>
           </Link>
           <Link to="/inventory">
-            <Button variant="ghost" colorScheme="teal">
+            <Button variant="ghost"
+              p="30px 20px"
+              ms="40px"
+              me="10px"
+              sx={{
+                color: 'black', // Default text color
+                _hover: {
+                  bg: 'rgba(0, 128, 0, 0.2)',  // Background color on hover
+                },
+              }}>
               Inventory
             </Button>
           </Link>
           <Link to="/instructions">
-            <Button variant="ghost" colorScheme="teal">
+            <Button variant="ghost"
+              p="30px 20px"
+              ms="40px"
+              me="10px"
+              sx={{
+                color: 'black', // Default text color
+                _hover: {
+                  bg: 'rgba(0, 128, 0, 0.2)',  // Background color on hover
+                },
+              }}>
               Instructions
             </Button>
           </Link>

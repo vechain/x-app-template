@@ -77,7 +77,7 @@ function App() {
               </Routes>
             </Container>
           </Flex>
-          <Footer />
+          {/* <Footer /> */}
           <SubmissionModal />
         </Router>
       </DAppKitProvider>
