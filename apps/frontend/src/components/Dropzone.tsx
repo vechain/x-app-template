@@ -1,19 +1,19 @@
-import { useCallback } from "react";
-import { useDropzone } from "react-dropzone";
-import { Box, HStack, Text, VStack } from "@chakra-ui/react";
-import { ScanIcon } from "./Icon";
-import { blobToBase64, getDeviceId, resizeImage } from "../util";
-import { useWallet } from "@vechain/dapp-kit-react";
-import { submitReceipt } from "../networking";
-import { useDisclosure, useSubmission } from "../hooks";
+import {useCallback} from "react";
+import {useDropzone} from "react-dropzone";
+import {Box, HStack, Text, VStack} from "@chakra-ui/react";
+import {ScanIcon} from "./Icon";
+import {blobToBase64, getDeviceId, resizeImage} from "../util";
+import {useWallet} from "@vechain/vechain-kit";
+import {submitReceipt} from "../networking";
+import {useDisclosure, useSubmission} from "../hooks";
 
 export const Dropzone = () => {
-  const { account } = useWallet();
+  const {account} = useWallet();
 
-  const { setIsLoading, setResponse } = useSubmission();
-  const { onOpen } = useDisclosure();
+  const {setIsLoading, setResponse} = useSubmission();
+  const {onOpen} = useDisclosure();
 
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+  const {getRootProps, getInputProps, isDragActive} = useDropzone({
     onDrop: (acceptedFiles: File[]) => {
       onFileUpload(acceptedFiles); // Pass the files to the callback
     },
@@ -47,7 +47,7 @@ export const Dropzone = () => {
 
       try {
         const response = await submitReceipt({
-          address: account,
+          address: account?.address,
           deviceID,
           image: base64Image,
         });
@@ -61,7 +61,7 @@ export const Dropzone = () => {
         setIsLoading(false);
       }
     },
-    [account, onOpen, setIsLoading, setResponse],
+    [account, onOpen, setIsLoading, setResponse]
   );
 
   return (

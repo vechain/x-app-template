@@ -24,5 +24,11 @@
   "workspaces": [
     "apps/*",
     "packages/*"
-  ]
+  ],
+  "dependencies": {
+    "@chakra-ui/react": "^2.10.7",
+    "@tanstack/react-query": "^5.71.1",
+    "@vechain/dapp-kit-react": "^1.4.1",
+    "@vechain/vechain-kit": "^1.5.13"
+  }
 }
