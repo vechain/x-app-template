@@ -55,7 +55,7 @@ Ensure your development environment is set up with the following:
 
 A blazing-fast React application powered by Vite:
 
-- **Vechain dapp-kit:** Streamline wallet connections and interactions. [Learn more](https://docs.vechain.org/developer-resources/sdks-and-providers/dapp-kit)
+- **Vechain vechain-kit:** Streamline wallet connections and interactions. [Learn more](https://docs.vechainkit.vechain.org/)
 
 ### Backend (apps/backend) 🔙
 
