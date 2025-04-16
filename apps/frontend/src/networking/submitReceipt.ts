@@ -11,7 +11,7 @@ export type Response = {
 
 export const submitReceipt = async (data: ReceiptData): Promise<Response> => {
   try {
-    const response = await axios.post(`${backendURL}/submitReceipt`, data);
+    const response = await axios.post(`${backendURL}/validate-claim`, data);
 
     return response.data;
   } catch (error: unknown) {
