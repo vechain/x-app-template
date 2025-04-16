@@ -27,6 +27,8 @@ export class UserController {
   @Post('validate-claim')
   validateClaim(@Body() claimData: any) {
     // Validate the claim using some business logic
+    // after AI gives true/false, pay the user some vbd tokens
+    
     return {
       isValid: true,
       message: 'Claim validation stub',
