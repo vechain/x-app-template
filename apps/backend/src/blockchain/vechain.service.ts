@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { Wallet, HDNodeWallet } from 'ethers';
 import { Framework } from '@vechain/connex-framework';
 import { Driver, SimpleNet } from '@vechain/connex-driver';
+import * as crypto from 'crypto';
 
 @Injectable()
 export class VeChainService {
@@ -10,15 +10,21 @@ export class VeChainService {
   private network: string;
   
   // Fixed accounts for consistent development and testing
-  private adminWallet: Wallet | HDNodeWallet;
-  private treasuryWallet: Wallet | HDNodeWallet;
-  private distributorWallet: Wallet | HDNodeWallet;
+  private adminWallet: {
+    address: string;
+    privateKey: string;
+  };
+  private treasuryWallet: {
+    address: string;
+    privateKey: string;
+  };
+  private distributorWallet: {
+    address: string;
+    privateKey: string;
+  };
 
   // Contract ABI and address
   private readonly rewardsPoolAddress = '0x5F8f86B8D0Fa93cdaE20936d150175dF0205fB38';
-  private readonly rewardsPoolAbi = [
-    'function distributeRewardWithProof(string appId, address recipient, uint256 amount, bytes32[] calldata proof) external returns (bool)'
-  ];
 
   constructor() {
     // Determine which VeChain network to use
@@ -57,41 +63,44 @@ export class VeChainService {
   }
 
   /**
-   * Initialize the admin, treasury, and distributor accounts
-   * These are deterministic wallets derived from mnemonics for development purposes
-   * In production, you would use secure private keys from environment variables
+   * Initialize wallet accounts for testing
+   * In a production environment, these would be loaded from secure environment variables
    */
   private initializeAccounts(): void {
-    // Real mnemonic phrases that generate usable wallets
-    // WARNING: These are now publicly visible in the codebase
-    // Only use these for testing and development, not for real funds
-    const adminMnemonic = 'uphold lounge dust elegant crisp pepper cup police ladder nest more alert';
-    const treasuryMnemonic = 'fatal mercy remove captain tired ancient gaze side appear teach group squeeze';
-    const distributorMnemonic = 'divide cruise upon flag settle easy chair clarify melody popular child flame';
+    // For development and testing, we're using predefined accounts
+    // Replace these with your own accounts for real usage
     
-    // Derive wallets from mnemonics
-    // Note: While we're using ethers.js for wallet generation,
-    // the addresses and private keys are compatible with VeChain's format
-    this.adminWallet = HDNodeWallet.fromPhrase(adminMnemonic);
-    this.treasuryWallet = HDNodeWallet.fromPhrase(treasuryMnemonic);
-    this.distributorWallet = HDNodeWallet.fromPhrase(distributorMnemonic);
+    // Admin account (replace with your own)
+    this.adminWallet = {
+      address: '0x7eF0CbaDFc0d1a4eC59F2D205Ad71258382FE3F4',
+      privateKey: '0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef'
+    };
+    
+    // Treasury account (replace with your own)
+    this.treasuryWallet = {
+      address: '0x3495D21A336B2D773Fe7DC9Bd6AfbE4a561fBF1C',
+      privateKey: 'fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210'
+    };
+    
+    // Distributor account (replace with your own)
+    this.distributorWallet = {
+      address: '0x60F73De462b0B20BB77730E26e42F5c4e60f4bf4',
+      privateKey: 'aabbccddeeff00112233445566778899aabbccddeeff00112233445566778899'
+    };
     
     console.log(`\n=== VECHAIN WALLET INFORMATION FOR DEVELOPMENT ===`);
     console.log(`ADMIN WALLET:`);
     console.log(`  Address: ${this.adminWallet.address}`);
-    console.log(`  Mnemonic: ${adminMnemonic}`);
-    console.log(`  Private Key: ${this.adminWallet.privateKey}`);
     
     console.log(`\nTREASURY WALLET:`);
     console.log(`  Address: ${this.treasuryWallet.address}`);
-    console.log(`  Mnemonic: ${treasuryMnemonic}`);
-    console.log(`  Private Key: ${this.treasuryWallet.privateKey}`);
     
     console.log(`\nDISTRIBUTOR WALLET:`);
     console.log(`  Address: ${this.distributorWallet.address}`);
-    console.log(`  Mnemonic: ${distributorMnemonic}`);
-    console.log(`  Private Key: ${this.distributorWallet.privateKey}`);
     console.log(`================================================\n`);
+    
+    console.warn(`WARNING: Using hardcoded wallet addresses and private keys for development!`);
+    console.warn(`DO NOT use these accounts for production or store real funds in them.`);
   }
 
   /**
@@ -124,25 +133,10 @@ export class VeChainService {
    * @returns A mock merkle proof as an array of 32-byte hex strings
    */
   generateMockProof(recipientAddress: string = ''): string[] {
-    // Create a helper function to generate a deterministic bytes32 value
+    // Generate bytes32 using standard crypto library
     const generateBytes32 = (input: string): string => {
-      // Simple hash function that produces a deterministic 32-byte hex string
-      let result = '';
-      let hash = 0;
-      
-      // Generate a hash of the input string
-      for (let i = 0; i < input.length; i++) {
-        hash = ((hash << 5) - hash) + input.charCodeAt(i);
-        hash = hash & hash; // Convert to 32bit integer
-      }
-      
-      // Create a hex string from the hash value
-      const hexHash = Math.abs(hash).toString(16);
-      
-      // Pad to ensure 32 bytes (64 hex chars) and add 0x prefix
-      result = '0x' + hexHash.padStart(64, '0');
-      
-      return result;
+      const hash = crypto.createHash('sha256').update(input).digest('hex');
+      return '0x' + hash;
     };
 
     // Create deterministic hash based on the recipient address
