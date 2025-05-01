@@ -3,24 +3,163 @@ import {
   Button,
   Card,
   CardBody,
+  Flex,
   Grid,
   HStack,
   Heading,
   IconButton,
   Image,
   Input,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalOverlay,
   SimpleGrid,
   Text,
   Textarea,
   VStack,
+  useDisclosure,
   useToast,
 } from '@chakra-ui/react';
+import { ChevronLeftIcon, ChevronRightIcon, DeleteIcon } from '@chakra-ui/icons';
 import { MarketplaceItem, supabase } from '../networking/supabase';
 import { useEffect, useState } from 'react';
 
-import { DeleteIcon } from '@chakra-ui/icons';
 import { useDropzone } from 'react-dropzone';
 import { useWallet } from '@vechain/dapp-kit-react';
+
+const ImageCarousel = ({ images, onImageClick }: { images: string[], onImageClick: (index: number) => void }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const nextImage = () => {
+    setCurrentIndex((prev) => (prev + 1) % images.length);
+  };
+
+  const prevImage = () => {
+    setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
+  };
+
+  return (
+    <Box position="relative" width="100%" height="200px">
+      <Image
+        src={images[currentIndex]}
+        alt={`Image ${currentIndex + 1}`}
+        width="100%"
+        height="100%"
+        objectFit="cover"
+        borderRadius="lg"
+        cursor="pointer"
+        onClick={() => onImageClick(currentIndex)}
+      />
+      {images.length > 1 && (
+        <>
+          <IconButton
+            aria-label="Previous image"
+            icon={<ChevronLeftIcon />}
+            position="absolute"
+            left={2}
+            top="50%"
+            transform="translateY(-50%)"
+            onClick={(e) => {
+              e.stopPropagation();
+              prevImage();
+            }}
+            size="sm"
+            borderRadius="full"
+          />
+          <IconButton
+            aria-label="Next image"
+            icon={<ChevronRightIcon />}
+            position="absolute"
+            right={2}
+            top="50%"
+            transform="translateY(-50%)"
+            onClick={(e) => {
+              e.stopPropagation();
+              nextImage();
+            }}
+            size="sm"
+            borderRadius="full"
+          />
+          <HStack
+            position="absolute"
+            bottom={2}
+            left="50%"
+            transform="translateX(-50%)"
+            spacing={1}
+          >
+            {images.map((_, index) => (
+              <Box
+                key={index}
+                w={2}
+                h={2}
+                borderRadius="full"
+                bg={index === currentIndex ? 'blue.500' : 'whiteAlpha.700'}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setCurrentIndex(index);
+                }}
+                cursor="pointer"
+              />
+            ))}
+          </HStack>
+        </>
+      )}
+    </Box>
+  );
+};
+
+const ImageModal = ({ isOpen, onClose, images, initialIndex }: { 
+  isOpen: boolean, 
+  onClose: () => void, 
+  images: string[],
+  initialIndex: number 
+}) => {
+  const [currentIndex, setCurrentIndex] = useState(initialIndex);
+
+  const nextImage = () => {
+    setCurrentIndex((prev) => (prev + 1) % images.length);
+  };
+
+  const prevImage = () => {
+    setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
+  };
+
+  return (
+    <Modal isOpen={isOpen} onClose={onClose} size="xl">
+      <ModalOverlay />
+      <ModalContent>
+        <ModalCloseButton />
+        <ModalBody p={4}>
+          <Flex direction="column" align="center">
+            <Image
+              src={images[currentIndex]}
+              alt={`Image ${currentIndex + 1}`}
+              maxH="70vh"
+              objectFit="contain"
+            />
+            {images.length > 1 && (
+              <HStack mt={4} spacing={4}>
+                <IconButton
+                  aria-label="Previous image"
+                  icon={<ChevronLeftIcon />}
+                  onClick={prevImage}
+                />
+                <Text>{currentIndex + 1} / {images.length}</Text>
+                <IconButton
+                  aria-label="Next image"
+                  icon={<ChevronRightIcon />}
+                  onClick={nextImage}
+                />
+              </HStack>
+            )}
+          </Flex>
+        </ModalBody>
+      </ModalContent>
+    </Modal>
+  );
+};
 
 export const Marketplace = () => {
   const [items, setItems] = useState<MarketplaceItem[]>([]);
@@ -33,6 +172,8 @@ export const Marketplace = () => {
   const [uploadingImages, setUploadingImages] = useState(false);
   const { account } = useWallet();
   const toast = useToast();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [selectedItem, setSelectedItem] = useState<{ images: string[], index: number } | null>(null);
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
@@ -162,6 +303,11 @@ export const Marketplace = () => {
     }));
   };
 
+  const handleImageClick = (item: MarketplaceItem, index: number) => {
+    setSelectedItem({ images: item.image_urls, index });
+    onOpen();
+  };
+
   return (
     <Box p={4}>
       <VStack spacing={8} align="stretch">
@@ -248,12 +394,9 @@ export const Marketplace = () => {
           {items.map((item) => (
             <Card key={item.id}>
               <CardBody>
-                <Image
-                  src={item.image_urls[0]}
-                  alt={item.title}
-                  borderRadius="lg"
-                  height="200px"
-                  objectFit="cover"
+                <ImageCarousel 
+                  images={item.image_urls} 
+                  onImageClick={(index) => handleImageClick(item, index)} 
                 />
                 <VStack align="stretch" mt={4}>
                   <Heading size="md">{item.title}</Heading>
@@ -270,6 +413,16 @@ export const Marketplace = () => {
           ))}
         </Grid>
       </VStack>
+
+      {/* Image Modal */}
+      {selectedItem && (
+        <ImageModal
+          isOpen={isOpen}
+          onClose={onClose}
+          images={selectedItem.images}
+          initialIndex={selectedItem.index}
+        />
+      )}
     </Box>
   );
 }; 
