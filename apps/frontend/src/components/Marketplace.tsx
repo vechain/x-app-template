@@ -1,10 +1,14 @@
 import {
+  Accordion,
+  AccordionButton,
+  AccordionIcon,
+  AccordionItem,
+  AccordionPanel,
   Box,
   Button,
   Card,
   CardBody,
   Flex,
-  Grid,
   HStack,
   Heading,
   IconButton,
@@ -320,97 +324,109 @@ export const Marketplace = () => {
         <Heading>Marketplace</Heading>
 
         {/* Create New Item Form */}
-        <Card>
-          <CardBody>
-            <VStack spacing={4}>
-              <Input
-                placeholder="Title"
-                value={newItem.title}
-                onChange={(e) => setNewItem({ ...newItem, title: e.target.value })}
-              />
-              <Textarea
-                placeholder="Description"
-                value={newItem.description}
-                onChange={(e) => setNewItem({ ...newItem, description: e.target.value })}
-              />
-              <Input
-                type="number"
-                placeholder="Price in USD"
-                value={newItem.price_usd}
-                onChange={(e) => setNewItem({ ...newItem, price_usd: e.target.value })}
-              />
-              <Input
-                type="email"
-                placeholder="Contact Email (optional)"
-                value={newItem.contact_email}
-                onChange={(e) => setNewItem({ ...newItem, contact_email: e.target.value })}
-              />
-              <Input
-                type="tel"
-                placeholder="Contact Phone (optional)"
-                value={newItem.contact_phone}
-                onChange={(e) => setNewItem({ ...newItem, contact_phone: e.target.value })}
-              />
-              
-              {/* Image Upload */}
-              <Box
-                {...getRootProps()}
-                border="2px dashed"
-                borderColor="gray.300"
-                borderRadius="md"
-                p={4}
-                textAlign="center"
-                cursor="pointer"
-                _hover={{ borderColor: 'blue.500' }}
-                w="100%"
-              >
-                <input {...getInputProps()} />
-                <Text>
-                  {uploadingImages
-                    ? 'Uploading...'
-                    : 'Drag and drop images here, or click to select files'}
-                </Text>
+        <Accordion allowToggle>
+          <AccordionItem>
+            <AccordionButton>
+              <Box flex="1" textAlign="left">
+                <Heading size="md">List New Item</Heading>
               </Box>
-
-              {/* Preview Uploaded Images */}
-              <SimpleGrid columns={3} spacing={4} w="100%">
-                {newItem.image_urls.map((url, index) => (
-                  <Box key={index} position="relative">
-                    <Image
-                      src={url}
-                      alt={`Uploaded image ${index + 1}`}
-                      borderRadius="lg"
-                      height="100px"
-                      objectFit="cover"
+              <AccordionIcon />
+            </AccordionButton>
+            <AccordionPanel pb={4}>
+              <Card>
+                <CardBody>
+                  <VStack spacing={4}>
+                    <Input
+                      placeholder="Title"
+                      value={newItem.title}
+                      onChange={(e) => setNewItem({ ...newItem, title: e.target.value })}
                     />
-                    <IconButton
-                      aria-label="Remove image"
-                      icon={<DeleteIcon />}
-                      size="sm"
-                      position="absolute"
-                      top={2}
-                      right={2}
-                      onClick={() => removeImage(index)}
+                    <Textarea
+                      placeholder="Description"
+                      value={newItem.description}
+                      onChange={(e) => setNewItem({ ...newItem, description: e.target.value })}
                     />
-                  </Box>
-                ))}
-              </SimpleGrid>
+                    <Input
+                      type="number"
+                      placeholder="Price in USD"
+                      value={newItem.price_usd}
+                      onChange={(e) => setNewItem({ ...newItem, price_usd: e.target.value })}
+                    />
+                    <Input
+                      type="email"
+                      placeholder="Contact Email (optional)"
+                      value={newItem.contact_email}
+                      onChange={(e) => setNewItem({ ...newItem, contact_email: e.target.value })}
+                    />
+                    <Input
+                      type="tel"
+                      placeholder="Contact Phone (optional)"
+                      value={newItem.contact_phone}
+                      onChange={(e) => setNewItem({ ...newItem, contact_phone: e.target.value })}
+                    />
+                    
+                    {/* Image Upload */}
+                    <Box
+                      {...getRootProps()}
+                      border="2px dashed"
+                      borderColor="gray.300"
+                      borderRadius="md"
+                      p={4}
+                      textAlign="center"
+                      cursor="pointer"
+                      _hover={{ borderColor: 'blue.500' }}
+                      w="100%"
+                    >
+                      <input {...getInputProps()} />
+                      <Text>
+                        {uploadingImages
+                          ? 'Uploading...'
+                          : 'Drag and drop images here, or click to select files'}
+                      </Text>
+                    </Box>
 
-              <Button 
-                colorScheme="blue" 
-                onClick={handleCreateItem}
-                isLoading={uploadingImages}
-              >
-                List Item
-              </Button>
-            </VStack>
-          </CardBody>
-        </Card>
+                    {/* Preview Uploaded Images */}
+                    <SimpleGrid columns={3} spacing={4} w="100%">
+                      {newItem.image_urls.map((url, index) => (
+                        <Box key={index} position="relative">
+                          <Image
+                            src={url}
+                            alt={`Uploaded image ${index + 1}`}
+                            borderRadius="lg"
+                            height="100px"
+                            objectFit="cover"
+                          />
+                          <IconButton
+                            aria-label="Remove image"
+                            icon={<DeleteIcon />}
+                            size="sm"
+                            position="absolute"
+                            top={2}
+                            right={2}
+                            onClick={() => removeImage(index)}
+                          />
+                        </Box>
+                      ))}
+                    </SimpleGrid>
+
+                    <Button 
+                      colorScheme="blue" 
+                      onClick={handleCreateItem}
+                      isLoading={uploadingImages}
+                    >
+                      List Item
+                    </Button>
+                  </VStack>
+                </CardBody>
+              </Card>
+            </AccordionPanel>
+          </AccordionItem>
+        </Accordion>
 
         {/* Items Grid */}
-        <Grid templateColumns="repeat(auto-fill, minmax(300px, 1fr))" gap={6}>
+        <Flex wrap="wrap" gap={6}>
           {items.map((item) => (
-            <Card key={item.id}>
+            <Card key={item.id} flex="1" minW="300px" maxW="400px">
               <CardBody>
                 <ImageCarousel 
                   images={item.image_urls} 
@@ -444,7 +460,7 @@ export const Marketplace = () => {
               </CardBody>
             </Card>
           ))}
-        </Grid>
+        </Flex>
       </VStack>
 
       {/* Image Modal */}
