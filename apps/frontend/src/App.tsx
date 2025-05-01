@@ -72,7 +72,11 @@ function App() {
             >
               <TabList>
                 <Tab 
-                  _selected={{ color: "blue.500", borderColor: "blue.500" }}
+                  _selected={{ 
+                    color: "blue.500", 
+                    borderColor: "blue.500",
+                    borderWidth: "4px",
+                  }}
                   display="flex"
                   flexDirection="column"
                   gap={1}
@@ -82,7 +86,11 @@ function App() {
                   Home
                 </Tab>
                 <Tab 
-                  _selected={{ color: "blue.500", borderColor: "blue.500" }}
+                  _selected={{ 
+                    color: "blue.500", 
+                    borderColor: "blue.500",
+                    borderWidth: "4px",
+                  }}
                   display="flex"
                   flexDirection="column"
                   gap={1}
