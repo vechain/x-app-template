@@ -1,13 +1,15 @@
-import { DAppKitProvider } from "@vechain/dapp-kit-react";
 import { ChakraProvider, Container, Flex } from "@chakra-ui/react";
 import {
   Dropzone,
   Footer,
   InfoCard,
   Instructions,
+  Marketplace,
   Navbar,
   SubmissionModal,
 } from "./components";
+
+import { DAppKitProvider } from "@vechain/dapp-kit-react";
 import { lightTheme } from "./theme";
 
 function App() {
@@ -35,6 +37,7 @@ function App() {
             <InfoCard />
             <Instructions />
             <Dropzone />
+            <Marketplace />
           </Container>
         </Flex>
         <Footer />
