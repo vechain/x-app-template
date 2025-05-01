@@ -15,8 +15,8 @@ export type MarketplaceItem = {
   created_at: string;
   title: string;
   description: string;
-  price: number;
-  image_url: string;
+  price_usd: number;
+  image_urls: string[];
   seller_address: string;
   status: 'available' | 'sold';
 }; 

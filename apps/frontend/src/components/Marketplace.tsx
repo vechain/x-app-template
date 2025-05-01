@@ -6,8 +6,10 @@ import {
   Grid,
   HStack,
   Heading,
+  IconButton,
   Image,
   Input,
+  SimpleGrid,
   Text,
   Textarea,
   VStack,
@@ -16,19 +18,62 @@ import {
 import { MarketplaceItem, supabase } from '../networking/supabase';
 import { useEffect, useState } from 'react';
 
+import { DeleteIcon } from '@chakra-ui/icons';
+import { useDropzone } from 'react-dropzone';
 import { useWallet } from '@vechain/dapp-kit-react';
 
 export const Marketplace = () => {
   const [items, setItems] = useState<MarketplaceItem[]>([]);
-  const [loading, setLoading] = useState(true);
   const [newItem, setNewItem] = useState({
     title: '',
     description: '',
-    price: 0,
-    image_url: '',
+    price_usd: '',
+    image_urls: [] as string[],
   });
+  const [uploadingImages, setUploadingImages] = useState(false);
   const { account } = useWallet();
   const toast = useToast();
+
+  const { getRootProps, getInputProps } = useDropzone({
+    accept: {
+      'image/*': ['.jpeg', '.jpg', '.png', '.webp']
+    },
+    onDrop: async (acceptedFiles) => {
+      setUploadingImages(true);
+      try {
+        const uploadPromises = acceptedFiles.map(async (file) => {
+          const fileExt = file.name.split('.').pop();
+          const fileName = `${Math.random()}.${fileExt}`;
+          const { error } = await supabase.storage
+            .from('marketplace-images')
+            .upload(fileName, file);
+
+          if (error) throw error;
+
+          const { data: { publicUrl } } = supabase.storage
+            .from('marketplace-images')
+            .getPublicUrl(fileName);
+
+          return publicUrl;
+        });
+
+        const uploadedUrls = await Promise.all(uploadPromises);
+        setNewItem(prev => ({
+          ...prev,
+          image_urls: [...prev.image_urls, ...uploadedUrls]
+        }));
+      } catch (error) {
+        console.error('Error uploading images:', error);
+        toast({
+          title: 'Error',
+          description: 'Failed to upload images',
+          status: 'error',
+        });
+      } finally {
+        setUploadingImages(false);
+      }
+    }
+  });
 
   useEffect(() => {
     fetchItems();
@@ -50,8 +95,6 @@ export const Marketplace = () => {
         description: 'Failed to fetch marketplace items',
         status: 'error',
       });
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -65,12 +108,22 @@ export const Marketplace = () => {
       return;
     }
 
+    if (newItem.image_urls.length === 0) {
+      toast({
+        title: 'Error',
+        description: 'Please upload at least one image',
+        status: 'error',
+      });
+      return;
+    }
+
     try {
       const { data, error } = await supabase
         .from('marketplace_items')
         .insert([
           {
             ...newItem,
+            price_usd: parseFloat(newItem.price_usd),
             seller_address: account,
             status: 'available',
           },
@@ -83,8 +136,8 @@ export const Marketplace = () => {
       setNewItem({
         title: '',
         description: '',
-        price: 0,
-        image_url: '',
+        price_usd: '',
+        image_urls: [],
       });
 
       toast({
@@ -100,6 +153,13 @@ export const Marketplace = () => {
         status: 'error',
       });
     }
+  };
+
+  const removeImage = (index: number) => {
+    setNewItem(prev => ({
+      ...prev,
+      image_urls: prev.image_urls.filter((_, i) => i !== index)
+    }));
   };
 
   return (
@@ -123,16 +183,60 @@ export const Marketplace = () => {
               />
               <Input
                 type="number"
-                placeholder="Price"
-                value={newItem.price}
-                onChange={(e) => setNewItem({ ...newItem, price: Number(e.target.value) })}
+                placeholder="Price in USD"
+                value={newItem.price_usd}
+                onChange={(e) => setNewItem({ ...newItem, price_usd: e.target.value })}
               />
-              <Input
-                placeholder="Image URL"
-                value={newItem.image_url}
-                onChange={(e) => setNewItem({ ...newItem, image_url: e.target.value })}
-              />
-              <Button colorScheme="blue" onClick={handleCreateItem}>
+              
+              {/* Image Upload */}
+              <Box
+                {...getRootProps()}
+                border="2px dashed"
+                borderColor="gray.300"
+                borderRadius="md"
+                p={4}
+                textAlign="center"
+                cursor="pointer"
+                _hover={{ borderColor: 'blue.500' }}
+                w="100%"
+              >
+                <input {...getInputProps()} />
+                <Text>
+                  {uploadingImages
+                    ? 'Uploading...'
+                    : 'Drag and drop images here, or click to select files'}
+                </Text>
+              </Box>
+
+              {/* Preview Uploaded Images */}
+              <SimpleGrid columns={3} spacing={4} w="100%">
+                {newItem.image_urls.map((url, index) => (
+                  <Box key={index} position="relative">
+                    <Image
+                      src={url}
+                      alt={`Uploaded image ${index + 1}`}
+                      borderRadius="lg"
+                      height="100px"
+                      objectFit="cover"
+                    />
+                    <IconButton
+                      aria-label="Remove image"
+                      icon={<DeleteIcon />}
+                      size="sm"
+                      position="absolute"
+                      top={2}
+                      right={2}
+                      onClick={() => removeImage(index)}
+                    />
+                  </Box>
+                ))}
+              </SimpleGrid>
+
+              <Button 
+                colorScheme="blue" 
+                onClick={handleCreateItem}
+                isLoading={uploadingImages}
+              >
                 List Item
               </Button>
             </VStack>
@@ -145,7 +249,7 @@ export const Marketplace = () => {
             <Card key={item.id}>
               <CardBody>
                 <Image
-                  src={item.image_url}
+                  src={item.image_urls[0]}
                   alt={item.title}
                   borderRadius="lg"
                   height="200px"
@@ -155,7 +259,7 @@ export const Marketplace = () => {
                   <Heading size="md">{item.title}</Heading>
                   <Text>{item.description}</Text>
                   <HStack justify="space-between">
-                    <Text fontWeight="bold">{item.price} VET</Text>
+                    <Text fontWeight="bold">${item.price_usd}</Text>
                     <Text color={item.status === 'available' ? 'green.500' : 'red.500'}>
                       {item.status}
                     </Text>
