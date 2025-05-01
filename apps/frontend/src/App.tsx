@@ -1,4 +1,4 @@
-import { ChakraProvider, Container, Flex } from "@chakra-ui/react";
+import { Box, ChakraProvider, Container, Flex, Tab, TabList, Tabs } from "@chakra-ui/react";
 import {
   Dropzone,
   Footer,
@@ -11,8 +11,11 @@ import {
 
 import { DAppKitProvider } from "@vechain/dapp-kit-react";
 import { lightTheme } from "./theme";
+import { useState } from "react";
 
 function App() {
+  const [tabIndex, setTabIndex] = useState(0);
+
   return (
     <ChakraProvider theme={lightTheme}>
       <DAppKitProvider
@@ -22,28 +25,47 @@ function App() {
         nodeUrl="https://testnet.vechain.org/"
         logLevel={"DEBUG"}
       >
-        <Navbar />
-        <Flex flex={1}>
-          <Container
-            mt={{ base: 4, md: 10 }}
-            maxW={"container.xl"}
-            mb={{ base: 4, md: 10 }}
-            display={"flex"}
-            flex={1}
-            alignItems={"center"}
-            justifyContent={"flex-start"}
-            flexDirection={"column"}
-          >
-            <InfoCard />
-            <Instructions />
-            <Dropzone />
-            <Marketplace />
-          </Container>
-        </Flex>
-        <Footer />
+        <Flex flexDirection="column" height="100vh">
+          <Navbar />
+          <Flex flex={1} overflow="auto">
+            <Container
+              mt={{ base: 4, md: 10 }}
+              maxW={"container.xl"}
+              mb={{ base: 4, md: 10 }}
+              display={"flex"}
+              flex={1}
+              alignItems={"center"}
+              justifyContent={"flex-start"}
+              flexDirection={"column"}
+            >
+              {tabIndex === 0 ? (
+                <>
+                  <InfoCard />
+                  <Instructions />
+                  <Dropzone />
+                  <Footer />
+                </>
+              ) : (
+                <Marketplace />
+              )}
+            </Container>
+          </Flex>
 
-        {/* MODALS  */}
-        <SubmissionModal />
+          {/* Bottom Navigation */}
+          <Box borderTop="1px" borderColor="gray.200">
+            <Tabs isFitted variant="enclosed" index={tabIndex} onChange={setTabIndex}>
+              <TabList>
+                <Tab>Home</Tab>
+                <Tab>Marketplace</Tab>
+              </TabList>
+            </Tabs>
+          </Box>
+
+         
+
+          {/* MODALS  */}
+          <SubmissionModal />
+        </Flex>
       </DAppKitProvider>
     </ChakraProvider>
   );
