@@ -168,6 +168,8 @@ export const Marketplace = () => {
     description: '',
     price_usd: '',
     image_urls: [] as string[],
+    contact_email: '',
+    contact_phone: '',
   });
   const [uploadingImages, setUploadingImages] = useState(false);
   const { account } = useWallet();
@@ -267,6 +269,8 @@ export const Marketplace = () => {
             price_usd: parseFloat(newItem.price_usd),
             seller_address: account,
             status: 'available',
+            contact_email: newItem.contact_email || null,
+            contact_phone: newItem.contact_phone || null,
           },
         ])
         .select();
@@ -279,6 +283,8 @@ export const Marketplace = () => {
         description: '',
         price_usd: '',
         image_urls: [],
+        contact_email: '',
+        contact_phone: '',
       });
 
       toast({
@@ -332,6 +338,18 @@ export const Marketplace = () => {
                 placeholder="Price in USD"
                 value={newItem.price_usd}
                 onChange={(e) => setNewItem({ ...newItem, price_usd: e.target.value })}
+              />
+              <Input
+                type="email"
+                placeholder="Contact Email (optional)"
+                value={newItem.contact_email}
+                onChange={(e) => setNewItem({ ...newItem, contact_email: e.target.value })}
+              />
+              <Input
+                type="tel"
+                placeholder="Contact Phone (optional)"
+                value={newItem.contact_phone}
+                onChange={(e) => setNewItem({ ...newItem, contact_phone: e.target.value })}
               />
               
               {/* Image Upload */}
@@ -407,6 +425,21 @@ export const Marketplace = () => {
                       {item.status}
                     </Text>
                   </HStack>
+                  {(item.contact_email || item.contact_phone) && (
+                    <Box mt={2}>
+                      <Text fontSize="sm" color="gray.500">Contact:</Text>
+                      {item.contact_email && (
+                        <Text fontSize="sm">
+                          <a href={`mailto:${item.contact_email}`}>{item.contact_email}</a>
+                        </Text>
+                      )}
+                      {item.contact_phone && (
+                        <Text fontSize="sm">
+                          <a href={`tel:${item.contact_phone}`}>{item.contact_phone}</a>
+                        </Text>
+                      )}
+                    </Box>
+                  )}
                 </VStack>
               </CardBody>
             </Card>

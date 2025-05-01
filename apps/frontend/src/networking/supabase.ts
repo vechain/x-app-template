@@ -19,4 +19,6 @@ export type MarketplaceItem = {
   image_urls: string[];
   seller_address: string;
   status: 'available' | 'sold';
+  contact_email?: string;
+  contact_phone?: string;
 }; 
