@@ -19,6 +19,7 @@ import {
   ModalCloseButton,
   ModalContent,
   ModalOverlay,
+  Select,
   SimpleGrid,
   Text,
   Textarea,
@@ -174,6 +175,7 @@ export const Marketplace = () => {
     image_urls: [] as string[],
     contact_email: '',
     contact_phone: '',
+    status: 'available' as 'available' | 'pending' | 'sold',
   });
   const [editingItem, setEditingItem] = useState<MarketplaceItem | null>(null);
   const [uploadingImages, setUploadingImages] = useState(false);
@@ -273,7 +275,6 @@ export const Marketplace = () => {
             ...newItem,
             price_usd: parseFloat(newItem.price_usd),
             seller_address: account,
-            status: 'available',
             contact_email: newItem.contact_email || null,
             contact_phone: newItem.contact_phone || null,
           },
@@ -290,6 +291,7 @@ export const Marketplace = () => {
         image_urls: [],
         contact_email: '',
         contact_phone: '',
+        status: 'available',
       });
 
       toast({
@@ -338,6 +340,7 @@ export const Marketplace = () => {
           price_usd: editingItem?.price_usd?.toString() || '0',
           contact_email: editingItem?.contact_email || null,
           contact_phone: editingItem?.contact_phone || null,
+          status: editingItem?.status || 'available',
         })
         .eq('id', editingItem?.id)
         .select();
@@ -398,6 +401,14 @@ export const Marketplace = () => {
                       value={newItem.price_usd}
                       onChange={(e) => setNewItem({ ...newItem, price_usd: e.target.value })}
                     />
+                    <Select
+                      value={newItem.status}
+                      onChange={(e) => setNewItem({ ...newItem, status: e.target.value as 'available' | 'pending' | 'sold' })}
+                    >
+                      <option value="available">Available</option>
+                      <option value="pending">Pending</option>
+                      <option value="sold">Sold</option>
+                    </Select>
                     <Input
                       type="email"
                       placeholder="Contact Email (optional)"
@@ -509,6 +520,14 @@ export const Marketplace = () => {
                                 value={editingItem.price_usd?.toString()}
                                 onChange={(e) => setEditingItem({ ...editingItem, price_usd: parseFloat(e.target.value) })}
                               />
+                              <Select
+                                value={editingItem.status}
+                                onChange={(e) => setEditingItem({ ...editingItem, status: e.target.value as 'available' | 'pending' | 'sold' })}
+                              >
+                                <option value="available">Available</option>
+                                <option value="pending">Pending</option>
+                                <option value="sold">Sold</option>
+                              </Select>
                               <Input
                                 type="email"
                                 placeholder="Contact Email (optional)"
@@ -536,8 +555,12 @@ export const Marketplace = () => {
                               <Text>{item.description}</Text>
                               <HStack justify="space-between">
                                 <Text fontWeight="bold">${item.price_usd}</Text>
-                                <Text color={item.status === 'available' ? 'green.500' : 'red.500'}>
-                                  {item.status}
+                                <Text color={
+                                  item.status === 'available' ? 'green.500' : 
+                                  item.status === 'pending' ? 'yellow.500' : 
+                                  'red.500'
+                                }>
+                                  {item.status.charAt(0).toUpperCase() + item.status.slice(1)}
                                 </Text>
                               </HStack>
                               {(item.contact_email || item.contact_phone) && (
@@ -596,8 +619,12 @@ export const Marketplace = () => {
                           <Text>{item.description}</Text>
                           <HStack justify="space-between">
                             <Text fontWeight="bold">${item.price_usd}</Text>
-                            <Text color={item.status === 'available' ? 'green.500' : 'red.500'}>
-                              {item.status}
+                            <Text color={
+                              item.status === 'available' ? 'green.500' : 
+                              item.status === 'pending' ? 'yellow.500' : 
+                              'red.500'
+                            }>
+                              {item.status.charAt(0).toUpperCase() + item.status.slice(1)}
                             </Text>
                           </HStack>
                           {(item.contact_email || item.contact_phone) && (
