@@ -470,95 +470,159 @@ export const Marketplace = () => {
         </Accordion>
 
         {/* Items Grid */}
-        <Flex wrap="wrap" gap={6}>
-          {items.map((item) => (
-            <Card key={item.id} flex="1" minW="300px" maxW="400px">
-              <CardBody>
-                <ImageCarousel 
-                  images={item.image_urls} 
-                  onImageClick={(index) => handleImageClick(item, index)} 
-                />
-                <VStack align="stretch" mt={4}>
-                  {editingItem?.id === item.id ? (
-                    <>
-                      <Input
-                        placeholder="Title"
-                        value={editingItem.title}
-                        onChange={(e) => setEditingItem({ ...editingItem, title: e.target.value })}
-                      />
-                      <Textarea
-                        placeholder="Description"
-                        value={editingItem.description}
-                        onChange={(e) => setEditingItem({ ...editingItem, description: e.target.value })}
-                      />
-                      <Input
-                        type="number"
-                        placeholder="Price in USD"
-                        value={editingItem.price_usd?.toString()}
-                        onChange={(e) => setEditingItem({ ...editingItem, price_usd: parseFloat(e.target.value) })}
-                      />
-                      <Input
-                        type="email"
-                        placeholder="Contact Email (optional)"
-                        value={editingItem.contact_email || ''}
-                        onChange={(e) => setEditingItem({ ...editingItem, contact_email: e.target.value })}
-                      />
-                      <Input
-                        type="tel"
-                        placeholder="Contact Phone (optional)"
-                        value={editingItem.contact_phone || ''}
-                        onChange={(e) => setEditingItem({ ...editingItem, contact_phone: e.target.value })}
-                      />
-                      <HStack>
-                        <Button colorScheme="blue" onClick={handleEditItem}>
-                          Save
-                        </Button>
-                        <Button onClick={() => setEditingItem(null)}>
-                          Cancel
-                        </Button>
-                      </HStack>
-                    </>
-                  ) : (
-                    <>
-                      <Heading size="md">{item.title}</Heading>
-                      <Text>{item.description}</Text>
-                      <HStack justify="space-between">
-                        <Text fontWeight="bold">${item.price_usd}</Text>
-                        <Text color={item.status === 'available' ? 'green.500' : 'red.500'}>
-                          {item.status}
-                        </Text>
-                      </HStack>
-                      {(item.contact_email || item.contact_phone) && (
-                        <Box mt={2}>
-                          <Text fontSize="sm" color="gray.500">Contact:</Text>
-                          {item.contact_email && (
-                            <Text fontSize="sm">
-                              <a href={`mailto:${item.contact_email}`}>{item.contact_email}</a>
-                            </Text>
-                          )}
-                          {item.contact_phone && (
-                            <Text fontSize="sm">
-                              <a href={`tel:${item.contact_phone}`}>{item.contact_phone}</a>
-                            </Text>
-                          )}
-                        </Box>
-                      )}
-                      {account === item.seller_address && (
-                        <IconButton
-                          aria-label="Edit item"
-                          icon={<EditIcon />}
-                          onClick={() => setEditingItem(item)}
-                          size="sm"
-                          alignSelf="flex-end"
+        <Accordion allowMultiple defaultIndex={[0, 1]}>
+          {/* My Postings Section */}
+          <AccordionItem>
+            <AccordionButton>
+              <Box flex="1" textAlign="left">
+                <Heading size="md">My Postings</Heading>
+              </Box>
+              <AccordionIcon />
+            </AccordionButton>
+            <AccordionPanel pb={4}>
+              <Flex wrap="wrap" gap={6}>
+                {items
+                  .filter(item => item.seller_address === account)
+                  .map((item) => (
+                    <Card key={item.id} flex="1" minW="300px" maxW="400px">
+                      <CardBody>
+                        <ImageCarousel 
+                          images={item.image_urls} 
+                          onImageClick={(index) => handleImageClick(item, index)} 
                         />
-                      )}
-                    </>
-                  )}
-                </VStack>
-              </CardBody>
-            </Card>
-          ))}
-        </Flex>
+                        <VStack align="stretch" mt={4}>
+                          {editingItem?.id === item.id ? (
+                            <>
+                              <Input
+                                placeholder="Title"
+                                value={editingItem.title}
+                                onChange={(e) => setEditingItem({ ...editingItem, title: e.target.value })}
+                              />
+                              <Textarea
+                                placeholder="Description"
+                                value={editingItem.description}
+                                onChange={(e) => setEditingItem({ ...editingItem, description: e.target.value })}
+                              />
+                              <Input
+                                type="number"
+                                placeholder="Price in USD"
+                                value={editingItem.price_usd?.toString()}
+                                onChange={(e) => setEditingItem({ ...editingItem, price_usd: parseFloat(e.target.value) })}
+                              />
+                              <Input
+                                type="email"
+                                placeholder="Contact Email (optional)"
+                                value={editingItem.contact_email || ''}
+                                onChange={(e) => setEditingItem({ ...editingItem, contact_email: e.target.value })}
+                              />
+                              <Input
+                                type="tel"
+                                placeholder="Contact Phone (optional)"
+                                value={editingItem.contact_phone || ''}
+                                onChange={(e) => setEditingItem({ ...editingItem, contact_phone: e.target.value })}
+                              />
+                              <HStack>
+                                <Button colorScheme="blue" onClick={handleEditItem}>
+                                  Save
+                                </Button>
+                                <Button onClick={() => setEditingItem(null)}>
+                                  Cancel
+                                </Button>
+                              </HStack>
+                            </>
+                          ) : (
+                            <>
+                              <Heading size="md">{item.title}</Heading>
+                              <Text>{item.description}</Text>
+                              <HStack justify="space-between">
+                                <Text fontWeight="bold">${item.price_usd}</Text>
+                                <Text color={item.status === 'available' ? 'green.500' : 'red.500'}>
+                                  {item.status}
+                                </Text>
+                              </HStack>
+                              {(item.contact_email || item.contact_phone) && (
+                                <Box mt={2}>
+                                  <Text fontSize="sm" color="gray.500">Contact:</Text>
+                                  {item.contact_email && (
+                                    <Text fontSize="sm">
+                                      <a href={`mailto:${item.contact_email}`}>{item.contact_email}</a>
+                                    </Text>
+                                  )}
+                                  {item.contact_phone && (
+                                    <Text fontSize="sm">
+                                      <a href={`tel:${item.contact_phone}`}>{item.contact_phone}</a>
+                                    </Text>
+                                  )}
+                                </Box>
+                              )}
+                              <IconButton
+                                aria-label="Edit item"
+                                icon={<EditIcon />}
+                                onClick={() => setEditingItem(item)}
+                                size="sm"
+                                alignSelf="flex-end"
+                              />
+                            </>
+                          )}
+                        </VStack>
+                      </CardBody>
+                    </Card>
+                  ))}
+              </Flex>
+            </AccordionPanel>
+          </AccordionItem>
+
+          {/* All Postings Section */}
+          <AccordionItem>
+            <AccordionButton>
+              <Box flex="1" textAlign="left">
+                <Heading size="md">All Postings</Heading>
+              </Box>
+              <AccordionIcon />
+            </AccordionButton>
+            <AccordionPanel pb={4}>
+              <Flex wrap="wrap" gap={6}>
+                {items
+                  .filter(item => item.seller_address !== account)
+                  .map((item) => (
+                    <Card key={item.id} flex="1" minW="300px" maxW="400px">
+                      <CardBody>
+                        <ImageCarousel 
+                          images={item.image_urls} 
+                          onImageClick={(index) => handleImageClick(item, index)} 
+                        />
+                        <VStack align="stretch" mt={4}>
+                          <Heading size="md">{item.title}</Heading>
+                          <Text>{item.description}</Text>
+                          <HStack justify="space-between">
+                            <Text fontWeight="bold">${item.price_usd}</Text>
+                            <Text color={item.status === 'available' ? 'green.500' : 'red.500'}>
+                              {item.status}
+                            </Text>
+                          </HStack>
+                          {(item.contact_email || item.contact_phone) && (
+                            <Box mt={2}>
+                              <Text fontSize="sm" color="gray.500">Contact:</Text>
+                              {item.contact_email && (
+                                <Text fontSize="sm">
+                                  <a href={`mailto:${item.contact_email}`}>{item.contact_email}</a>
+                                </Text>
+                              )}
+                              {item.contact_phone && (
+                                <Text fontSize="sm">
+                                  <a href={`tel:${item.contact_phone}`}>{item.contact_phone}</a>
+                                </Text>
+                              )}
+                            </Box>
+                          )}
+                        </VStack>
+                      </CardBody>
+                    </Card>
+                  ))}
+              </Flex>
+            </AccordionPanel>
+          </AccordionItem>
+        </Accordion>
       </VStack>
 
       {/* Image Modal */}
