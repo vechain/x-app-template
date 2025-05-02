@@ -319,7 +319,7 @@ export const Marketplace = () => {
     onOpen();
   };
 
-  const handleEditItem = async (item: MarketplaceItem) => {
+  const handleEditItem = async () => {
     if (!account) {
       toast({
         title: 'Error',
@@ -335,7 +335,7 @@ export const Marketplace = () => {
         .update({
           title: editingItem?.title,
           description: editingItem?.description,
-          price_usd: parseFloat(editingItem?.price_usd || '0'),
+          price_usd: editingItem?.price_usd?.toString() || '0',
           contact_email: editingItem?.contact_email || null,
           contact_phone: editingItem?.contact_phone || null,
         })
@@ -482,30 +482,35 @@ export const Marketplace = () => {
                   {editingItem?.id === item.id ? (
                     <>
                       <Input
+                        placeholder="Title"
                         value={editingItem.title}
                         onChange={(e) => setEditingItem({ ...editingItem, title: e.target.value })}
                       />
                       <Textarea
+                        placeholder="Description"
                         value={editingItem.description}
                         onChange={(e) => setEditingItem({ ...editingItem, description: e.target.value })}
                       />
                       <Input
                         type="number"
-                        value={editingItem.price_usd}
-                        onChange={(e) => setEditingItem({ ...editingItem, price_usd: e.target.value })}
+                        placeholder="Price in USD"
+                        value={editingItem.price_usd?.toString()}
+                        onChange={(e) => setEditingItem({ ...editingItem, price_usd: parseFloat(e.target.value) })}
                       />
                       <Input
                         type="email"
+                        placeholder="Contact Email (optional)"
                         value={editingItem.contact_email || ''}
                         onChange={(e) => setEditingItem({ ...editingItem, contact_email: e.target.value })}
                       />
                       <Input
                         type="tel"
+                        placeholder="Contact Phone (optional)"
                         value={editingItem.contact_phone || ''}
                         onChange={(e) => setEditingItem({ ...editingItem, contact_phone: e.target.value })}
                       />
                       <HStack>
-                        <Button colorScheme="blue" onClick={() => handleEditItem(item)}>
+                        <Button colorScheme="blue" onClick={handleEditItem}>
                           Save
                         </Button>
                         <Button onClick={() => setEditingItem(null)}>
