@@ -26,7 +26,7 @@ import {
   useDisclosure,
   useToast,
 } from '@chakra-ui/react';
-import { ChevronLeftIcon, ChevronRightIcon, DeleteIcon } from '@chakra-ui/icons';
+import { ChevronLeftIcon, ChevronRightIcon, DeleteIcon, EditIcon } from '@chakra-ui/icons';
 import { MarketplaceItem, supabase } from '../networking/supabase';
 import { useEffect, useState } from 'react';
 
@@ -175,6 +175,7 @@ export const Marketplace = () => {
     contact_email: '',
     contact_phone: '',
   });
+  const [editingItem, setEditingItem] = useState<MarketplaceItem | null>(null);
   const [uploadingImages, setUploadingImages] = useState(false);
   const { account } = useWallet();
   const toast = useToast();
@@ -318,6 +319,51 @@ export const Marketplace = () => {
     onOpen();
   };
 
+  const handleEditItem = async (item: MarketplaceItem) => {
+    if (!account) {
+      toast({
+        title: 'Error',
+        description: 'Please connect your wallet first',
+        status: 'error',
+      });
+      return;
+    }
+
+    try {
+      const { data, error } = await supabase
+        .from('marketplace_items')
+        .update({
+          title: editingItem?.title,
+          description: editingItem?.description,
+          price_usd: parseFloat(editingItem?.price_usd || '0'),
+          contact_email: editingItem?.contact_email || null,
+          contact_phone: editingItem?.contact_phone || null,
+        })
+        .eq('id', editingItem?.id)
+        .select();
+
+      if (error) throw error;
+
+      setItems(items.map(item => 
+        item.id === editingItem?.id ? data[0] : item
+      ));
+      setEditingItem(null);
+
+      toast({
+        title: 'Success',
+        description: 'Item updated successfully',
+        status: 'success',
+      });
+    } catch (error) {
+      console.error('Error updating item:', error);
+      toast({
+        title: 'Error',
+        description: 'Failed to update item',
+        status: 'error',
+      });
+    }
+  };
+
   return (
     <Box p={4}>
       <VStack spacing={8} align="stretch">
@@ -433,28 +479,75 @@ export const Marketplace = () => {
                   onImageClick={(index) => handleImageClick(item, index)} 
                 />
                 <VStack align="stretch" mt={4}>
-                  <Heading size="md">{item.title}</Heading>
-                  <Text>{item.description}</Text>
-                  <HStack justify="space-between">
-                    <Text fontWeight="bold">${item.price_usd}</Text>
-                    <Text color={item.status === 'available' ? 'green.500' : 'red.500'}>
-                      {item.status}
-                    </Text>
-                  </HStack>
-                  {(item.contact_email || item.contact_phone) && (
-                    <Box mt={2}>
-                      <Text fontSize="sm" color="gray.500">Contact:</Text>
-                      {item.contact_email && (
-                        <Text fontSize="sm">
-                          <a href={`mailto:${item.contact_email}`}>{item.contact_email}</a>
+                  {editingItem?.id === item.id ? (
+                    <>
+                      <Input
+                        value={editingItem.title}
+                        onChange={(e) => setEditingItem({ ...editingItem, title: e.target.value })}
+                      />
+                      <Textarea
+                        value={editingItem.description}
+                        onChange={(e) => setEditingItem({ ...editingItem, description: e.target.value })}
+                      />
+                      <Input
+                        type="number"
+                        value={editingItem.price_usd}
+                        onChange={(e) => setEditingItem({ ...editingItem, price_usd: e.target.value })}
+                      />
+                      <Input
+                        type="email"
+                        value={editingItem.contact_email || ''}
+                        onChange={(e) => setEditingItem({ ...editingItem, contact_email: e.target.value })}
+                      />
+                      <Input
+                        type="tel"
+                        value={editingItem.contact_phone || ''}
+                        onChange={(e) => setEditingItem({ ...editingItem, contact_phone: e.target.value })}
+                      />
+                      <HStack>
+                        <Button colorScheme="blue" onClick={() => handleEditItem(item)}>
+                          Save
+                        </Button>
+                        <Button onClick={() => setEditingItem(null)}>
+                          Cancel
+                        </Button>
+                      </HStack>
+                    </>
+                  ) : (
+                    <>
+                      <Heading size="md">{item.title}</Heading>
+                      <Text>{item.description}</Text>
+                      <HStack justify="space-between">
+                        <Text fontWeight="bold">${item.price_usd}</Text>
+                        <Text color={item.status === 'available' ? 'green.500' : 'red.500'}>
+                          {item.status}
                         </Text>
+                      </HStack>
+                      {(item.contact_email || item.contact_phone) && (
+                        <Box mt={2}>
+                          <Text fontSize="sm" color="gray.500">Contact:</Text>
+                          {item.contact_email && (
+                            <Text fontSize="sm">
+                              <a href={`mailto:${item.contact_email}`}>{item.contact_email}</a>
+                            </Text>
+                          )}
+                          {item.contact_phone && (
+                            <Text fontSize="sm">
+                              <a href={`tel:${item.contact_phone}`}>{item.contact_phone}</a>
+                            </Text>
+                          )}
+                        </Box>
                       )}
-                      {item.contact_phone && (
-                        <Text fontSize="sm">
-                          <a href={`tel:${item.contact_phone}`}>{item.contact_phone}</a>
-                        </Text>
+                      {account === item.seller_address && (
+                        <IconButton
+                          aria-label="Edit item"
+                          icon={<EditIcon />}
+                          onClick={() => setEditingItem(item)}
+                          size="sm"
+                          alignSelf="flex-end"
+                        />
                       )}
-                    </Box>
+                    </>
                   )}
                 </VStack>
               </CardBody>

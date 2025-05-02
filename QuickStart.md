@@ -8,6 +8,8 @@ Get a local development environment up and running with as few steps as possible
 
 ## Start
 
+Open Docker
+
 ```shell
 yarn set version classic
 yarn install
