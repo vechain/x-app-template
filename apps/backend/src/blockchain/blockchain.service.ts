@@ -7,6 +7,7 @@ import {
 } from '@vechain/sdk-network';
 import { X2EarnRewardsPool } from '@vechain/vebetterdao-contracts';
 import * as dotenv from 'dotenv';
+import { Mnemonic } from '@vechain/sdk-core';
 
 dotenv.config();
 
@@ -21,10 +22,13 @@ export class BlockchainService implements OnModuleInit {
     const nodeUrl = process.env.VECHAIN_RPC_URL || 'https://mainnet.vechain.org';
     this.thor = ThorClient.at(nodeUrl);
 
-    const mnemonic = process.env.DISTRIBUTOR_MNEMONIC?.split(' ') || [];
+
+        // replace with distributor menmonic
+    const newMnemonic = Mnemonic.of();
+
     this.provider = new VeChainProvider(
       this.thor,
-      new ProviderInternalHDWallet(mnemonic)
+      new ProviderInternalHDWallet(newMnemonic)
     );
   }
 

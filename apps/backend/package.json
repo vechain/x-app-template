@@ -23,8 +23,8 @@
     "@nestjs/common": "^10.0.0",
     "@nestjs/core": "^10.0.0",
     "@nestjs/platform-express": "^10.0.0",
-    "@vechain/sdk-core": "^1.1.0",
-    "@vechain/sdk-network": "^1.1.0",
+    "@vechain/sdk-core": "^1.2.0-rc.2",
+    "@vechain/sdk-network": "^1.2.0-rc.2",
     "dotenv": "^16.5.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.1"

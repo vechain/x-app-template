@@ -24,5 +24,9 @@
   "workspaces": [
     "apps/*",
     "packages/*"
-  ]
+  ],
+  "dependencies": {
+    "@vechain/sdk-core": "^1.2.0-rc.3",
+    "@vechain/sdk-network": "^1.2.0-rc.3"
+  }
 }
