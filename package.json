@@ -24,5 +24,8 @@
   "workspaces": [
     "apps/*",
     "packages/*"
-  ]
+  ],
+  "resolutions": {
+    "elliptic": "6.6.1"
+  }
 }
