@@ -46,6 +46,7 @@
         "@ethersproject/signing-key": "5.8.0",
         "sha.js": "2.4.12",
         "cipher-base": "1.0.5",
-        "ethers": "5.8.0"
+        "ethers": "5.8.0",
+        "base-x": "3.0.11"
     }
 }
