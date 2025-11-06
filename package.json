@@ -26,6 +26,8 @@
     "packages/*"
   ],
   "resolutions": {
-    "elliptic": "6.6.1"
+    "elliptic": "6.6.1",
+    "cipher-base": "1.0.5",
+    "sha.js": "2.4.12"
   }
 }
