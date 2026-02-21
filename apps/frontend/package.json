@@ -38,7 +38,7 @@
     "eslint-plugin-react-refresh": "^0.4.6",
     "react-icons": "^5.2.1",
     "typescript": "^5.2.2",
-    "vite": "^5.4.21",
+    "vite": "^7.3.1",
     "vite-plugin-node-polyfills": "^0.22.0"
   }
 }
