@@ -12,7 +12,7 @@
     "HexUtils"
   ],
   "dependencies": {
-    "lodash": "^4.17.23",
+    "lodash": "^4.18.1",
     "nft.storage": "^7.1.1",
     "thor-devkit": "^2.0.9"
   },
