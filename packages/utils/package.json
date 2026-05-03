@@ -14,12 +14,12 @@
   "dependencies": {
     "lodash": "^4.18.1",
     "nft.storage": "^7.1.1",
-    "thor-devkit": "^2.0.9"
+    "thor-devkit": "^2.2.0"
   },
   "devDependencies": {
     "@types/jest": "^29.5.12",
     "jsdom": "^24.0.0",
-    "vite": "^5.4.21",
-    "vitest": "^1.2.2"
+    "vite": "^8.0.10",
+    "vitest": "^4.1.5"
   }
 }
