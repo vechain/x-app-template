@@ -1,7 +1,5 @@
 import { HardhatUserConfig } from 'hardhat/config';
 import '@nomicfoundation/hardhat-toolbox';
-
-import '@nomiclabs/hardhat-truffle5';
 import '@vechain/sdk-hardhat-plugin';
 
 require('dotenv').config();
