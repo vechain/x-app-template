@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity 0.8.20;
+pragma solidity ^0.8.20;
 
 import {IX2EarnAppsMock} from "./interfaces/IX2EarnAppsMock.sol";
 import {X2EarnAppsDataTypes} from "./interfaces/X2EarnAppsDataTypes.sol";
