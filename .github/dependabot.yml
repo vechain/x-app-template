@@ -1,0 +1,131 @@
+version: 2
+
+# Strategy:
+# - One ecosystem entry per workspace directory so PRs are scoped, not monolithic.
+# - Two groups per workspace: "security" (immediate) and "patch-minor" (weekly batch).
+# - Majors are NOT grouped — each major bump gets its own PR, easier to review/revert.
+# - A handful of majors we know we want to handle manually are ignored here so
+#   dependabot does not re-open the same blocked PR every week. Remove the entries
+#   in `ignore` when you are ready to take those bumps.
+
+updates:
+  # ---- Yarn workspaces (one entry per workspace; share one schedule) ----
+  - package-ecosystem: "npm"
+    directories:
+      - "/"
+      - "/apps/backend"
+      - "/apps/frontend"
+      - "/apps/contracts"
+      - "/packages/utils"
+      - "/packages/config-contract"
+      - "/packages/config-typescript"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 10
+    labels:
+      - "dependencies"
+      - "javascript"
+    groups:
+      security:
+        applies-to: security-updates
+        patterns:
+          - "*"
+      patch-minor:
+        applies-to: version-updates
+        update-types:
+          - "patch"
+          - "minor"
+    ignore:
+      # Breaking majors deferred — handle in dedicated PRs.
+      - dependency-name: "vite"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@vitejs/plugin-react"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "vitest"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "pm2"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "express"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "helmet"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "hardhat"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@nomicfoundation/hardhat-toolbox"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@nomicfoundation/hardhat-verify"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@nomicfoundation/hardhat-chai-matchers"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@nomicfoundation/hardhat-ethers"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@nomicfoundation/hardhat-network-helpers"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@typechain/hardhat"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@openzeppelin/contracts"
+        # Pinned to ~5.1 because 5.3+ uses mcopy (Cancun); see hardhat.config.ts.
+        update-types: ["version-update:semver-major", "version-update:semver-minor"]
+      - dependency-name: "@vechain/dapp-kit-react"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@chakra-ui/react"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "react"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "react-dom"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@types/react"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@types/react-dom"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "eslint"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@typescript-eslint/eslint-plugin"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@typescript-eslint/parser"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "typescript"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@swc/cli"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "nodemon"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "chai"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@types/chai"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "envalid"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "dotenv"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "cross-env"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "react-dropzone"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "device-uuid"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@fingerprintjs/fingerprintjs"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "jsdom"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@vechain/sdk-core"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@vechain/sdk-network"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@vechain/sdk-hardhat-plugin"
+        update-types: ["version-update:semver-major"]
+
+  # ---- GitHub Actions ----
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    labels:
+      - "dependencies"
+      - "github-actions"
+    groups:
+      actions:
+        patterns:
+          - "*"
