@@ -9,16 +9,13 @@ version: 2
 #   in `ignore` when you are ready to take those bumps.
 
 updates:
-  # ---- Yarn workspaces (one entry per workspace; share one schedule) ----
+  # ---- Yarn workspaces (single entry at the root; the hoisted yarn.lock
+  #      lets dependabot scan all workspace package.jsons in one pass.
+  #      Listing workspace subdirs in `directories` produced duplicate PRs
+  #      that only touched the workspace package.json without updating the
+  #      root yarn.lock — see closed #120–#127 for the artifacts.) ----
   - package-ecosystem: "npm"
-    directories:
-      - "/"
-      - "/apps/backend"
-      - "/apps/frontend"
-      - "/apps/contracts"
-      - "/packages/utils"
-      - "/packages/config-contract"
-      - "/packages/config-typescript"
+    directory: "/"
     schedule:
       interval: "weekly"
       day: "monday"
@@ -64,6 +61,15 @@ updates:
         update-types: ["version-update:semver-major"]
       - dependency-name: "@typechain/hardhat"
         update-types: ["version-update:semver-major"]
+      - dependency-name: "hardhat-gas-reporter"
+        # 2.x links its bumps to hardhat-toolbox 4.x which needs Hardhat 3 — see closed #119.
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@typechain/ethers-v6"
+        # 0.5.x peer-deps incompatible with hardhat-toolbox 3.x.
+        update-types: ["version-update:semver-minor", "version-update:semver-major"]
+      - dependency-name: "eslint-plugin-react-refresh"
+        # 0.5.x is ESM-only and requires eslint 9 (flat config) — see closed #111.
+        update-types: ["version-update:semver-minor", "version-update:semver-major"]
       - dependency-name: "@openzeppelin/contracts"
         # Pinned to ~5.1 because 5.3+ uses mcopy (Cancun); see hardhat.config.ts.
         update-types: ["version-update:semver-major", "version-update:semver-minor"]
