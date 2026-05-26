@@ -16,7 +16,7 @@
   "dependencies": {
     "@repo/config-contract": "*",
     "class-transformer": "^0.5.1",
-    "class-validator": "^0.14.0",
+    "class-validator": "^0.15.1",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
@@ -27,7 +27,7 @@
     "hpp": "^0.2.3",
     "morgan": "^1.10.0",
     "openai": "^4.27.0",
-    "reflect-metadata": "^0.1.13",
+    "reflect-metadata": "^0.2.2",
     "swagger-jsdoc": "^6.2.1",
     "swagger-ui-express": "^4.5.0",
     "typedi": "^0.10.0",
@@ -35,7 +35,7 @@
     "winston-daily-rotate-file": "^4.7.1"
   },
   "devDependencies": {
-    "@swc/cli": "^0.1.57",
+    "@swc/cli": "^0.8.1",
     "@swc/core": "^1.2.220",
     "@types/compression": "^1.7.2",
     "@types/cookie-parser": "^1.4.3",
