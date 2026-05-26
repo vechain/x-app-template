@@ -22,14 +22,14 @@
         "@types/mocha": ">=9.1.0",
         "chai": "^4.2.0",
         "hardhat": "^2.28.6",
-        "hardhat-gas-reporter": "^1.0.8",
+        "hardhat-gas-reporter": "^2.3.0",
         "solidity-coverage": "^0.8.1",
         "ts-node": ">=8.0.0",
         "typechain": "^8.1.0",
         "typescript": ">=4.5.0"
     },
     "devDependencies": {
-        "@nomicfoundation/hardhat-toolbox": "^3.0.0",
+        "@nomicfoundation/hardhat-toolbox": "^7.0.0",
         "@nomicfoundation/hardhat-verify": "^1.1.1",
         "@typechain/ethers-v6": "^0.4.3",
         "@vechain/sdk-hardhat-plugin": "1.0.0-beta.30",
