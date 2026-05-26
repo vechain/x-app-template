@@ -40,7 +40,7 @@
     "@types/compression": "^1.7.2",
     "@types/cookie-parser": "^1.4.3",
     "@types/cors": "^2.8.12",
-    "@types/express": "^4.17.13",
+    "@types/express": "^5.0.6",
     "@types/hpp": "^0.2.2",
     "@types/morgan": "^1.9.3",
     "@types/node": "^17.0.45",
