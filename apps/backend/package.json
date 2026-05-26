@@ -26,7 +26,7 @@
     "helmet": "^5.1.1",
     "hpp": "^0.2.3",
     "morgan": "^1.10.0",
-    "openai": "^4.27.0",
+    "openai": "^6.39.0",
     "reflect-metadata": "^0.1.13",
     "swagger-jsdoc": "^6.2.1",
     "swagger-ui-express": "^5.0.1",

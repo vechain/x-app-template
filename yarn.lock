@@ -3370,14 +3370,6 @@
   resolved "https://registry.npmjs.org/@types/ms/-/ms-0.7.34.tgz"
   integrity sha512-nG96G3Wp6acyAgJqGasjODb+acrI7KltPiRxzHPXnP3NgI28bpQDRv53olbqGXbfcgF5aiiHmO3xpwEpS5Ld9g==
 
-"@types/node-fetch@^2.6.4":
-  version "2.6.11"
-  resolved "https://registry.npmjs.org/@types/node-fetch/-/node-fetch-2.6.11.tgz"
-  integrity sha512-24xFj9R5+rfQJLRyM56qh+wnVSYhyXC2tkoBndtY0U+vubqNsYXGjufB2nn8Q6gt0LrARwL6UBtMCSVCwl4B1g==
-  dependencies:
-    "@types/node" "*"
-    form-data "^4.0.0"
-
 "@types/node@*", "@types/node@^25.9.1":
   version "25.9.1"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-25.9.1.tgz#3bda556db500ae4319c08e7fc9ab94f19013ba0b"
@@ -3401,13 +3393,6 @@
   version "10.17.60"
   resolved "https://registry.npmjs.org/@types/node/-/node-10.17.60.tgz"
   integrity sha512-F0KIgDJfy2nA3zMLmWGKxcH2ZVEtCZXHHdOQs2gSaQ27+lNeEfGxzkIw90aXswATX7AZ33tahPbzy6KAfUreVw==
-
-"@types/node@^18.11.18":
-  version "18.19.33"
-  resolved "https://registry.npmjs.org/@types/node/-/node-18.19.33.tgz"
-  integrity sha512-NR9+KrpSajr2qBVp/Yt5TU/rp+b5Mayi3+OlMlcg2cVCfRmcG5PWZ7S4+MG9PZ5gWBoc9Pd0BKSRViuBCRPu0A==
-  dependencies:
-    undici-types "~5.26.4"
 
 "@types/node@^8.0.0":
   version "8.10.66"
@@ -4547,13 +4532,6 @@ abitype@^1.2.3:
   resolved "https://registry.yarnpkg.com/abitype/-/abitype-1.2.4.tgz#8aab72949bcad4107031862ae998e5bd20eec76e"
   integrity sha512-dpKH+N27vRjarMVTFFkeY445VTKftzGWpL0FiT7xmVmzQRKazZexzC5uHG0f6XKsVLAuUlndnbGau6lRejClxg==
 
-abort-controller@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.npmjs.org/abort-controller/-/abort-controller-3.0.0.tgz"
-  integrity sha512-h8lQ8tacZYnR3vNQTgibj+tODHI5/+l06Au2Pcriv/Gmet0eaj4TwWH41sO9wnHDiQsEj19q0drzdWdeAHtweg==
-  dependencies:
-    event-target-shim "^5.0.0"
-
 accepts@~1.3.5, accepts@~1.3.8:
   version "1.3.8"
   resolved "https://registry.npmjs.org/accepts/-/accepts-1.3.8.tgz"
@@ -4615,13 +4593,6 @@ agent-base@^7.1.2:
   version "7.1.4"
   resolved "https://registry.yarnpkg.com/agent-base/-/agent-base-7.1.4.tgz#e3cd76d4c548ee895d3c3fd8dc1f6c5b9032e7a8"
   integrity sha512-MnA+YT8fwfJPgBx3m60MNqakm30XOkyIoH1y6huTQvC0PwZG7ki8NacLBcrPbNoo8vEZy7Jpuk7+jMO+CUovTQ==
-
-agentkeepalive@^4.2.1:
-  version "4.5.0"
-  resolved "https://registry.npmjs.org/agentkeepalive/-/agentkeepalive-4.5.0.tgz"
-  integrity sha512-5GG/5IbQQpC9FpkRGsSvZI5QYeSCzlJHdpBQntCsuTOxhKD8lqKhrleg2Yi7yvMIf82Ycmmqln9U8V9qwEiJew==
-  dependencies:
-    humanize-ms "^1.2.1"
 
 aggregate-error@^3.0.0:
   version "3.1.0"
@@ -6789,11 +6760,6 @@ ethjs-unit@0.1.6:
     bn.js "4.11.6"
     number-to-bn "1.7.0"
 
-event-target-shim@^5.0.0:
-  version "5.0.1"
-  resolved "https://registry.npmjs.org/event-target-shim/-/event-target-shim-5.0.1.tgz"
-  integrity sha512-i/2XbnSz/uxRCU6+NdVJgKWDTM427+MqYbkQzD321DuCQJUqOuJKIA0IM2+W2xtYHdKOmZ4dR6fExsd4SXL+WQ==
-
 eventemitter2@5.0.1, eventemitter2@~5.0.1:
   version "5.0.1"
   resolved "https://registry.npmjs.org/eventemitter2/-/eventemitter2-5.0.1.tgz"
@@ -7168,11 +7134,6 @@ for-each@^0.3.5:
   dependencies:
     is-callable "^1.2.7"
 
-form-data-encoder@1.7.2:
-  version "1.7.2"
-  resolved "https://registry.npmjs.org/form-data-encoder/-/form-data-encoder-1.7.2.tgz"
-  integrity sha512-qfqtYan3rxrnCk1VYaA4H+Ms9xdpPqvLZa6xmMgFvhO32x7/3J/ExcTd6qpxM0vH2GdMI+poehyBZvqfMTto8A==
-
 form-data@^2.2.0:
   version "2.5.1"
   resolved "https://registry.npmjs.org/form-data/-/form-data-2.5.1.tgz"
@@ -7192,14 +7153,6 @@ form-data@^4.0.0, form-data@^4.0.5:
     es-set-tostringtag "^2.1.0"
     hasown "^2.0.2"
     mime-types "^2.1.12"
-
-formdata-node@^4.3.2:
-  version "4.4.1"
-  resolved "https://registry.npmjs.org/formdata-node/-/formdata-node-4.4.1.tgz"
-  integrity sha512-0iirZp3uVDjVGt9p49aTaqjk84TrglENEDuqfdlZQ1roC9CWlPk6Avf8EEnZNcAqPonwkG35x4n3ww/1THYAeQ==
-  dependencies:
-    node-domexception "1.0.0"
-    web-streams-polyfill "4.0.0-beta.3"
 
 forwarded@0.2.0:
   version "0.2.0"
@@ -7907,13 +7860,6 @@ human-signals@^5.0.0:
   version "5.0.0"
   resolved "https://registry.npmjs.org/human-signals/-/human-signals-5.0.0.tgz"
   integrity sha512-AXcZb6vzzrFAUE61HnN4mpLqd/cSIwNQjtNWR0euPm6y0iqx3G4gOXaIDdtdDwZmhwe82LA6+zinmW4UBWVePQ==
-
-humanize-ms@^1.2.1:
-  version "1.2.1"
-  resolved "https://registry.npmjs.org/humanize-ms/-/humanize-ms-1.2.1.tgz"
-  integrity sha512-Fl70vYtsAFb/C06PTS9dZBo7ihau+Tu/DNCk/OyHhea07S+aeMWpFFkUaXRa8fI+ScZbEI8dfSxwY7gxZ9SAVQ==
-  dependencies:
-    ms "^2.0.0"
 
 iconv-lite@0.4.24, iconv-lite@^0.4.4, iconv-lite@~0.4.24:
   version "0.4.24"
@@ -8990,7 +8936,7 @@ ms@2.1.2:
   resolved "https://registry.npmjs.org/ms/-/ms-2.1.2.tgz"
   integrity sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==
 
-ms@2.1.3, ms@^2.0.0, ms@^2.1.1, ms@^2.1.3:
+ms@2.1.3, ms@^2.1.1, ms@^2.1.3:
   version "2.1.3"
   resolved "https://registry.npmjs.org/ms/-/ms-2.1.3.tgz"
   integrity sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==
@@ -9069,11 +9015,6 @@ node-addon-api@^7.0.0:
   resolved "https://registry.npmjs.org/node-addon-api/-/node-addon-api-7.1.0.tgz"
   integrity sha512-mNcltoe1R8o7STTegSOHdnJNN7s5EUvhoS7ShnTHDyOSd+8H+UdWODq6qSv67PjC8Zc5JRT8+oLAMCr0SIXw7g==
 
-node-domexception@1.0.0:
-  version "1.0.0"
-  resolved "https://registry.npmjs.org/node-domexception/-/node-domexception-1.0.0.tgz"
-  integrity sha512-/jKZoMpw0F8GRwl4/eLROPA3cfcXtLApP0QzLmUT/HuPCZWyB7IY9ZrMeKw2O/nFIqPQB3PVM9aYm0F312AXDQ==
-
 node-emoji@^1.10.0:
   version "1.11.0"
   resolved "https://registry.npmjs.org/node-emoji/-/node-emoji-1.11.0.tgz"
@@ -9086,7 +9027,7 @@ node-fetch-native@^1.6.2, node-fetch-native@^1.6.3:
   resolved "https://registry.npmjs.org/node-fetch-native/-/node-fetch-native-1.6.4.tgz"
   integrity sha512-IhOigYzAKHd244OC0JIMIUrjzctirCmPkaIfhDeGcEETWof5zKYUW7e7MYvChGWh/4CJeXEgsRyGzuF334rOOQ==
 
-node-fetch@^2.6.1, node-fetch@^2.6.12, node-fetch@^2.6.7:
+node-fetch@^2.6.1, node-fetch@^2.6.12:
   version "2.7.0"
   resolved "https://registry.npmjs.org/node-fetch/-/node-fetch-2.7.0.tgz"
   integrity sha512-c4FRfUm/dbcWZ7U+1Wq0AwCyFL+3nt2bEw05wfxSz+DWpWsitgmSgYmy2dQdWyKC1694ELPqMs/YzUSNozLt8A==
@@ -9322,19 +9263,10 @@ onetime@^6.0.0:
   dependencies:
     mimic-fn "^4.0.0"
 
-openai@^4.27.0:
-  version "4.47.1"
-  resolved "https://registry.npmjs.org/openai/-/openai-4.47.1.tgz"
-  integrity sha512-WWSxhC/69ZhYWxH/OBsLEirIjUcfpQ5+ihkXKp06hmeYXgBBIUCa9IptMzYx6NdkiOCsSGYCnTIsxaic3AjRCQ==
-  dependencies:
-    "@types/node" "^18.11.18"
-    "@types/node-fetch" "^2.6.4"
-    abort-controller "^3.0.0"
-    agentkeepalive "^4.2.1"
-    form-data-encoder "1.7.2"
-    formdata-node "^4.3.2"
-    node-fetch "^2.6.7"
-    web-streams-polyfill "^3.2.1"
+openai@^6.39.0:
+  version "6.39.0"
+  resolved "https://registry.yarnpkg.com/openai/-/openai-6.39.0.tgz#7455b619b9b7496cce0c1276c9f9e3059e7b96f5"
+  integrity sha512-O61LIsimY3acVabwvomwFhwrnN36yvHY2quIfy9keEcFytGgWeV35yLHQ6NVMLSBxRpHmcg2yuhCnlu2HT4pLQ==
 
 optionator@^0.8.1:
   version "0.8.3"
@@ -11673,11 +11605,6 @@ undefsafe@^2.0.5:
   resolved "https://registry.yarnpkg.com/undici-types/-/undici-types-7.24.6.tgz#61275b485d7fd4e9d269c7cf04ec2873c9cc0f91"
   integrity sha512-WRNW+sJgj5OBN4/0JpHFqtqzhpbnV0GuB+OozA9gCL7a993SmU+1JBZCzLNxYsbMfIeDL+lTsphD5jN5N+n0zg==
 
-undici-types@~5.26.4:
-  version "5.26.5"
-  resolved "https://registry.npmjs.org/undici-types/-/undici-types-5.26.5.tgz"
-  integrity sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==
-
 undici-types@~6.19.2:
   version "6.19.8"
   resolved "https://registry.yarnpkg.com/undici-types/-/undici-types-6.19.8.tgz#35111c9d1437ab83a7cdc0abae2f26d88eda0a02"
@@ -11993,16 +11920,6 @@ w3c-xmlserializer@^5.0.0:
   integrity sha512-o8qghlI8NZHU1lLPrpi2+Uq7abh4GGPpYANlalzWxyWteJOCsr/P+oPBA49TOLu5FTZO4d3F9MnWJfiMo4BkmA==
   dependencies:
     xml-name-validator "^5.0.0"
-
-web-streams-polyfill@4.0.0-beta.3:
-  version "4.0.0-beta.3"
-  resolved "https://registry.npmjs.org/web-streams-polyfill/-/web-streams-polyfill-4.0.0-beta.3.tgz"
-  integrity sha512-QW95TCTaHmsYfHDybGMwO5IJIM93I/6vTRk+daHTWFPhwh+C8Cg7j7XyKrwrj8Ib6vYXe0ocYNrmzY4xAAN6ug==
-
-web-streams-polyfill@^3.2.1:
-  version "3.3.3"
-  resolved "https://registry.npmjs.org/web-streams-polyfill/-/web-streams-polyfill-3.3.3.tgz"
-  integrity sha512-d2JWLCivmZYTSIoge9MsgFCZrt571BikcWGYkjC1khllbTeDlGqZ2D8vD8E/lJa8WGWbb7Plm8/XJYV7IJHZZw==
 
 web3-utils@^1.3.6:
   version "1.10.4"
