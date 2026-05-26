@@ -30,10 +30,19 @@ services:
         networks:
             - vechain-thor
 
+    # insight & inspector are optional observability tools. They are published
+    # as private packages on ghcr.io/vechain/* — a `docker login ghcr.io -u <user>
+    # -p <PAT_with_read:packages>` is required to pull them. They are not needed
+    # for the dApp itself to run. To start them alongside thor-solo, after the
+    # docker login above run:
+    #   docker compose --profile tools up -d
+    # Hosted alternatives that need no login: https://insight.vecha.in/ and
+    # https://inspector.vecha.in/ — both can be pointed at http://localhost:8669.
     insight:
         image: ghcr.io/vechain/insight-app:master
         hostname: insight
         container_name: insight
+        profiles: [tools]
         environment:
             - VUE_APP_SOLO_URL=http://localhost:8669
         ports:
@@ -45,6 +54,7 @@ services:
         image: ghcr.io/vechain/inspector-app:latest
         hostname: inspector
         container_name: inspector
+        profiles: [tools]
         environment:
             - VUE_APP_SOLO_URL=http://localhost:8669
         ports:
