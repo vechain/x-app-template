@@ -1,0 +1,71 @@
+{
+  "version": 1,
+  "skills": {
+    "create-vechain-dapp": {
+      "source": "vechain/vechain-ai-skills",
+      "sourceType": "github",
+      "skillPath": "skills/create-vechain-dapp/SKILL.md",
+      "computedHash": "881c53623c32a5c5a9a86dbb6123710aa3f74c02d6b7e428eba6666fdb7d97ec"
+    },
+    "frontend": {
+      "source": "vechain/vechain-ai-skills",
+      "sourceType": "github",
+      "skillPath": "skills/frontend/SKILL.md",
+      "computedHash": "8567b28fc75395adb33b6a104fabc6c7e4f29c758c147bc52779cda09fd2e8f7"
+    },
+    "grill-me": {
+      "source": "vechain/vechain-ai-skills",
+      "sourceType": "github",
+      "skillPath": "skills/grill-me/SKILL.md",
+      "computedHash": "a096bc3a1b5f73b889f688b82cf806cc9ffc278551b47efee4465265280c555f"
+    },
+    "secure-github-actions": {
+      "source": "vechain/vechain-ai-skills",
+      "sourceType": "github",
+      "skillPath": "skills/secure-github-actions/SKILL.md",
+      "computedHash": "b145bad15d85685851039cc06417735cb3f1b4e5c541b8fc3c3de3579c9d31b4"
+    },
+    "smart-contract-development": {
+      "source": "vechain/vechain-ai-skills",
+      "sourceType": "github",
+      "skillPath": "skills/smart-contract-development/SKILL.md",
+      "computedHash": "f36be74017b9223e371095528a1d9859f0691adfd1aef2cd71d154c0fe309930"
+    },
+    "translate": {
+      "source": "vechain/vechain-ai-skills",
+      "sourceType": "github",
+      "skillPath": "skills/translate/SKILL.md",
+      "computedHash": "78b470c50fbd83040f88937699a40b5f4520cfb0d81d8a06e17f231d24273d46"
+    },
+    "vebetterdao": {
+      "source": "vechain/vechain-ai-skills",
+      "sourceType": "github",
+      "skillPath": "skills/vebetterdao/SKILL.md",
+      "computedHash": "1ae325d3bfe76b3df6ddee70b018f830aa11d954eabcf0ce816ec07d927c3f6c"
+    },
+    "vechain-core": {
+      "source": "vechain/vechain-ai-skills",
+      "sourceType": "github",
+      "skillPath": "skills/vechain-core/SKILL.md",
+      "computedHash": "66a5647e25c3b1adea55a123f9a9d19bf37f8378bd0fbad68a721a4070752d35"
+    },
+    "vechain-kit": {
+      "source": "vechain/vechain-ai-skills",
+      "sourceType": "github",
+      "skillPath": "skills/vechain-kit/SKILL.md",
+      "computedHash": "24c4f163f30e96c349cd8076013ebaafae5e8ecb4696b7b52a615699fcb8e1d1"
+    },
+    "vechain-react-native-dev": {
+      "source": "vechain/vechain-ai-skills",
+      "sourceType": "github",
+      "skillPath": "skills/vechain-react-native-dev/SKILL.md",
+      "computedHash": "c548d6f80bcc2b270c347de95274cd7baa5bf38616e094416edc1d782935933a"
+    },
+    "x-2-earn-apps": {
+      "source": "vechain/vechain-ai-skills",
+      "sourceType": "github",
+      "skillPath": "skills/x-2-earn-apps/SKILL.md",
+      "computedHash": "362e58327073b7cf99af3a75d885733eccb3eb0bba760f1e1576faa25299911a"
+    }
+  }
+}
