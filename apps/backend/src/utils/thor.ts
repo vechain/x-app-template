@@ -1,6 +1,5 @@
 import { ADMIN_PRIVATE_KEY, NETWORK_URL } from '../config';
 import { HttpClient, ThorClient, VeChainPrivateKeySigner, VeChainProvider } from '@vechain/sdk-network';
-import { EcoEarnABI } from '@utils/const';
 import { ECO_SOL_ABI, config } from '@repo/config-contract';
 
 export const thor = new ThorClient(new HttpClient(NETWORK_URL), {
