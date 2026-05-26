@@ -16,6 +16,7 @@
     "@emotion/styled": "^11.11.5",
     "@repo/utils": "*",
     "@vechain/dapp-kit-react": "^1.0.12",
+    "axios": "^1.15.2",
     "framer-motion": "^11.2.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
